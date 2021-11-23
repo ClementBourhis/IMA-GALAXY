@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(Temple-Run)
+project(IMACRun)
 
 add_definitions(-std=c++11)
 
@@ -18,14 +18,4 @@ include_directories(${SDL_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIR}
 set(ALL_LIBRARIES glimac ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
 
 add_subdirectory(glimac)
-add_subdirectory(Game)
-add_subdirectory(TestOpenGL)
-
-target_link_libraries(glew)
-target_link_libraries(OpenGL)
-
-file(GLOB GAME_DIRECTORIES "TEMPLE_RUN")
-
-foreach(GAME ${GAME_DIRECTORIES})
-    add_subdirectory(${GAME})
-endforeach()
+add_subdirectory(Test_OpenGL)

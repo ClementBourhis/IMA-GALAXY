@@ -4,18 +4,23 @@
 #include<string>
 #include<vector>
 
+#include "Case.hpp";
+
 class Plateau {
 
 private:
-    std::string _name;
-    std::vector _cells; //tableau de cases
+	//attributs
+    /* ! Question ! */ std::string _name; //Nécessaire ??????????
+    std::vector<Case> _cells; //tableau de cases
 
 public:
-
+	//constructeurs-/-destructeur
 	Plateau(); 
-	Plateau(std::string name, );
-	~Circle() = default;
+	Plateau(std::string name);
+	~Plateau() = default;
 
-	double surface() const override; 
-    void draw() const override;
+	//methodes
+	void addCell(Case cell);
+	/* ! Concepte ! */ void saveConfig();
+	/* ! Concepte ! */ void loadConfig();
 };

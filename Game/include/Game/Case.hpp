@@ -1,21 +1,23 @@
 #pragma once
 
-#include<iostream>
-#include<vector>
-#include<glimac/glm.hpp>
+#include <vector>
 
-class Plateau {
+#include <glimac/glm.hpp>
+
+class Case {
 
 private:
+	//attributs
     glm::vec3 _position;
     glm::vec2 _texCoord;
 
 public:
+	//constructeurs-/-destructeur
+	Case() = default; 
+	Case(glm::vec3 position, glm::vec2 _texCoord);
+	~Case() = default;
 
-	Plateau(); 
-	Plateau(const double radius);
-	~Circle() = default;
-
-	double surface() const override; 
-    void draw() const override;
+	//methodes
+	glm::vec3 getPosition();
+	glm::vec2 getTexCoord();
 };

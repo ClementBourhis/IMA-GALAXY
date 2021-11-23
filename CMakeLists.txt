@@ -19,7 +19,6 @@ set(ALL_LIBRARIES glimac ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
 
 add_subdirectory(glimac)
 add_subdirectory(Game)
-add_subdirectory(Mesh)
 
 file(GLOB GAME_DIRECTORIES "TEMPLE_RUN")
 

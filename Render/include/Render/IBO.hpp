@@ -5,22 +5,22 @@
 
 #include "Render.hpp"
 
-class VBO : public Render {
+//La classe IBO est sensiblement la même que la classe VBO
+
+class IBO : public Render { 
     //attribut de Render
     public :
         //constructeurs-/-destructeur
-        VBO();
-        ~VBO();
+        IBO();
+        ~IBO();
 
         //méthodes
-        void bind() const;  //bind le VBO
-        void debind() const;//debind le VBO
+        void bind() const;
+        void debind() const;
 
-        //Remplissage du VBO
         template <typename type>
         void fillBuffer(const std::vector<type> &vec){
             bind();
-            glBufferData(GL_ARRAY_BUFFER, vec.size()*sizeof(type), vec.data(), GL_STATIC_DRAW);
-            debind();
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, vec.size()*sizeof(type), vec.data(), GL_STATIC_DRAW);
         }
 };

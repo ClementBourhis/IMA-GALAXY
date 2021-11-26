@@ -5,7 +5,7 @@
 //à voir si utile
 class Render {
 
-    private :
+    protected :
         //attributs
         GLuint _id;
 

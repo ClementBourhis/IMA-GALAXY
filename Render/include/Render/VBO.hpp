@@ -1,18 +1,16 @@
 #pragma once
 
-#include <GL/glew.h>
-#include <vector>
-
 #include "Render.hpp"
 
+//La classe VBO permet de créer des objets VBO et de les manipuler plus simplement
 class VBO : public Render {
-    //attribut de Render
+    //---attribut de Render
     public :
-        //constructeurs-/-destructeur
+        //---constructeurs-/-destructeur
         VBO();
         ~VBO();
 
-        //méthodes
+        //---méthodes
         void bind() const;  //bind le VBO
         void debind() const;//debind le VBO
 

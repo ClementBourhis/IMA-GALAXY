@@ -1,20 +1,17 @@
 #pragma once
 
-#include <GL/glew.h>
-#include <vector>
-
 #include "Render.hpp"
 
 //La classe IBO est sensiblement la même que la classe VBO
-
+//Elle permet de créer des objets IBO et de les manipuler plus simplement
 class IBO : public Render { 
-    //attribut de Render
+    //---attribut de Render
     public :
-        //constructeurs-/-destructeur
+        //---constructeurs-/-destructeur
         IBO();
         ~IBO();
 
-        //méthodes
+        //---méthodes
         void bind() const;
         void debind() const;
 
@@ -22,5 +19,6 @@ class IBO : public Render {
         void fillBuffer(const std::vector<type> &vec){
             bind();
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, vec.size()*sizeof(type), vec.data(), GL_STATIC_DRAW);
+            debind();
         }
 };

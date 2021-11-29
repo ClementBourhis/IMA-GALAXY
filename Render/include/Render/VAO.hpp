@@ -1,20 +1,19 @@
 #pragma once
 
-#include <GL/glew.h>
-#include <vector>
-
 #include "Render.hpp"
 #include "VBO.hpp"
 #include "IBO.hpp"
 
+//La classe VAO permet de créer des objets VAO et de les manipuler plus simplement
+//elle utilise les classe VBO et IBO pour envoyer les informations au shader
 class VAO : public Render {
-    //attribut de Render
+    //---attribut de Render
     public :
-        //constructeurs-/-destructeur
+        //---constructeurs-/-destructeur
         VAO();
         ~VAO();
 
-        //méthodes
+        //---méthodes
         void bind() const;  //bind le VAO
         void debind() const;//debind le VAO
 

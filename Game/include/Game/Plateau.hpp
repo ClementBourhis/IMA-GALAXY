@@ -16,13 +16,13 @@ class Plateau {
 	public:
 		//constructeurs-/-destructeur
 		Plateau() = default; 
+		Plateau(const std::string appPath, const int niveau); 
 		//Plateau(std::string name);
 		~Plateau() = default;
 
 		//methodes
 		//void addCell(Case cell);
 		//void createPath(const int nbCases);
-		//void saveConfig() const;
-		void loadConfig(const std::string &filename); //charge le chemin à partir du fichier txt
+		void loadParcours(const std::string &filename); //charge le chemin à partir du fichier txt
 		void infosPlateau();
 };

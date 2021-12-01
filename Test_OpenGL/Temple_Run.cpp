@@ -4,6 +4,7 @@
 #include <string>
 #include <Game/Plateau.hpp>
 
+
 /* ***************************************************
 Commandes pour compiler :
 
@@ -34,11 +35,7 @@ int main(int argc, char** argv) {
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
      *********************************/
-
-    Plateau plateauTest;
-    plateauTest.loadConfig("/home/ubuntu/Documents/IMAC2/Temple_Run/Game/Chemin.pgm");
-    plateauTest.infosPlateau();
-
+    Plateau plateauTest("../Temple_Run/Game/Niveaux/1.pgm", 1);
 
     // Application loop:
     bool done = false;

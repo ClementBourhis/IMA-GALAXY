@@ -9,15 +9,17 @@ class Case {
 	private:
 		//attributs
 		glm::vec3 _position;
-		glm::vec2 _texCoord;
+		std::string type;
 
 	public:
 		//constructeurs-/-destructeur
 		Case() = default; 
-		Case(glm::vec3 position, glm::vec2 _texCoord);
+		//constructeur à partir de la position de la case sur une grille 2D
+		Case(int x, int y);
 		~Case() = default;
 
 		//methodes
-		glm::vec3 getPosition();
+		glm::vec3 getPosition() const;
+		void setPosition(int x,int y,int z);
 		glm::vec2 getTexCoord();
 };

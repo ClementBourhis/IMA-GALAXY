@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <iostream>
 #include <string>
-#include <Game/Plateau.hpp>
+#include <Game/Partie.hpp>
 
 
 /* ***************************************************
@@ -35,7 +35,8 @@ int main(int argc, char** argv) {
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
      *********************************/
-    Plateau plateauTest("../Temple_Run/Game/Niveaux/1.pgm", 1);
+    Partie partieTest("../Temple_Run/Game/Niveaux/", 1);
+    partieTest.getInfosPlateau();
 
     // Application loop:
     bool done = false;

@@ -7,6 +7,10 @@
 #include <Game/Plateau.hpp>
 
 Partie::Partie(const std::string appPath, const int niveau)
+: _map(appPath, niveau)
 {
-    Plateau plateauTest(appPath, niveau);
 };
+
+void Partie::getInfosPlateau(){
+    _map.infosPlateau();
+}

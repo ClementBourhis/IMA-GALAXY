@@ -8,8 +8,7 @@
 
 Plateau::Plateau(const std::string appPath, const int niveau)
 {
-    loadParcours(appPath);
-    infosPlateau();
+    loadParcours(appPath + std::to_string(niveau) + ".pgm");
 };
 
 void Plateau::loadParcours(const std::string &filename) {
@@ -41,7 +40,7 @@ void Plateau::loadParcours(const std::string &filename) {
         for (int j=0; j<widthGrid; j++) {
             std::getline(file, line);
             if(line!="0"){
-                Case cell(j,i);
+                Case cell(j,((heightGrid-1)-i)); //heightGrid-i pour avoir la case du bas comme la premiere en (0,0,0)
                 _cells.push_back(cell);
             }
         }

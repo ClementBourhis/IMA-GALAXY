@@ -2,7 +2,7 @@
 
 Texture::Texture(FilePath path) 
 : _path(path) {
-    loadImage(_path);
+    loadTexture();
 }
 
 Texture::~Texture(){

@@ -44,11 +44,6 @@ class VAO : public Render {
             glVertexAttribPointer(VERTEX_ATTR_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(type), (const GLvoid*) (offsetof(type, normal)));
             glVertexAttribPointer(VERTEX_ATTR_TEXTURE, 2, GL_FLOAT, GL_FALSE, sizeof(type), (const GLvoid*) (offsetof(type, texCoords)));
 
-
-            //on debind tout
-            if(ibo != nullptr){
-                ibo->debind();
-            }
             vbo->debind();
             debind();
         }

@@ -6,6 +6,7 @@
 #include <Render/VBO.hpp>
 #include <Render/IBO.hpp>
 #include <Render/VAO.hpp>
+#include <Render/ShaderManager.hpp>
 
 using namespace glimac;
 
@@ -48,20 +49,24 @@ int main(int argc, char** argv) {
      * HERE SHOULD COME THE INITIALIZATION CODE
      *********************************/
 
+    /*----------SHADERS---------*/
+    FilePath applicationPath(argv[0]); // chemin du programme
+    FilePath vsPath = applicationPath.dirPath() + "shaders/color.vs.glsl";
+    FilePath fsPath = applicationPath.dirPath() + "shaders/color.fs.glsl";
+
+    ShaderManager shader(vsPath, fsPath);
+    shader.use();
+
     /*----------Vertex----------*/
     std::vector<Vertex3D> vertices;
     vertices.push_back(Vertex3D(glm::vec3(-0.5f, -0.5f, 0.f), glm::vec3(-0.5f, -0.5f, 0.f), glm::vec2(0.f, 0.f)));
     vertices.push_back(Vertex3D(glm::vec3(0.5f, -0.5f, 0.f), glm::vec3(0.5f, -0.5f, 0.f), glm::vec2(0.f, 0.f)));
-    vertices.push_back(Vertex3D(glm::vec3(0.5f, 0.5f, 0.f), glm::vec3(0.5f, 0.5f, 0.f), glm::vec2(0.f, 0.f)));
-    vertices.push_back(Vertex3D(glm::vec3(-0.5f, 0.5f, 0.f), glm::vec3(-0.5f, 0.5f, 0.f), glm::vec2(0.f, 0.f)));
+    vertices.push_back(Vertex3D(glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.5f, 0.5f, 0.f), glm::vec2(0.f, 0.f)));
 
     std::vector<u_int32_t> indices;
     indices.push_back(0);
     indices.push_back(1);
     indices.push_back(2);
-    indices.push_back(0);
-    indices.push_back(2);
-    indices.push_back(3);
 
     /*----------VBO----------*/
     VBO vbo;

@@ -56,7 +56,6 @@ int main(int argc, char** argv) {
     FilePath fsPath = applicationPath.dirPath() + "shaders/texture.fs.glsl";
 
     ShaderManager shader(vsPath, fsPath);
-    shader.use();
 
     /*----------Vertex----------*/
     std::vector<Vertex3D> vertices;
@@ -107,9 +106,10 @@ int main(int argc, char** argv) {
 
         //-----DRAW-----
         vao.bind();
+        shader.use();
         texture.bind();
         shader.sendUniformInt("uTexture", 0);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
         texture.debind();
         vao.debind();
 
@@ -119,9 +119,8 @@ int main(int argc, char** argv) {
 
     //-----LIBERATION MEMOIRE-----
     vbo.~VBO();
-    ibo.~IBO();
     vao.~VAO();
-    texture.~Texture();
+    texture.free();
 
     return EXIT_SUCCESS;
 }

@@ -22,7 +22,8 @@ class Texture {
         //---constructeur-/-destructeur
         Texture() = default;
         Texture(FilePath path);
-        ~Texture();
+        ~Texture(){};
+        void free();
 
         //---méthodes
         void bind();                        //bind l'objet texture

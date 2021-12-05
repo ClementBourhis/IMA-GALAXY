@@ -5,7 +5,7 @@ Texture::Texture(FilePath path)
     loadTexture();
 }
 
-Texture::~Texture(){
+void Texture::free(){
     glDeleteTextures(1, &_id);
 }
 

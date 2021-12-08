@@ -1,4 +1,5 @@
 #include <glimac/SDLWindowManager.hpp>
+#include <glimac/TrackballCamera.hpp>
 
 #include <GL/glew.h>
 #include <iostream>
@@ -26,6 +27,9 @@ int main(int argc, char** argv) {
      * HERE SHOULD COME THE INITIALIZATION CODE
      *********************************/
 
+    /*----------Camera----------*/
+    TrackballCamera camera;
+
     /*----------Vertex----------*/
     std::vector<ShapeVertex> vertices;
     vertices.push_back(ShapeVertex(glm::vec3(-0.5f, -0.5f, 0.f), glm::vec3(-0.5f, -0.5f, 0.f), glm::vec2(0.f, 1.f)));
@@ -44,11 +48,16 @@ int main(int argc, char** argv) {
 
     ShaderManager shader(vsPath, fsPath);
 
+    shader.addUniformVariable("uTexture");
+    shader.addUniformVariable("uProjMatrix");
+    shader.addUniformVariable("uMVMatrix");
+    shader.addUniformVariable("uNormalMatrix");
+
+
     /*----------Texture----------*/
     FilePath texturePath = applicationPath.dirPath()+"../../Temple_Run/Assets/textures/test/triforce.png";
     Texture texture(texturePath);
 
-    shader.addUniformVariable("uTexture");
     texture.bind();
     shader.sendUniformInt("uTexture", 0);
     texture.debind();

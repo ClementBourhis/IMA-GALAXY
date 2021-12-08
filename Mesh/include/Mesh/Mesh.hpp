@@ -40,6 +40,7 @@ class Mesh{
         Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t> indices);
         Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t> indices, ShaderManager* shader);
         Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t> indices, ShaderManager* shader, Texture* texture);
+        Mesh(ShaderManager* shader, Texture* texture);
 
         //---destructeurs
         ~Mesh(){};
@@ -51,6 +52,7 @@ class Mesh{
         void fillBuffers();     //on met un fillBuffer pour envoyer les datas aux cibles souhaité
 
         void draw();
+        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MVMatrix);
         void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MVMatrix, const glm::mat4 &ViewMatrix);
 
         //getters

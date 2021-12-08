@@ -51,7 +51,7 @@ class Mesh{
         void fillBuffers();     //on met un fillBuffer pour envoyer les datas aux cibles souhaité
 
         void draw();
-        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MWMatrix, const glm::mat4 &ViewMatrix);
+        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MVMatrix, const glm::mat4 &ViewMatrix);
 
         //getters
         inline GLsizei nbVertex() const{  //on récupère le nb de vertex utilisé pour le mesh

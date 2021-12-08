@@ -31,9 +31,9 @@ namespace glimac
 
             glm::mat4 getViewMatrix(){
                 glm::mat4 VM = glm::mat4(1.f);
-                 VM = glm::translate(VM, glm::vec3(0.0f, 0.0f, m_fDistance));
-                VM = glm::rotate(VM, glm::radians(m_fAngleY), glm::vec3(1.0f, 0.0f, 0.0f));
-                VM = glm::rotate(VM, glm::radians(m_fAngleX), glm::vec3(0.0f, 1.0f, 0.0f));
+                VM = glm::translate(VM, glm::vec3(0.0f, 0.0f, m_fDistance));
+                VM = glm::rotate(VM, glm::radians(m_fAngleX), glm::vec3(1.0f, 0.0f, 0.0f));
+                VM = glm::rotate(VM, glm::radians(m_fAngleY), glm::vec3(0.0f, 1.0f, 0.0f));
                 return VM;
             }
     };

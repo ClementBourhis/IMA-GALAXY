@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
      *********************************/
-    //Temporaire, utilisation de shaders test
+    /*//Temporaire, utilisation de shaders test
     FilePath applicationPath(argv[0]);
     Program program = loadProgram(applicationPath.dirPath() + "shaders/"+argv[1], applicationPath.dirPath() + "shaders/"+argv[2]);
     program.use();
@@ -58,12 +58,12 @@ int main(int argc, char** argv) {
     glEnable(GL_DEPTH_TEST);
 
     glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), (float)(WINDOW_WIDTH)/(float)(WINDOW_HEIGHT), 0.1f, 100.f);
-    glm::mat4 MVMatrix = glm::translate(glm::mat4(), glm::vec3(0, 0, -5));
+    glm::mat4 MVMatrix = glm::translate(glm::mat4(), glm::vec3(-1, -1, -5));
     glm::mat4 NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
 
     glUniformMatrix4fv(locationMVP, 1, GL_FALSE, glm::value_ptr(ProjMatrix*MVMatrix));
     glUniformMatrix4fv(locationMV, 1, GL_FALSE, glm::value_ptr(MVMatrix));
-    glUniformMatrix4fv(locationNormal, 1, GL_FALSE, glm::value_ptr(NormalMatrix));
+    glUniformMatrix4fv(locationNormal, 1, GL_FALSE, glm::value_ptr(NormalMatrix));*/
 
     //on crée et on récupère les infos du plateau
     Partie partieTest("../Temple_Run/Game/Niveaux/", 1);
@@ -76,7 +76,6 @@ int main(int argc, char** argv) {
     /*GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    Cube skybox(1);
     skybox.getVerticesInfos();
     //Sphere sphere(1, 32, 16);
     //Sol sol(1);
@@ -142,9 +141,10 @@ int main(int argc, char** argv) {
          *********************************/
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        //-----DRAW-----
         //glBindVertexArray(vao);
         vao.bind();
-
         glDrawElements(GL_TRIANGLES, skybox.getIndexCount(), GL_UNSIGNED_INT, 0);
         //glBindVertexArray(0);
         vao.debind();
@@ -154,8 +154,10 @@ int main(int argc, char** argv) {
     }
 
     //la libération des ressources
-    //glDeleteBuffers(1, &vbo);
-    //glDeleteVertexArrays(1, &vao);
+    /*glDeleteBuffers(1, &vbo);
+    glDeleteVertexArrays(1, &vao);*/
+    vbo.~VBO();
+    vao.~VAO();
 
     return EXIT_SUCCESS;
 }

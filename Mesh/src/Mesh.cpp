@@ -86,8 +86,8 @@ void Mesh::draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MVMatrix){
 
 
 void Mesh::draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MVMatrix, const glm::mat4 &ViewMatrix){
-    _shader->sendUniformMatrix4("uMVPMatrix", ProjMatrix*MVMatrix*ViewMatrix);
-    _shader->sendUniformMatrix4("uMVMatrix", MVMatrix);
+    _shader->sendUniformMatrix4("uMVPMatrix", ProjMatrix*ViewMatrix*MVMatrix);
+    _shader->sendUniformMatrix4("uMVMatrix", ViewMatrix * MVMatrix);
     _shader->sendUniformMatrix4("uNormalMatrix", glm::inverse(MVMatrix));
     _shader->sendUniformInt("uTexture", 0);
 

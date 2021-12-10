@@ -8,10 +8,11 @@
 
 Plateau::Plateau(const std::string appPath, const int niveau)
 {
-    loadParcours(appPath + std::to_string(niveau) + ".pgm");
+    loadParcours(appPath + "/" + std::to_string(niveau) + ".pgm");
 };
 
 void Plateau::loadParcours(const std::string &filename) {
+    std::cout << filename << std::endl;
     std::ifstream file(filename);
 
     if (file.fail()){
@@ -52,7 +53,7 @@ void Plateau::loadParcours(const std::string &filename) {
 //voir les infos des cases entrées dans le plateau
 void Plateau::infosPlateau(){
     for(int i=0; i<_cells.size(); i++){
-        std::cout << _cells[i].getPosition() << std::endl;
+        std::cout << "Cell["<<i<<"]" << _cells[i].getPosition() << std::endl;
     }
 };
 

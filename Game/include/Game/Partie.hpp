@@ -22,4 +22,8 @@ class Partie {
         //void savePartie() const;
         void renderParcours();
         void getInfosPlateau();
+
+        inline Plateau getMap(){
+            return _map;
+        }
 };

@@ -25,4 +25,8 @@ class Plateau {
 		//void createPath(const int nbCases);
 		void loadParcours(const std::string &filename); //charge le chemin à partir du fichier txt
 		void infosPlateau();
+
+		inline std::vector<Case> getCells(){
+			return _cells;
+		}
 };

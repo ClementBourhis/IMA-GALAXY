@@ -1,44 +1,59 @@
 #pragma once
 
 #include <glimac/glm.hpp>
+#include <glimac/SDLWindowManager.hpp>
+
 #include <cmath>
 #include <iostream>
 
 //Pour l'instant c'est TrackballCamera
 class Camera{
     private :
-        //attributs
-        float _fDistance;
-        float _fAngleX;
-        float _fAngleY;
-        bool _cameraType; //false=centré explorateur ; true=vue première personne
+        //---attributs
+        //paramètre pour la caméra Trackball
+        glm::vec3 _position;     
+        float _distance;
+        float _angleX;
+        float _angleY;
+
+        //paramètre pour la camera en Freefly
+        float _phi;
+        float _theta;
+        glm::vec3 _frontVector;
+        glm::vec3 _leftVector;
+        glm::vec3 _upVector;
+
+        float _maxAngle;
+        bool _cameraType; //choix de la camera Trackball(false) ou camera freefly(true)
+
+        //---méthodes
+        void computeDirectionVector(){
+            _frontVector = glm::vec3(cos(_theta) * sin(_phi), sin(_theta), cos(_theta) * cos(_phi));
+            _leftVector = glm::vec3(sin(glm::radians(_phi)), 0, cos(glm::radians(_phi)));
+            _upVector = glm::cross(_frontVector, _leftVector);
+        }
 
     public :
-        //constructeur
-        Camera(): _fDistance(-5), _fAngleX(30), _fAngleY(0), _cameraType(false){}
+        //---constructeur
+        Camera();
 
-        //méthodes
-        void moveFront(float delta) {
-            if(_fDistance+delta < 0){
-                _fDistance+=delta;
-            }
-        }
+        //---destructeur
+        ~Camera(){};
 
-        void rotateLeft(float degrees){
-            if(_fAngleX+degrees < 90 && _fAngleX+degrees > -90){
-                _fAngleX+=degrees;
-            }
-        }
+        //---méthodes
+        void initialization(const float &distance = -5, const float &angleY = 20.f, const glm::vec3 &position = glm::vec3(), const float &maxAngle = 40.f); //initialisation des paramètre de la caméra
+        void controlManager(const SDL_Event &e); //regroupement des contrôles pour la camera
+        void changeCameraType(bool type);
+        
+        //méthode Trackball
+        void setPosition(const glm::vec3 &position); //changement du centre de la trackball
 
-        void rotateUp(float degrees){
-            _fAngleY+=degrees;
-        }
+        void moveFront(float delta);
+        void rotateLeft(float degrees);
+        void rotateUp(float degrees);
 
-        glm::mat4 getViewMatrix(){
-            glm::mat4 VM = glm::mat4(1.f);
-            VM = glm::translate(VM, glm::vec3(0.0f, 0.0f, _fDistance));
-            VM = glm::rotate(VM, glm::radians(_fAngleX), glm::vec3(1.0f, 0.0f, 0.0f));
-            VM = glm::rotate(VM, glm::radians(_fAngleY), glm::vec3(0.0f, 1.0f, 0.0f));
-            return VM;
-        }
+        glm::mat4 getViewMatrix();
+
+        //méthode freefly
+        
 };

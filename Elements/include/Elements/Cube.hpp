@@ -4,7 +4,6 @@
 #include <glimac/common.hpp>
 #include "Vertex.hpp"
 
-// Représente un cube centrée en (0, 0, 0) dans son repère local
 class Cube {
     private:
     std::vector<Vertex> _vertices;

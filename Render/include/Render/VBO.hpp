@@ -3,6 +3,7 @@
 #include "Render.hpp"
 
 //La classe VBO permet de créer des objets VBO et de les manipuler plus simplement
+//Hérite de la classe Render
 class VBO : public Render {
     //---attribut de Render
     public :

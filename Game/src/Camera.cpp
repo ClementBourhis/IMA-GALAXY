@@ -1,7 +1,5 @@
 #include <Game/Camera.hpp>
 
-#include <cmath>
-
 Camera::Camera()
     : _distance(-5.0f), _angleX(10.f), _angleY(0.f), _position(0.f, 0.f, 0.f), _cameraType(false), _maxAngle(40.f){
     computeDirectionVector();

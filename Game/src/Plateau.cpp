@@ -1,23 +1,24 @@
-#include <iostream>
-#include <cassert>
-#include <fstream>
-#include <string>
-
 #include <Game/Plateau.hpp>
-
 
 Plateau::Plateau(const std::string appPath, const int niveau)
 {
-    loadParcours(appPath + "/" + std::to_string(niveau) + ".pgm");
+    try {
+        loadParcours(appPath + "" + std::to_string(niveau) + ".pgm");
+    }
+    catch(const std::exception &e){
+            std::cerr << "Error: " << e.what() << " " << strerror(errno) << std::endl;
+    }
+
 };
 
 void Plateau::loadParcours(const std::string &filename) {
-    std::cout << filename << std::endl;
     std::ifstream file(filename);
 
     if (file.fail()){
-        std::cerr << "Error: " << strerror(errno);
+        throw std::ios_base::failure("Texture::loadTexture() : error : can't load file: " + filename);
     }
+
+    std::cout << "Niveau chargé : " << filename << std::endl;
 
     //on récupère notre fichier ligne par ligne
     std::string line;
@@ -28,9 +29,6 @@ void Plateau::loadParcours(const std::string &filename) {
     int widthGrid, heightGrid, value;
     file >> widthGrid;
     file >> heightGrid;
-
-    /*std::cout << widthGrid << std::endl;
-    std::cout << heightGrid << std::endl;*/
 
     //valeur max b&w
     std::getline(file, line);

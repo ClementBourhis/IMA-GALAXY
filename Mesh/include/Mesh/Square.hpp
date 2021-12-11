@@ -1,16 +1,17 @@
 #pragma once
 
+//Mesh
 #include "Mesh.hpp"
 
-//un sol pour le parcours, c'est un quad carré
+//Hérite de la classe Mesh, c'est un quad créé avec deux triangles
 class Square : public Mesh{
     //récupère les attributs de Mesh
     private :
         //---méthodes
-        void build(float size);
+        void build(float size); //construit les vertex et les envoies dans le conteneur _vertices du Mesh
 
     public:
-    //---constructeurs
-    Square(float size);
-    Square(float size, ShaderManager* shader, Texture* texture);
+        //---constructeurs
+        Square(float size);
+        Square(float size, ShaderManager* shader, Texture* texture);
 };

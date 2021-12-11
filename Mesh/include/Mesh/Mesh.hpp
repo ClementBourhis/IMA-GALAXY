@@ -1,13 +1,8 @@
 #pragma once
 
-//---external libs
-#include <GL/glew.h>
-#include <iostream>
-#include <string>
-
 //---glimac
-#include <glimac/SDLWindowManager.hpp>
-#include <glimac/common.hpp> //utilisation de la struct ShapeVertex pour créer nos vertex
+#include <glimac/SDLWindowManager.hpp>  //SDLWindowManager
+#include <glimac/common.hpp>            //utilisation de la struct ShapeVertex pour créer nos vertex
 
 //---Render
 #include <Render/VBO.hpp>
@@ -24,12 +19,12 @@ class Mesh{
         std::vector<ShapeVertex> _vertices; //conteneur des nos vertex. (à envoyer au VBO)
         std::vector<u_int32_t> _indices;    //conteneur des indices (à envoyer à l'IBO)
 
-        VBO *_vbo = new VBO();
-        IBO *_ibo = new IBO();
-        VAO *_vao = new VAO();
+        VBO *_vbo = new VBO();              //objet VBO
+        IBO *_ibo = new IBO();              //objet IBO
+        VAO *_vao = new VAO();              //objet VAO
 
-        ShaderManager *_shader; //création d'un program(vs+fs) spécifique au mesh
-        Texture *_texture;
+        ShaderManager *_shader;             //création d'un program(vs+fs) spécifique au mesh
+        Texture *_texture;                  //objet Texture
 
     public :
         //---constructeurs
@@ -44,16 +39,16 @@ class Mesh{
 
         //---destructeurs
         ~Mesh(){};
-        void free();
+        void free();            //libère la mémoire en supprimant tout les objets VBO, VAO, Texture
 
         //---methodes
         void bind();            //bind les éléments permetant de dessiner le mesh (VAO + Texture) et d'activer le program avec les shaders
         void debind();          //debind le vao et la texture
         void fillBuffers();     //on met un fillBuffer pour envoyer les datas aux cibles souhaité
 
-        void draw();
-        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MVMatrix);
-        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MVMatrix, const glm::mat4 &ViewMatrix);
+        void draw();                                                                                    //dessine le mesh
+        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MVMatrix);                              //dessine et permet de modifier le mesh avec des matrices de transformation
+        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MVMatrix, const glm::mat4 &ViewMatrix); //dessine modifie le mesh et permet l'utilisation d'une camera en prenant le ViewMatrix
 
         //getters
         inline GLsizei nbVertex() const{  //on récupère le nb de vertex utilisé pour le mesh

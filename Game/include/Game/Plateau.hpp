@@ -1,32 +1,33 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-#include <vector>
+//STL
+#include <fstream>	//std::ifstream, std::ofstream
+#include <stdexcept>//std::error...
+#include <iostream>	//std::cerr
+#include <string>	//std::string<T>
+#include <vector>	//std::vector<T>
 
+//Game
 #include "Case.hpp"
 
 class Plateau {
-
 	private:
-		//attributs
-		///* ! Question ! */ std::string _name; //Nécessaire ??????????
+		//---attributs
 		std::vector<Case> _cells; //tableau de cases
 
 	public:
-		//constructeurs-/-destructeur
+		//---constructeurs-/-destructeur
 		Plateau() = default; 
 		Plateau(const std::string appPath, const int niveau); 
-		//Plateau(std::string name);
 		~Plateau() = default;
 
-		//methodes
+		//---methodes
 		//void addCell(Case cell);
 		//void createPath(const int nbCases);
 		void loadParcours(const std::string &filename); //charge le chemin à partir du fichier txt
 		void infosPlateau();
 
-		inline std::vector<Case> getCells(){
+		inline std::vector<Case> getCells() const{
 			return _cells;
 		}
 };

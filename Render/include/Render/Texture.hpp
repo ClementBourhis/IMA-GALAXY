@@ -1,12 +1,17 @@
 #pragma once
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <GL/glew.h>
+//STL
+#include <iostream>             //std::cerr
+#include <stdexcept>            //std::error...
+#include <vector>               //std::vector<T>
+#include <string>               //std::string
 
-#include <glimac/FilePath.hpp>
-#include <glimac/Image.hpp>
+//GL
+#include <GL/glew.h>            //GLuint
+
+//glimac
+#include <glimac/FilePath.hpp>  //FilePath
+#include <glimac/Image.hpp>     //loadImage
 
 using namespace glimac; //utilisation de la lib glimac
 
@@ -23,7 +28,7 @@ class Texture {
         Texture() = default;
         Texture(FilePath path);
         ~Texture(){};
-        void free();
+        void free();                        //destructeur qui supprime l'objet texture
 
         //---méthodes
         void bind();                        //bind l'objet texture

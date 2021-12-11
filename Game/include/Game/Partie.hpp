@@ -1,7 +1,5 @@
 #pragma once
 
-#include <glimac/SDLWindowManager.hpp>
-
 #include "Plateau.hpp"
 #include "Camera.hpp"
 

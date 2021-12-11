@@ -1,21 +1,5 @@
 #pragma once
 
-//---external libs
-#include <GL/glew.h>
-#include <iostream>
-#include <string>
-
-//---glimac
-#include <glimac/SDLWindowManager.hpp>
-#include <glimac/common.hpp> //utilisation de la struct ShapeVertex pour créer nos vertex
-
-//---Render
-#include <Render/VBO.hpp>
-#include <Render/IBO.hpp>
-#include <Render/VAO.hpp>
-#include <Render/ShaderManager.hpp>
-#include <Render/Texture.hpp>
-
 //---Mesh
 #include <Mesh/Mesh.hpp>
 

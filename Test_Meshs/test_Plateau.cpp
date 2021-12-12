@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
     texture.debind();
 
     /*----------MESH : Square----------*/
-    Square carre(1.f, &shader, &texture);
+    Square carre(&shader, &texture);
     carre.fillBuffers();
 
     /*----------Transfo-------*/

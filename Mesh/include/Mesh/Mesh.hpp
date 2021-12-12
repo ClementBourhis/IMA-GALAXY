@@ -23,19 +23,13 @@ class Mesh{
         IBO *_ibo = new IBO();              //objet IBO
         VAO *_vao = new VAO();              //objet VAO
 
-        ShaderManager *_shader;             //création d'un program(vs+fs) spécifique au mesh
-        Texture *_texture;                  //objet Texture
+        bool _isFill;                        //on vérifie si le mesh à envoyer ses données
 
     public :
         //---constructeurs
         Mesh() = default;
         Mesh(const std::vector<ShapeVertex> vertices);
-        Mesh(const std::vector<ShapeVertex> vertices, ShaderManager* shader);
-        Mesh(const std::vector<ShapeVertex> vertices, ShaderManager* shader, Texture* texture);
         Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t> indices);
-        Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t> indices, ShaderManager* shader);
-        Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t> indices, ShaderManager* shader, Texture* texture);
-        Mesh(ShaderManager* shader, Texture* texture);
 
         //---destructeurs
         ~Mesh(){};
@@ -46,9 +40,7 @@ class Mesh{
         void debind();          //debind le vao et la texture
         void fillBuffers();     //on met un fillBuffer pour envoyer les datas aux cibles souhaité
 
-        void draw();                                                                                    //dessine le mesh
-        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MVMatrix);                              //dessine et permet de modifier le mesh avec des matrices de transformation
-        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &MVMatrix, const glm::mat4 &ViewMatrix); //dessine modifie le mesh et permet l'utilisation d'une camera en prenant le ViewMatrix
+        void draw();            //dessine le mesh
 
         //getters
         inline GLsizei nbVertex() const{  //on récupère le nb de vertex utilisé pour le mesh
@@ -75,15 +67,20 @@ class Mesh{
             return _vao;
         }
 
-        inline ShaderManager *shader()const{
-            return _shader;
-        }
-
-        inline Texture *texture() const{
-            return _texture;
-        }
-
         inline bool haveIBO() const{   //on créer une méthode pour vérifier qu'il existe ou non un IBO
             return _indices.size() > 0 ? true : false;
+        }
+
+        //Affichage :
+        friend std::ostream &operator<<(std::ostream &os, const Mesh &mesh){
+            os << "     nb vertices : "<<mesh._vertices.size()<<"\n";
+            os << "     nb indices  : "<<mesh._indices.size()<<"\n";
+            if(mesh._isFill){
+                os << "     statut : is fill";
+            }
+            else{
+                os << "     statut : is notfill !";
+            }
+            return os;
         }
 };

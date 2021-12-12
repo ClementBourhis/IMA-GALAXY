@@ -12,7 +12,6 @@ class Cube : public Mesh{
         //---constructeurs
         Cube(); //constructeur si pas de size donné
         Cube(GLfloat size);
-        Cube(GLfloat size, ShaderManager* shader, Texture* texture);
 
         //---destructeurs
         ~Cube() = default;

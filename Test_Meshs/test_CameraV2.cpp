@@ -7,6 +7,7 @@
 #include <Mesh/Square.hpp>
 #include <Game/Partie.hpp>
 #include <Game/Camera.hpp>
+#include <Elements/Element.hpp>
 
 using namespace glimac;
 
@@ -46,26 +47,22 @@ int main(int argc, char** argv) {
 
     ShaderManager shader(vsPath, fsPath);
 
-    shader.addUniformVariable("uTexture");
-    shader.addUniformVariable("uMVPMatrix");
-    shader.addUniformVariable("uMVMatrix");
-    shader.addUniformVariable("uNormalMatrix");
-
     /*----------Texture----------*/
     FilePath texturePath = applicationPath.dirPath()+"../../Temple_Run/Assets/textures/test/fleche.jpg";
     Texture texture(texturePath);
 
-    texture.bind();
-    shader.sendUniformInt("uTexture", 0);
-    texture.debind();
-
     /*----------MESH : Square----------*/
-    Square carre(1.f, &shader, &texture);
+    Square carre;
     carre.fillBuffers();
+
+    /*---------ELEMENT-----------*/
+    //on rassemble tout dans un element
+    Element floor(&carre, &shader, &texture);
+
+    std::cout << "Element :\n" << floor << std::endl;
 
     /*----------Transfo-------*/
     glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), WINDOW_WIDTH/(float)WINDOW_HEIGHT, 0.1f, -100.f); 
-    glm::mat4 MVMatrix = camera.getViewMatrix();
 
     // Application loop:
     bool done = false;
@@ -90,22 +87,16 @@ int main(int argc, char** argv) {
          *********************************/
 
         glClear(GL_COLOR_BUFFER_BIT);
-        MVMatrix = glm::mat4(1.f);
 
         //-----DRAW-----
-        carre.bind();
-        for(int i = 0; i<cells.size(); i++){
-            MVMatrix = glm::translate(glm::mat4(1.f), cells[i].getPosition());
-            carre.draw(ProjMatrix, MVMatrix, camera.getViewMatrix());
-        }
-       carre.debind();
+        floor.draw(ProjMatrix, camera.getViewMatrix());
 
         // Update the display
         windowManager.swapBuffers();
     }
 
     //-----LIBERATION MEMOIRE-----
-    carre.free();
+    floor.~Element();
 
     return EXIT_SUCCESS;
 }

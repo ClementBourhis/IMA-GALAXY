@@ -8,10 +8,6 @@ Cube::Cube(GLfloat size) : Mesh() {
     build(size);
 }
 
-Cube::Cube(GLfloat size, ShaderManager* shader, Texture* texture) : Mesh(shader, texture) {
-    build(size);
-}
-
 void Cube::build(GLfloat size) {
 
     //bottom

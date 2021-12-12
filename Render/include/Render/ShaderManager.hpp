@@ -37,4 +37,22 @@ class ShaderManager {
         inline GLuint getId() const{
             return _program.getGLId();
         }
+
+        //Affichage :
+        friend std::ostream &operator<<(std::ostream &os, const ShaderManager &shader){
+            os << "     vs file : " << shader._vsFile << "\n";
+            os << "     fs file : " << shader._fsFile << "\n";
+            if(shader._uVariables.size() != 0){
+                os << "     uniform variables :\n";
+                int i = 0;
+                for(const auto &it : shader._uVariables){
+                    os << "     ["<< i <<"] : "<< it.first << " | " << it.second << "\n";
+                    i++;
+                }
+            }
+            else{
+                os << "     uniform variables : empty\n";
+            }
+            return os;
+        }
 };

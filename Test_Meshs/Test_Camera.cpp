@@ -1,11 +1,11 @@
 #include <glimac/SDLWindowManager.hpp>
-#include <glimac/TrackballCamera.hpp>
 
 #include <GL/glew.h>
 #include <iostream>
 #include <vector>
 
-#include <Mesh/Square.hpp>
+#include <Mesh/Mesh.hpp>
+#include <Game/Camera.hpp>
 
 using namespace glimac;
 
@@ -29,9 +29,19 @@ int main(int argc, char** argv) {
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
      *********************************/
+    /*CAMERA*/
+    Camera camera;
 
-    /*----------Camera----------*/
-    TrackballCamera camera;
+    /*----------Vertex----------*/
+    std::vector<ShapeVertex> vertices;
+    vertices.push_back(ShapeVertex(glm::vec3(-0.5f, -0.5f, 0.f), glm::vec3(-0.5f, -0.5f, 0.f), glm::vec2(0.f, 1.f)));
+    vertices.push_back(ShapeVertex(glm::vec3(0.5f, -0.5f, 0.f), glm::vec3(0.5f, -0.5f, 0.f), glm::vec2(1.f, 1.f)));
+    vertices.push_back(ShapeVertex(glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.5f, 0.5f, 0.f), glm::vec2(0.5f, 0.f)));
+
+    std::vector<u_int32_t> indices;
+    indices.push_back(0);
+    indices.push_back(1);
+    indices.push_back(2);
 
     /*----------SHADERS---------*/
     FilePath applicationPath(argv[0]); // chemin du programme
@@ -40,26 +50,26 @@ int main(int argc, char** argv) {
 
     ShaderManager shader(vsPath, fsPath);
 
-    shader.addUniformVariable("uTexture");
     shader.addUniformVariable("uMVPMatrix");
     shader.addUniformVariable("uMVMatrix");
     shader.addUniformVariable("uNormalMatrix");
+    shader.addUniformVariable("uTexture");
 
     /*----------Texture----------*/
-    FilePath texturePath = applicationPath.dirPath()+"../../Temple_Run/Assets/textures/test/fleche.jpg";
+    FilePath texturePath = applicationPath.dirPath()+"../../Temple_Run/Assets/textures/test/triforce.png";
     Texture texture(texturePath);
 
     texture.bind();
     shader.sendUniformInt("uTexture", 0);
     texture.debind();
 
-    /*----------MESH : Square----------*/
-    Square carre(&shader, &texture);
-    carre.fillBuffers();
+    /*----------MESH----------*/
+    Mesh triangle(vertices, indices);
+    triangle.fillBuffers();
 
-    /*----------Transfo-------*/
+    //----Transfo
     glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), WINDOW_WIDTH/(float)WINDOW_HEIGHT, 0.1f, -100.f); 
-    glm::mat4 MVMatrix = camera.getViewMatrix();
+    glm::mat4 MVMatrix = glm::mat4(1.f);
 
     // Application loop:
     bool done = false;
@@ -67,32 +77,10 @@ int main(int argc, char** argv) {
         // Event loop:
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
-            switch (e.type) {
-				case SDL_QUIT:
-					done = true;
-					break;
-
-                case SDL_MOUSEMOTION:
-                    if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
-                        if (e.motion.xrel != 0) {
-                            camera.rotateUp(e.motion.xrel / 1.5f);
-                        }
-                        if (e.motion.yrel != 0) {
-                            camera.rotateLeft(e.motion.yrel / 1.5f);
-                        }
-                        break;
-                    }
-                default:
-                    break;
+            if(e.type == SDL_QUIT) {
+                done = true; // Leave the loop after this iteration
             }
-        }
-
-        if(windowManager.isKeyPressed(SDLK_UP)){
-                camera.moveFront(0.5f);
-        }
-                
-        if(windowManager.isKeyPressed(SDLK_DOWN)){
-                camera.moveFront(-0.5f);
+            camera.controlManager(e);
         }
 
         /*********************************
@@ -100,23 +88,27 @@ int main(int argc, char** argv) {
          *********************************/
 
         glClear(GL_COLOR_BUFFER_BIT);
-        MVMatrix = glm::mat4(1.f);
 
         //-----DRAW-----
-        carre.bind();
-        carre.draw(ProjMatrix, MVMatrix, camera.getViewMatrix());
-        MVMatrix = glm::translate(glm::mat4(1.f), glm::vec3(0, 0, 1));
-        carre.draw(ProjMatrix, MVMatrix, camera.getViewMatrix());
-        MVMatrix = glm::translate(glm::mat4(1.f), glm::vec3(9, 0, 2));
-        carre.draw(ProjMatrix, MVMatrix, camera.getViewMatrix());
-        carre.debind();
+        triangle.bind();
+        shader.use();
+        texture.bind();
+
+        shader.sendUniformMatrix4("uMVPMatrix", ProjMatrix * camera.getViewMatrix() * MVMatrix);
+        shader.sendUniformMatrix4("uMVMatrix", camera.getViewMatrix() * MVMatrix);
+        shader.sendUniformMatrix4("uNormalMatrix", (glm::transpose(glm::inverse(MVMatrix))));
+
+        triangle.draw();
+        texture.debind();
+        triangle.debind();
 
         // Update the display
         windowManager.swapBuffers();
     }
 
     //-----LIBERATION MEMOIRE-----
-    carre.free();
+    triangle.free();
+    texture.free();
 
     return EXIT_SUCCESS;
 }

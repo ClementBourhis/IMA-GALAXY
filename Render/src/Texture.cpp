@@ -31,7 +31,7 @@ void Texture::loadTexture(){
 
     //envoie d'une exeption si l'image n'est pas chargé
     if(_image == nullptr){
-        throw std::ios_base::failure("Texture::loadTexture() : error : can't load file: " + (const std::string) _path.dirPath());
+        throw std::ios_base::failure("Texture::loadTexture() : error : can't load file: " + (const std::string) _path);
     }
 
     //génération de l'objet texture

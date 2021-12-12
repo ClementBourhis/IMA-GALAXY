@@ -12,6 +12,5 @@ class Square : public Mesh{
 
     public:
         //---constructeurs
-        Square(float size);
-        Square(float size, ShaderManager* shader, Texture* texture);
+        Square(float size = 1.f);
 };

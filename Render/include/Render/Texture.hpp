@@ -38,4 +38,10 @@ class Texture {
         
         GLuint getId();                     //retourne l'id
         std::unique_ptr<Image> getImage();  //retourne le pointeur ver l'image
+
+        //Affichage :
+        friend std::ostream &operator<<(std::ostream &os, const Texture &texture){
+            os << "     image : " << texture._path << "\n";
+            return os;
+        }
 };

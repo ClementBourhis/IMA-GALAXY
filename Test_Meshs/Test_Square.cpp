@@ -1,23 +1,19 @@
 #include <glimac/SDLWindowManager.hpp>
+
 #include <GL/glew.h>
 #include <iostream>
 #include <vector>
 
-//---Mesh
-#include <Mesh/Mesh.hpp>
-#include <Mesh/Cube.hpp>
-
-//---glimac
-#include <glimac/TrackballCamera.hpp>
-
-#include <Game/Partie.hpp>
+#include <Mesh/Square.hpp>
+#include <Game/Camera.hpp>
 
 using namespace glimac;
 
 int main(int argc, char** argv) {
     // Initialize SDL and open a window
-    const int WINDOW_WIDTH = 2000;
-    const int WINDOW_HEIGHT = 1600;
+    const unsigned int WINDOW_WIDTH = 800;
+    const unsigned int WINDOW_HEIGHT = 600;
+
     SDLWindowManager windowManager(WINDOW_WIDTH, WINDOW_HEIGHT, "GLImac");
 
     // Initialize glew for OpenGL3+ support
@@ -33,8 +29,8 @@ int main(int argc, char** argv) {
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
      *********************************/
-
-    Partie currentPartie("../Temple_Run/Game/Niveaux/", 1);
+    /*CAMERA*/
+    Camera camera;
 
     /*----------SHADERS---------*/
     FilePath applicationPath(argv[0]); // chemin du programme
@@ -43,29 +39,26 @@ int main(int argc, char** argv) {
 
     ShaderManager shader(vsPath, fsPath);
 
+    shader.addUniformVariable("uMVPMatrix");
+    shader.addUniformVariable("uMVMatrix");
+    shader.addUniformVariable("uNormalMatrix");
+    shader.addUniformVariable("uTexture");
+
     /*----------Texture----------*/
-    FilePath texturePath = applicationPath.dirPath()+"../../Temple_Run/Assets/textures/skybox/back.png";
+    FilePath texturePath = applicationPath.dirPath()+"../../Temple_Run/Assets/textures/test/fleche.jpg";
     Texture texture(texturePath);
 
-    shader.addUniformVariable("uTexture");
     texture.bind();
     shader.sendUniformInt("uTexture", 0);
     texture.debind();
 
     /*----------MESH----------*/
-    Cube cube(1, &shader, &texture);
-    cube.fillBuffers();
+    Square square;
+    square.fillBuffers();    
 
-    /*----------Activation profondeur GPU----------*/
-    glEnable(GL_DEPTH_TEST); 
-
-    /*----------3D-MATRICES----------*/
-    shader.addUniformVariable("uMVPMatrix");
-    shader.addUniformVariable("uMVMatrix");
-    shader.addUniformVariable("uNormalMatrix");
-    glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f),((float)WINDOW_WIDTH/(float)WINDOW_HEIGHT), 0.1f, 100.f);
-    //glm::mat4 MVMatrix = currentPartie.getCamera().getViewMatrix();
-    glm::mat4 MVMatrix = glm::mat4();
+    //----Transfo
+    glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), WINDOW_WIDTH/(float)WINDOW_HEIGHT, 0.1f, -100.f); 
+    glm::mat4 MVMatrix = glm::mat4(1.f);
 
     // Application loop:
     bool done = false;
@@ -73,36 +66,38 @@ int main(int argc, char** argv) {
         // Event loop:
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
-            switch (e.type) {
-				case SDL_QUIT:
-					done = true;
-					break;
-                default:
-                    break;
+            if(e.type == SDL_QUIT) {
+                done = true; // Leave the loop after this iteration
             }
-            currentPartie.eventManager(e); //se charge des events de la camera
+            camera.controlManager(e);
         }
-
-        
 
         /*********************************
          * HERE SHOULD COME THE RENDERING CODE
          *********************************/
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT);
 
         //-----DRAW-----
-        cube.bind();
-        //cube.draw();
-        cube.draw(ProjMatrix, MVMatrix, currentPartie.getCamera().getViewMatrix());
-        cube.debind();
+        square.bind();
+        shader.use();
+        texture.bind();
+
+        shader.sendUniformMatrix4("uMVPMatrix", ProjMatrix * camera.getViewMatrix() * MVMatrix);
+        shader.sendUniformMatrix4("uMVMatrix", camera.getViewMatrix() * MVMatrix);
+        shader.sendUniformMatrix4("uNormalMatrix", (glm::transpose(glm::inverse(MVMatrix))));
+
+        square.draw();
+        texture.debind();
+        square.debind();
 
         // Update the display
         windowManager.swapBuffers();
     }
 
     //-----LIBERATION MEMOIRE-----
-    cube.free();
+    square.free();
+    texture.free();
 
     return EXIT_SUCCESS;
 }

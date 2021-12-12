@@ -4,11 +4,6 @@ Square::Square(float size) {
     build(size);
 }
 
-Square::Square(float size, ShaderManager* shader, Texture* texture)
-    : Mesh(shader, texture){
-    build(size);
-}
-
 void Square::build(float size){
     //On remplit nos vertex
     //                              |            POSIION              |      NORMAL      |      TEXTURE     |

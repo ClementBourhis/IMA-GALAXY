@@ -8,6 +8,18 @@ Mesh::Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t>
     :_vertices(vertices), _indices(indices), _isFill(false){
 }
 
+/*Mesh::Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t> indices, ShaderManager* shader)
+    :_vertices(vertices), _indices(indices), _shader(shader){
+}*/
+
+/*Mesh::Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t> indices, ShaderManager* shader, Texture* texture)
+    :_vertices(vertices), _indices(indices), _shader(shader), _texture(texture){
+}*/
+
+/*Mesh::Mesh(ShaderManager* shader, Texture* texture)
+    :_shader(shader), _texture(texture){
+}*/
+
 void Mesh::free(){
     _vbo->~VBO();
     _vao->~VAO();

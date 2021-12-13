@@ -49,6 +49,9 @@ class Camera{
         
         //méthode Trackball
         void setPosition(const glm::vec3 &position); //changement du centre de la trackball
+        glm::vec3 getPosition(){
+            return _position;
+        }; //récupère la position du centre de la caméra
 
         //mouvements
         void moveFront(float delta);

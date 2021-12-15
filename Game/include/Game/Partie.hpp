@@ -3,6 +3,9 @@
 #include "Plateau.hpp"
 #include "Camera.hpp"
 
+//Elements 
+//#include <Elements/Skybox.hpp>
+
 class Partie {
 
 	private:
@@ -11,7 +14,7 @@ class Partie {
         //std::vector<Enemy> _enemies; ??
         //config en fonction du niveau de difficulté
         Camera _camera; //reliée au personnage et à ses déplacements
-        //skybox skybox; //reliée à la caméra et à ses déplacements
+        //Skybox _skybox; //reliée à la caméra et à ses déplacements
 
 	public:
 		//constructeurs-/-destructeur

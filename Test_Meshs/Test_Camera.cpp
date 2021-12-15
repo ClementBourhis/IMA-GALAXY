@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
     shader.addUniformVariable("uTexture");
 
     /*----------Texture----------*/
-    FilePath texturePath = applicationPath.dirPath()+"../../Temple_Run/Assets/textures/test/triforce.png";
+    FilePath texturePath = applicationPath.dirPath()+"../Assets/textures/test/triforce.png";
     Texture texture(texturePath);
 
     texture.bind();

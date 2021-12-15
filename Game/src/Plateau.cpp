@@ -15,7 +15,7 @@ void Plateau::loadParcours(const std::string &filename) {
     std::ifstream file(filename);
 
     if (file.fail()){
-        throw std::ios_base::failure("Texture::loadTexture() : error : can't load file: " + filename);
+        throw std::ios_base::failure("Plateau::loadParcours() : error : can't load file: " + filename);
     }
 
     std::cout << "Niveau chargé : " << filename << std::endl;
@@ -26,7 +26,7 @@ void Plateau::loadParcours(const std::string &filename) {
     std::getline(file, line);
     std::getline(file, line);
 
-    int widthGrid, heightGrid, value;
+    int widthGrid, heightGrid;
     file >> widthGrid;
     file >> heightGrid;
 

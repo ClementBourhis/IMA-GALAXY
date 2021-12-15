@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
     shader.addUniformVariable("uTexture");
 
     /*----------Texture----------*/
-    FilePath texturePath = applicationPath.dirPath()+"../../Temple_Run/Assets/textures/test/fleche.jpg";
+    FilePath texturePath = applicationPath.dirPath()+"../Assets/textures/test/fleche.jpg";
     Texture texture(texturePath);
 
     texture.bind();

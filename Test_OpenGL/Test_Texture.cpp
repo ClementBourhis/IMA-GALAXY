@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
     vao.fillBuffer(vertices, &vbo, &ibo);
 
     /*----------Texture---------*/
-    FilePath texturePath = applicationPath.dirPath()+"../../Temple_Run/Assets/textures/test/triforce.png";
+    FilePath texturePath = applicationPath.dirPath()+"../Assets/textures/test/triforce.png";
     Texture texture(texturePath);
 
     shader.addUniformVariable("uTexture");

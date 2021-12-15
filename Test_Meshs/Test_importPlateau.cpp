@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
      *********************************/
     /*----------Partie----------*/
     FilePath applicationPath(argv[0]); // chemin du programme
-    std::string levelPath = applicationPath.dirPath() + "../../Temple_Run/Game/Niveaux";
+    std::string levelPath = applicationPath.dirPath() + "../Assets/Niveaux";
     Partie partie(levelPath, 1);
 
     std::vector<Case> cells = partie.getMap().getCells();
@@ -58,10 +58,10 @@ int main(int argc, char** argv) {
     ShaderManager shader(vsPath, fsPath);
 
     /*----------Texture----------*/
-    FilePath texturePath = applicationPath.dirPath()+"../../Temple_Run/Assets/textures/Floor/sparckle.png";
+    FilePath texturePath = applicationPath.dirPath()+"../Assets/textures/Floor/sparckle.png";
     Texture texture(texturePath);
 
-    texturePath = applicationPath.dirPath()+"../../Temple_Run/Assets/textures/test/triforce.png";
+    texturePath = applicationPath.dirPath()+"../Assets/textures/test/triforce.png";
     Texture texture2(texturePath);
 
     /*----------MESH----------*/

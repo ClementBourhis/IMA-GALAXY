@@ -29,3 +29,6 @@ add_subdirectory(Elements)
 add_subdirectory(Test_OpenGL)
 add_subdirectory(Test_Meshs)
 add_subdirectory(Mesh)
+
+#on copie le répertoire assets à la source du build (pour avoir des chemins relatifs qui fonctionnent depuis n'importe quel emplacement du build)
+file(COPY Assets DESTINATION .)

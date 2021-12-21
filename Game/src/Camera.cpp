@@ -1,7 +1,7 @@
 #include <Game/Camera.hpp>
 
 Camera::Camera()
-    : _distance(-5.0f), _angleX(10.f), _angleY(180.f), _position(0.f, 1.f, 0.f), _cameraType(false), _maxAngle(40.f), _phi(0), _theta(0) {
+    : _distance(-5.0f), _angleX(10.f), _angleY(180.f), _position(0.f, 1.f, 0.f), _cameraType(false), _maxAngle(70.f), _phi(0), _theta(0) {
     computeDirectionVectors();
 }
 
@@ -87,8 +87,11 @@ void Camera::moveFront(float delta) {
 
 void Camera::rotateLeft(float degrees){
     if(_cameraType){
-        _theta+=degrees*0.01;
-        computeDirectionVectors();
+        if(_theta+(degrees*0.01) >= glm::radians(-_maxAngle) && _theta+(degrees*0.01) <= glm::radians(_maxAngle)){
+            _theta+=degrees*0.01;
+            computeDirectionVectors();
+        }
+        
     }
     else{
         if(_angleX+degrees>=-90.f && _angleX+degrees<=90.f){ // on met les contraintes pour ne pas aller à l'envers
@@ -99,8 +102,10 @@ void Camera::rotateLeft(float degrees){
 
 void Camera::rotateUp(float degrees){
     if(_cameraType){
-        _phi+=degrees*0.01;
-        computeDirectionVectors();
+        if(_phi+(degrees*0.01) >= glm::radians(-_maxAngle) && _phi+(degrees*0.01) <= glm::radians(_maxAngle)){
+            _phi+=degrees*0.01;
+            computeDirectionVectors();
+        }
     }
     else{
         _angleY+=degrees;

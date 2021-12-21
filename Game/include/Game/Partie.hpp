@@ -4,17 +4,17 @@
 #include "Camera.hpp"
 
 //Elements 
-//#include <Elements/Skybox.hpp>
+#include <Elements/Skybox.hpp>
 
 class Partie {
 
 	private:
         Plateau _map;
-        //Personnage _persoPrincipal;
-        //std::vector<Enemy> _enemies; ??
+        //Personnage* _persoPrincipal;
+        //AssetManager _assets; //tous les éléments du jeu, dont le personnage et la skybox
         //config en fonction du niveau de difficulté
         Camera _camera; //reliée au personnage et à ses déplacements
-        //Skybox _skybox; //reliée à la caméra et à ses déplacements
+        //Skybox* _skybox(); //reliée à la caméra et à ses déplacements
 
 	public:
 		//constructeurs-/-destructeur
@@ -35,8 +35,9 @@ class Partie {
         Camera getCamera(){
             return _camera;
         }
-        void setCameraEvent(SDL_Event& e);
 
         void eventManager(SDL_Event& e);
+
+        void draw();
 
 };

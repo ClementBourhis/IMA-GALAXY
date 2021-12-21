@@ -13,7 +13,6 @@
 #include <Mesh/Cube.hpp>
 
 //Game
-#include <Game/Camera.hpp>
 #include <Game/Partie.hpp>
 
 //Element
@@ -58,16 +57,7 @@ int main(int argc, char** argv) {
     std::string levelPath = applicationPath.dirPath() + "../Assets/Niveaux";
     Partie partie(levelPath, 1);
 
-    partie.getInfosPlateau();
-
     std::vector<Case> cells = partie.getMap().getCells();
-
-    /*----------CAMERA----------*/
-    Camera camera;
-
-    std::cout << "position cam : " << camera.getPositionInScene() << std::endl;
-
-    std::cout << "VM : " << camera.getViewMatrix() << std::endl;
 
     /*----------SHADERS---------*/
     FilePath vsPath = applicationPath.dirPath() + "shaders/camera.vs.glsl";
@@ -96,9 +86,9 @@ int main(int argc, char** argv) {
 
     Element floor(&square, &shader, &texture);
 
-    Element cubox(&cube, &shader, &texture2, glm::vec3(0,0.5f,0), glm::vec3(0.5, 1, 0.5));
+    //Element cubox(&cube, &shader, &texture2, glm::vec3(0,0.5f,0), glm::vec3(0.5, 1, 0.5));
 
-    Skybox skybox(&cube, &shader, &texture3, camera.getPositionInScene(), glm::vec3(1, 1, 1));
+    Skybox skybox(&cube, &shader, &texture3, partie.getCamera().getPositionInScene(), glm::vec3(1, 1, 1));
 
     //----Transfo
     glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), WINDOW_WIDTH/(float)WINDOW_HEIGHT, 0.1f, -100.f);
@@ -115,13 +105,9 @@ int main(int argc, char** argv) {
             if(e.type == SDL_QUIT) {
                 done = true; // Leave the loop after this iteration
             }
-            camera.controlManager(e);
+            partie.eventManager(e);
 
-            if(windowManager.isKeyPressed(SDLK_m)){
-                std::cout << camera.getViewMatrix() << std::endl;
-            }
-
-            if(windowManager.isKeyPressed(SDLK_z)){
+            /*if(windowManager.isKeyPressed(SDLK_z)){
                 cubox.translate(glm::vec3(0,0,1));
             }
 
@@ -135,7 +121,7 @@ int main(int argc, char** argv) {
 
             if(windowManager.isKeyPressed(SDLK_q)){
                 cubox.translate(glm::vec3(1,0,0));;
-            }
+            }*/
         }
 
         /*********************************
@@ -145,17 +131,17 @@ int main(int argc, char** argv) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //-----DRAW-----
-        skybox.updatePosition(camera.getPositionInScene());
-        skybox.draw(ProjMatrix, camera.getViewMatrix());
+        skybox.updatePosition(partie.getCamera().getPositionInScene());
+        skybox.draw(ProjMatrix, partie.getCamera().getViewMatrix());
 
         
         for(const auto &it : cells){
             floor.position() = it.getPosition();
-            floor.draw(ProjMatrix, camera.getViewMatrix());
+            floor.draw(ProjMatrix, partie.getCamera().getViewMatrix());
         }
         
 
-        cubox.draw(ProjMatrix, camera.getViewMatrix());
+        //cubox.draw(ProjMatrix, partie.getCamera().getViewMatrix());
         
 
         // Update the display

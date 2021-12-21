@@ -12,8 +12,8 @@ class Camera{
     private :
         //---attributs
         //paramètre pour la caméra Trackball
-        glm::vec3 _position;     
-        float _distance;
+        glm::vec3 _position;        //position du centre de l'objet que suis la caméra
+        float _distance;            //distance par rapport à l'objet
         float _angleX;
         float _angleY;
 
@@ -24,16 +24,8 @@ class Camera{
         glm::vec3 _leftVector;
         glm::vec3 _upVector;
 
-        float _maxAngle;
+        float _maxAngle;    //angle max qui permet de tourner la tete de l'explorateur
         bool _cameraType; //choix de la camera Trackball(false) ou camera freefly(true)
-
-        //---méthodes
-        //calcul les vecteurs pour la camera freefly
-        void computeDirectionVector(){
-            _frontVector = glm::vec3(cos(_theta) * sin(_phi), sin(_theta), cos(_theta) * cos(_phi));
-            _leftVector = glm::vec3(sin(glm::radians(_phi)), 0, cos(glm::radians(_phi)));
-            _upVector = glm::cross(_frontVector, _leftVector);
-        }
 
     public :
         //---constructeur
@@ -43,7 +35,7 @@ class Camera{
         ~Camera(){};
 
         //---méthodes
-        void initialization(const float &distance = -5, const float &angleY = 20.f, const glm::vec3 &position = glm::vec3(), const float &maxAngle = 40.f); //initialisation des paramètre de la caméra
+        void initialization(const float &distance = -5, const float &angleY = 20.f, const float &angleX = 180.f, const glm::vec3 &position = glm::vec3(), const float &maxAngle = 40.f); //initialisation des paramètre de la caméra
         void controlManager(const SDL_Event &e);                                                                                                            //regroupement des contrôles pour la camera
         void changeCameraType(bool type);                                                                                                                   //change le type de la camera
         
@@ -60,7 +52,13 @@ class Camera{
 
         glm::mat4 getViewMatrix(); //récupère la matrice ViewMatrix
 
-        //méthode freefly
-        //...
+        //méthodes freefly
+        
+        //calcul les vecteurs pour la camera freefly
+        void computeDirectionVectors(){
+            _frontVector = glm::vec3(cos(_theta) * sin(_phi), sin(_theta), cos(_theta) * cos(_phi));
+            _leftVector = glm::vec3(sin(_phi+(M_PI/2)), 0, cos(_phi+(M_PI/2)));
+            _upVector = glm::cross(_frontVector, _leftVector);
+        }
         
 };

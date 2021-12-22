@@ -24,6 +24,7 @@ class Mesh{
         VAO *_vao = new VAO();              //objet VAO
 
         bool _isFill;                        //on vérifie si le mesh à envoyer ses données
+        bool _isBind;                        //on vérifie si le mesh est déjà bind
 
     public :
         //---constructeurs
@@ -79,7 +80,13 @@ class Mesh{
                 os << "     statut : is fill";
             }
             else{
-                os << "     statut : is notfill !";
+                os << "     statut : is not fill !";
+            }
+            if(mesh._isBind){
+                os << "     statut : is bind";
+            }
+            else{
+                os << "     statut : is not bind !";
             }
             return os;
         }

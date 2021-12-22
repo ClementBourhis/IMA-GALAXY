@@ -1,24 +1,12 @@
 #include <Mesh/Mesh.hpp>
 
 Mesh::Mesh(const std::vector<ShapeVertex> vertices)
-    :_vertices(vertices), _isFill(false){
+    :_vertices(vertices), _isFill(false), _isBind(false){
 }
 
 Mesh::Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t> indices)
-    :_vertices(vertices), _indices(indices), _isFill(false){
+    :_vertices(vertices), _indices(indices), _isFill(false), _isBind(false){
 }
-
-/*Mesh::Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t> indices, ShaderManager* shader)
-    :_vertices(vertices), _indices(indices), _shader(shader){
-}*/
-
-/*Mesh::Mesh(const std::vector<ShapeVertex> vertices, const std::vector<u_int32_t> indices, ShaderManager* shader, Texture* texture)
-    :_vertices(vertices), _indices(indices), _shader(shader), _texture(texture){
-}*/
-
-/*Mesh::Mesh(ShaderManager* shader, Texture* texture)
-    :_shader(shader), _texture(texture){
-}*/
 
 void Mesh::free(){
     _vbo->~VBO();
@@ -28,10 +16,12 @@ void Mesh::free(){
 
 void Mesh::bind(){
     _vao->bind();
+    _isBind = true;
 }
 
 void Mesh::debind(){
     _vao->debind();
+    _isBind = false;
 }
 
 void Mesh::fillBuffers(){
@@ -45,7 +35,6 @@ void Mesh::fillBuffers(){
     }
     _isFill = true;
 }
-
 
 void Mesh::draw(){
     if(haveIBO()){

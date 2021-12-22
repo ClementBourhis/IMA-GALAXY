@@ -69,10 +69,10 @@ int main(int argc, char** argv) {
     FilePath texturePath = applicationPath.dirPath()+"../Assets/textures/Floor/sparckle.png";
     Texture texture(texturePath);
 
-    texturePath = applicationPath.dirPath()+"../Assets/textures/test/triforce.png";
+    texturePath = applicationPath.dirPath()+"../Assets/textures/explorateur.png";
     Texture texture2(texturePath);
 
-    texturePath = applicationPath.dirPath()+"../Assets/textures/skybox/skybox.png";
+    texturePath = applicationPath.dirPath()+"../Assets/textures/skybox/2.png";
     Texture texture3(texturePath);
 
     /*----------MESH----------*/
@@ -86,7 +86,7 @@ int main(int argc, char** argv) {
 
     Element floor(&square, &shader, &texture);
 
-    //Element cubox(&cube, &shader, &texture2, glm::vec3(0,0.5f,0), glm::vec3(0.5, 1, 0.5));
+    Element perso(&cube, &shader, &texture2, glm::vec3(0,0.5f,0), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec3(0.f,glm::radians(180.f),0.f));
 
     Skybox skybox(&cube, &shader, &texture3, partie.getCamera().getPositionInScene(), glm::vec3(1, 1, 1));
 
@@ -95,6 +95,10 @@ int main(int argc, char** argv) {
     std::cout << ProjMatrix << std::endl;
 
     glEnable(GL_DEPTH_TEST);
+    
+    //transparence
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);   
 
     // Application loop:
     bool done = false;
@@ -107,21 +111,21 @@ int main(int argc, char** argv) {
             }
             partie.eventManager(e);
 
-            /*if(windowManager.isKeyPressed(SDLK_z)){
-                cubox.translate(glm::vec3(0,0,1));
+            if(windowManager.isKeyPressed(SDLK_z)){
+                perso.translate(glm::vec3(0,0,1));
             }
 
             if(windowManager.isKeyPressed(SDLK_s)){
-                cubox.translate(glm::vec3(0,0,-1));;
+                perso.translate(glm::vec3(0,0,-1));
             }
 
             if(windowManager.isKeyPressed(SDLK_d)){
-                cubox.translate(glm::vec3(-1,0,0));;
+                perso.translate(glm::vec3(-1,0,0));
             }
 
             if(windowManager.isKeyPressed(SDLK_q)){
-                cubox.translate(glm::vec3(1,0,0));;
-            }*/
+                perso.translate(glm::vec3(1,0,0));
+            }
         }
 
         /*********************************
@@ -141,8 +145,8 @@ int main(int argc, char** argv) {
         }
         
 
-        //cubox.draw(ProjMatrix, partie.getCamera().getViewMatrix());
-        
+        perso.draw(ProjMatrix, partie.getCamera().getViewMatrix());
+
 
         // Update the display
         windowManager.swapBuffers();

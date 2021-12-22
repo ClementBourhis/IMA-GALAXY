@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
     texturePath = applicationPath.dirPath()+"../Assets/textures/test/triforce.png";
     Texture texture2(texturePath);
 
-    texturePath = applicationPath.dirPath()+"../Assets/textures/skybox/skybox.png";
+    texturePath = applicationPath.dirPath()+"../Assets/textures/skybox/1.png";
     Texture texture3(texturePath);
 
     /*----------MESH----------*/

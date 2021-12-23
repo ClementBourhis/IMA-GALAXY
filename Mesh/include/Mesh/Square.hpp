@@ -13,4 +13,8 @@ class Square : public Mesh{
     public:
         //---constructeurs
         Square(float size = 1.f);
+
+        inline std::string type() const override{
+            return "Square";
+        }
 };

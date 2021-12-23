@@ -15,4 +15,8 @@ class Skybox : public Element {
         void updatePosition(glm::vec3 posCamera){
             _position = posCamera;
         }
+
+        inline std::string type() const override {
+            return "Skybox";
+        }
 };

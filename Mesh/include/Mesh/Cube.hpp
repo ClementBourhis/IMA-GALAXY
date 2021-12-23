@@ -18,4 +18,8 @@ class Cube : public Mesh{
 
         //méthodes
         void build(GLfloat size); //remplit les vecteurs _vertices et _indices
+
+        inline std::string type() const override{
+            return "Cube";
+        }
 };

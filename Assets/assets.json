@@ -1,0 +1,60 @@
+{
+    "shaders":[
+        {
+            "name": "3Dtexture",
+            "vs" : "shaders/3Dtexture.vs.glsl",
+            "fs" : "shaders/3Dtexture.fs.glsl"
+        }
+    ],
+    "textures":[
+        {
+            "name": "sparckle",
+            "image": "textures/Floor/sparckle.png"
+        },
+        {
+            "name": "skybox1",
+            "image": "textures/skybox/1.png"
+        },
+        {
+            "name": "skybox2",
+            "image": "textures/skybox/2.png"
+        },
+        {
+            "name": "explorateur",
+            "image": "textures/explorateur.png"
+        }
+    ],
+    "meshs":[
+        {
+            "name": "cube",
+            "type": "Cube"
+        },
+        {
+            "name": "square",
+            "type": "Square"
+        }
+    ],
+    "elements":[
+        {
+            "name": "floor",
+            "mesh": "square",
+            "type": "Floor",
+            "shader": "3Dtexture",
+            "texture": "sparckle"
+        },
+        {
+            "name": "skybox1",
+            "type": "Skybox",
+            "mesh": "cube",
+            "shader": "3Dtexture",
+            "texture": "skybox1"
+        },
+        {
+            "name": "skybox2",
+            "type": "Skybox",
+            "mesh": "cube",
+            "shader": "3Dtexture",
+            "texture": "skybox2"
+        }
+    ]
+}

@@ -72,6 +72,10 @@ class Mesh{
             return _indices.size() > 0 ? true : false;
         }
 
+        inline virtual std::string type() const{
+            return "Mesh";
+        }
+
         //Affichage :
         friend std::ostream &operator<<(std::ostream &os, const Mesh &mesh){
             os << "     nb vertices : "<<mesh._vertices.size()<<"\n";

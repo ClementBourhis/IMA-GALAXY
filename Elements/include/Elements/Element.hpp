@@ -83,6 +83,10 @@ class Element{
             return _position;
         }
 
+        inline virtual std::string type() const {
+            return "Element";
+        }
+
         //Affichage :
         friend std::ostream &operator<<(std::ostream &os, const Element &element){
             os << "     MVMatrix : " << element.MVMatrix() << "\n";

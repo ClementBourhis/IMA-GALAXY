@@ -19,7 +19,7 @@ set(OPENGL_LIBRARIES /usr/lib/x86_64-linux-gnu/libGL.so.1)
 include_directories(${SDL_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} glimac/include Adds/third-party/include Adds/jsoncpp/include)
 
 #on rassemble toutes les libs qui vont être utilisé
-set(ALL_LIBRARIES glimac Render Elements Mesh Game ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
+set(ALL_LIBRARIES glimac Render Elements Mesh Game jsoncpp ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
 
 #ajout des répertoirs pour les libs
 add_subdirectory(glimac)
@@ -29,6 +29,7 @@ add_subdirectory(Elements)
 add_subdirectory(Test_OpenGL)
 add_subdirectory(Test_Meshs)
 add_subdirectory(Mesh)
+add_subdirectory(Adds/jsoncpp)
 
 #on copie le répertoire assets à la source du build (pour avoir des chemins relatifs qui fonctionnent depuis n'importe quel emplacement du build)
 file(COPY Assets DESTINATION .)

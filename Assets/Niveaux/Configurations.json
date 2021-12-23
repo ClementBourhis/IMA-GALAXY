@@ -1,12 +1,10 @@
 [
     {
-        "vision" : 1,
         "vitessePerso" : 1,
         "parcours" : "1.pgm",
         "skybox" : 1
     },
     {
-        "vision" : 0.5,
         "vitessePerso" : 2,
         "parcours" : "2.pgm",
         "skybox" : 2

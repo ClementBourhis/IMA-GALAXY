@@ -19,6 +19,15 @@ void Partie::eventManager(SDL_Event& e){
     _camera.controlManager(e);
 }
 
+//update tous les elements de la scene
+void Partie::update() {
+    //_camera.update();
+    //_skybox.update();
+    //_explorateur.update();
+}
+
+//dessine tous les elements de la scene
 void Partie::draw() {
     //_skybox.draw();
+    //_explorateur.draw();
 }

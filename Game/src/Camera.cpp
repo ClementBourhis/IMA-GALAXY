@@ -1,7 +1,7 @@
 #include <Game/Camera.hpp>
 
 Camera::Camera()
-    : _distance(-5.0f), _angleX(10.f), _angleY(180.f), _position(0.f, 1.f, 0.f), _cameraType(false), _maxAngle(70.f), _phi(0), _theta(0) {
+    : _distance(-5.0f), _angleX(20.f), _angleY(180.f), _position(0.f, 1.f, 0.f), _cameraType(false), _maxAngle(70.f), _phi(0), _theta(0), _blocked(false) {
     computeDirectionVectors();
 }
 
@@ -16,7 +16,7 @@ void Camera::initialization(const float &distance, const float &angleY, const fl
 void Camera::controlManager(const SDL_Event &e){
     switch(e.type){
         case SDL_MOUSEMOTION:
-            if (SDL_GetMouseState(nullptr, nullptr) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
+            if (!_blocked && SDL_GetMouseState(nullptr, nullptr) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
                 if (e.motion.xrel != 0) {
                     rotateUp(e.motion.xrel / 1.5f);
                 }
@@ -29,28 +29,31 @@ void Camera::controlManager(const SDL_Event &e){
         case SDL_KEYDOWN:
             switch (e.key.keysym.sym){
                 case SDLK_UP:
-                    if(!_cameraType){
+                    if(!_cameraType && !_blocked){
                         moveFront(0.5f);
                     }
                     break;
 
                 case SDLK_DOWN:
-                    if(!_cameraType){
+                    if(!_cameraType && !_blocked){
                         moveFront(-0.5f);
                     }
                     break;
+
+                case SDLK_l:
+                    changeBlock();
+                    break;
                 
                 case SDLK_c:
-                    bool cameraType = false;
-                    if(_cameraType == cameraType){
-                        cameraType = true;
+                    if(!_blocked){
+                        bool cameraType = false;
+                        if(_cameraType == cameraType){
+                            cameraType = true;
+                        }
+                        changeCameraType(cameraType);
                     }
-                    changeCameraType(cameraType);
                     break;
-                    
-                /*case SDLK_l:
-                    //bloquer la vue
-                    break;*/
+                
             }
 
         default:
@@ -58,13 +61,13 @@ void Camera::controlManager(const SDL_Event &e){
     }
 
     if(e.button.button == SDL_BUTTON_WHEELUP){
-        if(!_cameraType){
+        if(!_cameraType && !_blocked){
             moveFront(0.5f);
         }
     }
 
     if(e.button.button == SDL_BUTTON_WHEELDOWN){
-        if(!_cameraType){
+        if(!_cameraType && !_blocked){
             moveFront(-0.5f);
         }
     }
@@ -72,6 +75,13 @@ void Camera::controlManager(const SDL_Event &e){
 
 void Camera::changeCameraType(bool type){
     _cameraType = type;
+}
+
+void Camera::changeBlock(){
+    if(_blocked)
+        _blocked = false;
+    else
+        _blocked = true;
 }
 
 //---TrackBall
@@ -121,8 +131,12 @@ glm::mat4 Camera::getViewMatrix(){
         VM = glm::translate(VM, glm::vec3(0.0f, 0.0f, _distance));
         VM = glm::rotate(VM, glm::radians(_angleX), glm::vec3(1.0f, 0.0f, 0.0f));
         VM = glm::rotate(VM, glm::radians(_angleY), glm::vec3(0.0f, 1.0f, 0.0f));
+        VM = glm::translate(VM, -_position);
         return VM;
     }
 }
 
-//---Freefly
+
+void Camera::update(){
+    //update la position en fonction de l'explorateur
+}

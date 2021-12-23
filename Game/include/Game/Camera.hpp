@@ -26,6 +26,7 @@ class Camera{
 
         float _maxAngle;    //angle max qui permet de tourner la tete de l'explorateur
         bool _cameraType; //choix de la camera Trackball(false) ou camera freefly(true)
+        bool _blocked; //camera bloquée quand true
 
     public :
         //---constructeur
@@ -38,7 +39,8 @@ class Camera{
         void initialization(const float &distance = -5, const float &angleY = 20.f, const float &angleX = 180.f, const glm::vec3 &position = glm::vec3(), const float &maxAngle = 40.f); //initialisation des paramètre de la caméra
         void controlManager(const SDL_Event &e);                                                                                                            //regroupement des contrôles pour la camera
         void changeCameraType(bool type);                                                                                                                   //change le type de la camera
-        
+        void changeBlock();
+
         //méthode Trackball
         void setPosition(const glm::vec3 &position); //changement du centre de la trackball
         glm::vec3 getPositionInScene(){
@@ -59,6 +61,13 @@ class Camera{
             _frontVector = glm::vec3(cos(_theta) * sin(_phi), sin(_theta), cos(_theta) * cos(_phi));
             _leftVector = glm::vec3(sin(_phi+(M_PI/2)), 0, cos(_phi+(M_PI/2)));
             _upVector = glm::cross(_frontVector, _leftVector);
+        }
+
+        void update();
+
+        //setters
+        inline glm::vec3 &position(){
+            return _position;
         }
         
 };

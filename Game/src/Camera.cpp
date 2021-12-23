@@ -131,6 +131,7 @@ glm::mat4 Camera::getViewMatrix(){
         VM = glm::translate(VM, glm::vec3(0.0f, 0.0f, _distance));
         VM = glm::rotate(VM, glm::radians(_angleX), glm::vec3(1.0f, 0.0f, 0.0f));
         VM = glm::rotate(VM, glm::radians(_angleY), glm::vec3(0.0f, 1.0f, 0.0f));
+        VM = glm::translate(VM, -_position);
         return VM;
     }
 }

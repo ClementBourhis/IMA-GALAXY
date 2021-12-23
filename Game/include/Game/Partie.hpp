@@ -10,11 +10,12 @@ class Partie {
 
 	private:
         Plateau _map;
-        //Personnage* _persoPrincipal;
+        //Personnage* _explorateur;
         //AssetManager _assets; //tous les éléments du jeu, dont le personnage et la skybox
-        //config en fonction du niveau de difficulté
         Camera _camera; //reliée au personnage et à ses déplacements
         //Skybox* _skybox(); //reliée à la caméra et à ses déplacements
+
+        //config en fonction du niveau de difficulté
 
 	public:
 		//constructeurs-/-destructeur
@@ -31,13 +32,17 @@ class Partie {
             return _map;
         }
 
-        
+        //getter
         Camera getCamera(){
             return _camera;
+        }
+        void setCameraPos(const glm::vec3 pos){
+            _camera.position() = pos;
         }
 
         void eventManager(SDL_Event& e);
 
         void draw();
+        void update();
 
 };

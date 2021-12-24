@@ -27,8 +27,8 @@ using namespace glimac;
 
 int main(int argc, char** argv) {
     // Initialize SDL and open a window
-    const unsigned int WINDOW_WIDTH = 1920;
-    const unsigned int WINDOW_HEIGHT = 1080;
+    const unsigned int WINDOW_WIDTH = 900;
+    const unsigned int WINDOW_HEIGHT = 800;
 
     SDLWindowManager windowManager(WINDOW_WIDTH, WINDOW_HEIGHT, "GLImac");
 
@@ -56,8 +56,6 @@ int main(int argc, char** argv) {
     FilePath assetsJson = applicationPath.dirPath() + "../Assets/assets.json";
     AssetsManager assets(assetsJson);
 
-    std::cout << assets << std::endl;
-
     //----Transfo
     glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), WINDOW_WIDTH/(float)WINDOW_HEIGHT, 0.1f, -100.f);
 
@@ -65,7 +63,7 @@ int main(int argc, char** argv) {
     
     //transparence
     glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
 
     // Application loop:
     bool done = false;
@@ -85,13 +83,15 @@ int main(int argc, char** argv) {
          *********************************/
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        //Draw
+        assets.element("skybox1")->updatePosition(partie.getCamera().getPositionInScene());
+        assets.element("skybox1")->draw(ProjMatrix, partie.getCamera().getViewMatrix(), false);
+
         for(const auto &it : cells){
-            assets.element("floor")->position() = it.getPosition();
+            assets.element("floor")->updatePosition(it.getPosition());
             assets.element("floor")->draw(ProjMatrix, partie.getCamera().getViewMatrix());
         }
-
-        assets.element("skybox2")->position() = partie.getCamera().getPositionInScene();
-        assets.element("skybox2")->draw(ProjMatrix, partie.getCamera().getViewMatrix());
 
         // Update the display
         windowManager.swapBuffers();

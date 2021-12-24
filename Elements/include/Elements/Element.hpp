@@ -49,7 +49,7 @@ class Element{
         }
 
         //draw
-        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix);
+        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix, bool depthMask = true);
 
         //getters
         glm::mat4 MVMatrix() const;
@@ -85,6 +85,10 @@ class Element{
 
         inline virtual std::string type() const {
             return "Element";
+        }
+
+        inline void updatePosition(glm::vec3 position){
+            _position = position;
         }
 
         //Affichage :

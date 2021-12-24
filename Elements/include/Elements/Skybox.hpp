@@ -10,12 +10,6 @@ class Skybox : public Element {
         }
 
         //méthodes
-        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix);
-        
-        void updatePosition(glm::vec3 posCamera){
-            _position = posCamera;
-        }
-
         inline std::string type() const override {
             return "Skybox";
         }

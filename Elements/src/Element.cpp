@@ -2,10 +2,6 @@
 
 Element::Element(Mesh *mesh, ShaderManager* shader, Texture* texture, glm::vec3 position, glm::vec3 size, glm::vec3 rotation)
     :_mesh(mesh), _shader(shader), _texture(texture), _position(position), _size(size), _rotation(rotation){
-    _shader->addUniformVariable("uMVPMatrix");
-    _shader->addUniformVariable("uMVMatrix");
-    _shader->addUniformVariable("uNormalMatrix");
-    _shader->addUniformVariable("uTexture");
 }
 
 Element::~Element(){
@@ -13,7 +9,7 @@ Element::~Element(){
     _texture->free();
 }
 
-void Element::draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix){
+void Element::draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix, bool depthMask){
     //on bind les datas
     _mesh->bind();
     _shader->use();
@@ -24,7 +20,16 @@ void Element::draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix){
     _shader->sendUniformMatrix4("uNormalMatrix", (glm::transpose(glm::inverse(MVMatrix()))));
     _shader->sendUniformInt("uTexture", 0);
 
+    //on désactive le gldepthmask (utile pour la skybox)
+    if(!depthMask){
+       glDepthMask(GL_FALSE); 
+    }
+
     _mesh->draw();
+
+    if(!depthMask){
+       glDepthMask(GL_TRUE); 
+    }
 
     //debind les datas
     _texture->debind();

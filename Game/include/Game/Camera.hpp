@@ -51,11 +51,13 @@ class Camera{
         void moveFront(float delta);
         void rotateLeft(float degrees);
         void rotateUp(float degrees);
+        void changeDirection(float degrees);
+        
 
         glm::mat4 getViewMatrix(); //récupère la matrice ViewMatrix
 
         //méthodes freefly
-        
+
         //calcul les vecteurs pour la camera freefly
         void computeDirectionVectors(){
             _frontVector = glm::vec3(cos(_theta) * sin(_phi), sin(_theta), cos(_theta) * cos(_phi));

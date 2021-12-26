@@ -107,7 +107,9 @@ int main(int argc, char** argv) {
             }
             partie.eventManager(e);
 
-            if(windowManager.isKeyPressed(SDLK_z)){
+            explorateur.controlManager(e);
+
+            /*if(windowManager.isKeyPressed(SDLK_z)){
                 explorateur.translate(glm::vec3(0,0,1));
             }
 
@@ -116,12 +118,12 @@ int main(int argc, char** argv) {
             }
 
             if(windowManager.isKeyPressed(SDLK_d)){
-                explorateur.translate(glm::vec3(-1,0,0));
+                explorateur.rotate(glm::vec3(0,glm::radians(-90.f),0));
             }
 
             if(windowManager.isKeyPressed(SDLK_q)){
-                explorateur.translate(glm::vec3(1,0,0));
-            }
+                explorateur.rotate(glm::vec3(0,glm::radians(90.f),0));
+            }*/
         }
 
 

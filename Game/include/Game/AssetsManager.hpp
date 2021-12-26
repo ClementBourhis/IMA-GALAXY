@@ -26,6 +26,7 @@
 #include <Elements/Element.hpp>
 #include <Elements/Floor.hpp>
 #include <Elements/Skybox.hpp>
+#include <Elements/Personnage.hpp>
 
 class AssetsManager{
     private :

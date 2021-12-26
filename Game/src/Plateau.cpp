@@ -3,7 +3,7 @@
 Plateau::Plateau(const std::string appPath, const int niveau)
 {
     try {
-        loadParcours(appPath + "/" + std::to_string(niveau) + ".pgm");
+        loadParcours(appPath + "/../Assets/Niveaux/" + std::to_string(niveau) + ".pgm");
     }
     catch(const std::exception &e){
             std::cerr << "Error: " << e.what() << " " << strerror(errno) << std::endl;

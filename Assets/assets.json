@@ -9,7 +9,7 @@
     "textures":[
         {
             "name": "sparckle",
-            "image": "textures/Floor/sparckle.png"
+            "image": "textures/Floor/sparckleBg.png"
         },
         {
             "name": "skybox1",
@@ -21,7 +21,7 @@
         },
         {
             "name": "explorateur",
-            "image": "textures/explorateur.png"
+            "image": "textures/personnage/explorateur.png"
         }
     ],
     "meshs":[
@@ -55,6 +55,16 @@
             "mesh": "cube",
             "shader": "3Dtexture",
             "texture": "skybox2"
+        },
+        {
+            "name": "explorateur",
+            "type": "Personnage",
+            "mesh": "cube",
+            "shader": "3Dtexture",
+            "texture": "explorateur",
+            "size":[0.5,0.5,0.5],
+            "rotation":[0,180,0],
+            "position":[0,0.5,0]
         }
     ]
 }

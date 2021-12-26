@@ -10,14 +10,13 @@
 
 //Game
 #include <Game/Partie.hpp>
-#include <Game/AssetsManager.hpp>
 
 using namespace glimac;
 
 int main(int argc, char** argv) {
     // Initialize SDL and open a window
-    const unsigned int WINDOW_WIDTH = 900;
-    const unsigned int WINDOW_HEIGHT = 800;
+    const unsigned int WINDOW_WIDTH = 1800;
+    const unsigned int WINDOW_HEIGHT = 1600;
 
     SDLWindowManager windowManager(WINDOW_WIDTH, WINDOW_HEIGHT, "GLImac");
 
@@ -36,29 +35,27 @@ int main(int argc, char** argv) {
      *********************************/
     /*----------Partie----------*/
     FilePath applicationPath(argv[0]); // chemin du programme
-    std::string levelPath = applicationPath.dirPath();
-    Partie partie(levelPath, 1);
+    //on crée une partie
+    Partie partie(applicationPath.dirPath(), 1);
+    /* Nombre minimal de millisecondes separant le rendu de deux images, 24 images par secondes */
+    static const Uint32 FRAMERATE_MILLISECONDS = 1000 / partie.framerate();
 
-    std::vector<Case> cells = partie.getMap().getCells();
-
-    /*----------AssetsManager---------*/
-    FilePath assetsJson = applicationPath.dirPath() + "../Assets/assets.json";
-    AssetsManager assets(assetsJson);
-
-    std::cout << assets << std::endl;
+    std::cout << partie.assets() << std::endl;
 
     //----Transfo
     glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), WINDOW_WIDTH/(float)WINDOW_HEIGHT, 0.1f, -100.f);
-
+    //----profondeur
     glEnable(GL_DEPTH_TEST);
-    
-    //transparence
+    //----transparence
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
 
     // Application loop:
     bool done = false;
     while(!done) {
+        /* Recuperation du temps au debut de la boucle */
+        Uint32 startTime = SDL_GetTicks();
+
         // Event loop:
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
@@ -75,24 +72,22 @@ int main(int argc, char** argv) {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //Draw
-        assets.element("skybox1")->updatePosition(partie.getCamera().getPositionInScene());
-        assets.element("skybox1")->draw(ProjMatrix, partie.getCamera().getViewMatrix(), false);
-
-        for(const auto &it : cells){
-            assets.element("floor")->updatePosition(it.getPosition());
-            assets.element("floor")->draw(ProjMatrix, partie.getCamera().getViewMatrix());
-        }
-
-        //assets.element("explorateur")->updatePosition(it.getPosition());
-        assets.element("explorateur")->draw(ProjMatrix, partie.getCamera().getViewMatrix());
+        partie.draw(ProjMatrix);
 
         // Update the display
         windowManager.swapBuffers();
+
+        /* Calcul du temps ecoule */
+        Uint32 elapsedTime = SDL_GetTicks() - startTime;
+        /* Si trop peu de temps s'est ecoule, on met en pause le programme */
+        if(elapsedTime < FRAMERATE_MILLISECONDS) 
+        {
+            SDL_Delay(FRAMERATE_MILLISECONDS - elapsedTime);
+        }
     }
 
     //-----LIBERATION MEMOIRE-----
-    assets.unloadAssets();
+    partie.unloadPartie();
 
     return EXIT_SUCCESS;
 }

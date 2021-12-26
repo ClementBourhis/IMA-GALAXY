@@ -1,7 +1,7 @@
 #include <Elements/Element.hpp>
 
 Element::Element(Mesh *mesh, ShaderManager* shader, Texture* texture, glm::vec3 position, glm::vec3 size, glm::vec3 rotation)
-    :_mesh(mesh), _shader(shader), _texture(texture), _position(position), _size(size), _rotation(rotation){
+    :_mesh(mesh), _shader(shader), _texture(texture), _position(position), _size(size), _rotation(glm::vec3(glm::radians(rotation.x),glm::radians(rotation.y),glm::radians(rotation.z))){
 }
 
 Element::~Element(){

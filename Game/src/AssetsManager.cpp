@@ -1,8 +1,8 @@
 #include <Game/AssetsManager.hpp>
 
 AssetsManager::AssetsManager(const FilePath &assetsPath)
-    : _assetsPath(assetsPath){
-    loadAssets(assetsPath);
+    : _assetsPath(assetsPath+"/../Assets/assets.json"){
+    loadAssets(_assetsPath);
 }
 
 AssetsManager::~AssetsManager(){
@@ -196,6 +196,9 @@ void AssetsManager::loadElement(const Json::Value &data){
         }
         if(type == "Skybox"){
             element = new Skybox(mesh, shader, texture, position, size, rotation);
+        }
+        if(type == "Personnage"){
+            element = new Personnage(mesh, shader, texture, position, size, rotation);
         }
     }
     else{

@@ -88,9 +88,10 @@
             "mesh": "cube",
             "shader": "3Dtexture",
             "texture": "explorateur",
+            "position":[0,0.5,0],
             "size":[0.5,0.5,0.5],
-            "rotation":[0,180,0],
-            "position":[0,0.5,0]
+            "rotation":[0,180,0]
+            
         }
     ]
 }

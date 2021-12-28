@@ -1,10 +1,6 @@
 #pragma once
 
-//STL
-#include <string> 			//std::string
-
-//glimac
-#include <glimac/glm.hpp> 	//glm::vec3, glm::vec2
+#include "Partie.hpp" 
 
 class GameManager {
 	private:
@@ -20,9 +16,27 @@ class GameManager {
 		float _zFar = -100;
 
 	public:
-		//---constructeurs-/-destructeur
-		GameManager() = default; 
-		~gameManager() = default;
+		//---constructeur
+        GameManager() = default;
+        //---destructeur
+        ~GameManager()=default;
+
+		//getters
+		inline const unsigned int &framerate() const{
+            return _framerate;
+        }
+		inline const unsigned int &windowWidth() const{
+            return _windowWidth;
+        }
+		inline const unsigned int &windowHeight() const{
+            return _windowHeight;
+        }
+		inline const float &zNear() const{
+            return _zNear;
+        }
+		inline const float &zFar() const{
+            return _zFar;
+        }
 
 		//---methodes
 		//void draw();

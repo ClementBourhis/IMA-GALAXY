@@ -9,10 +9,13 @@
 Partie::Partie(const std::string appPath, const int niveau)
 : _map(appPath, niveau), _assets(appPath), _direction(0), _niveau(niveau)
 {
-    //loadConfig(appPath+"/../Assets/Niveaux/Configurations.json", niveau);
-    _explorateur = _assets.element("explorateur");
-    _skybox = _assets.element("skybox"+std::to_string(niveau));
+    //explorateur
+    _explorateur = dynamic_cast<Personnage*>(_assets.element("explorateur"));
+    _explorateur->vitesse() = static_cast<float>(_niveau) * (1000/static_cast<float>(_framerate)) / 1000;
+    _explorateur->hauteur() = _explorateur->position().y;
 
+    //skybox
+    _skybox = dynamic_cast<Skybox*>(_assets.element("skybox"+std::to_string(niveau)));
 };
 
 void Partie::getInfosPlateau(){
@@ -21,11 +24,12 @@ void Partie::getInfosPlateau(){
 
 void Partie::eventManager(SDL_Event& e){
     //CAMERA
-    _camera.controlManager(e);
+    _camera.controlManager(e, _direction);
 
     //PERSONNAGE
     //_explorateur->controlManager(e);
     
+    //Controles de Jeu
     switch(e.type){
         case SDL_KEYDOWN:
             switch (e.key.keysym.sym){
@@ -44,13 +48,9 @@ void Partie::eventManager(SDL_Event& e){
                     break;
 
                 case SDLK_z:
-                    //_explorateur->jump();
-                    _explorateur->translate(glm::vec3(0,0.5,0));
+                    _explorateur->jumping() = true;
+                    //_explorateur->translate(glm::vec3(0,0.5,0));
                     break;
-
-                /*case SDLK_s:
-                    //_explorateur->glide();
-                    break;*/
                 
             }
 
@@ -63,20 +63,28 @@ void Partie::eventManager(SDL_Event& e){
 void Partie::draw(glm::mat4 ProjMatrix) {
     //update position camera en fonction de la position de l'explorateur
     _camera.position() = _explorateur->position();
-    //_camera.position().z = _explorateur->position().z + (_explorateur->size().z/2);
-    _camera.position().y = _explorateur->position().y + _explorateur->size().y/2;
+    //se mettre au niveau des yeux de l'explorateur
+    _camera.translateEyes(_explorateur->size(), _direction);
     
 
     _skybox->updatePosition(_camera.getPositionInScene());
     _skybox->draw(ProjMatrix, _camera.getViewMatrix(), false);
 
     for(const auto &it : _map.getCells()){
-            _assets.element("floor")->updatePosition(it.getPosition());
+            _assets.element("floor")->update2DPosition(it.getPosition());
             _assets.element("floor")->draw(ProjMatrix, _camera.getViewMatrix());
     }
 
+    for(const auto &it : _map.getPieces()){
+            _assets.element("piece")->update2DPosition(it.getPosition());
+            _assets.element("piece")->draw(ProjMatrix, _camera.getViewMatrix());
+    }
+    //rotation des pièces
+    _assets.element("piece")->rotate(glm::vec3(0,0,glm::radians(180 * (1000/static_cast<float>(_framerate))/1000)));
+
+    _explorateur->jump();
     _explorateur->draw(ProjMatrix, _camera.getViewMatrix());
-    avancer();
+    _explorateur->avancer(_direction);
 }
 
 void Partie::changeDirection(bool goud){ //gauche (0) ou droite (1)
@@ -94,52 +102,6 @@ void Partie::changeDirection(bool goud){ //gauche (0) ou droite (1)
         }
         else{
             _direction--;
-        }
-    }
-}
-
-void Partie::avancer(){
-    float speed = _niveau; //en bloc par seconde
-    float avancement = speed * (1000/_framerate) / 1000;
-    switch (_direction){
-        case 0:
-            _explorateur->translate(glm::vec3(0,0,avancement));
-            break;
-        
-        case 1:
-            _explorateur->translate(glm::vec3(-avancement,0,0));
-            break;
-
-        case 2:
-            _explorateur->translate(glm::vec3(0,0,-avancement));
-            break;
-
-        case 3:
-            _explorateur->translate(glm::vec3(avancement,0,0));
-            break;
-    }
-}
-
-void Partie::loadConfig(const FilePath &configPath, const int niveau){
-    //---Use Json
-    std::ifstream configJSON(configPath, std::ifstream::binary);
-
-    Json::Value root;
-    Json::CharReaderBuilder builder;
-    std::string errs;
-
-    Json::parseFromStream(builder, configJSON, &root, &errs);
-    
-    const Json::Value data = root["niveaux"];
-    if(!data)
-        throw std::string("loadConfig : Data is missing");
-
-    for(Json::Value const &value : data){
-        try{
-            _config["vitessePerso"] = value.asFloat();
-        }
-        catch(const std::exception &e){
-            std::cerr << "Error :: loadConfig(" << value["vitessePerso"].asString() << ") : " << e.what() << std::endl;
         }
     }
 }

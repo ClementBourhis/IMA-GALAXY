@@ -14,6 +14,8 @@ class Plateau {
 	private:
 		//---attributs
 		std::vector<Case> _cells; //tableau de cases
+		std::vector<Case> _pieces; //tableau de pieces
+		std::vector<Case> _obstacles; //tableau d'obstacles
 
 	public:
 		//---constructeurs-/-destructeur
@@ -27,7 +29,16 @@ class Plateau {
 		void loadParcours(const std::string &filename); //charge le chemin à partir du fichier txt
 		void infosPlateau();
 
+		//getters
 		inline std::vector<Case> getCells() const{
 			return _cells;
+		}
+
+		inline std::vector<Case> getPieces() const{
+			return _pieces;
+		}
+
+		inline std::vector<Case> getObstacles() const{
+			return _obstacles;
 		}
 };

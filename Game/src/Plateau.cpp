@@ -41,6 +41,12 @@ void Plateau::loadParcours(const std::string &filename) {
             if(line!="0"){
                 Case cell(j,((heightGrid-1)-i)); //heightGrid-i pour avoir la case du bas comme la premiere en (0,0,0)
                 _cells.push_back(cell);
+                if(line=="200"){
+                    _pieces.push_back(cell);
+                }
+                if(line=="100"){
+                    _obstacles.push_back(cell);
+                }
             }
         }
     }
@@ -53,10 +59,7 @@ void Plateau::infosPlateau(){
     for(int i=0; i<_cells.size(); i++){
         std::cout << "Cell["<<i<<"]" << _cells[i].getPosition() << std::endl;
     }
+    for(int i=0; i<_pieces.size(); i++){
+        std::cout << "Piece : Cell["<<i<<"]" << _cells[i].getPosition() << std::endl;
+    }
 };
-
-/*void Plateau::saveConfig() const {
-    std::ofstream file("Chemin.txt");
-    
-    file.close();
-};*/

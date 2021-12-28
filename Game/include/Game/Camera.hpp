@@ -37,7 +37,7 @@ class Camera{
 
         //---méthodes
         void initialization(const float &distance = -5, const float &angleY = 20.f, const float &angleX = 180.f, const glm::vec3 &position = glm::vec3(), const float &maxAngle = 40.f); //initialisation des paramètre de la caméra
-        void controlManager(const SDL_Event &e);                                                                                                            //regroupement des contrôles pour la camera
+        void controlManager(const SDL_Event &e, unsigned int dir);                                                                                                            //regroupement des contrôles pour la camera
         void changeCameraType(bool type);                                                                                                                   //change le type de la camera
         void changeBlock();
 
@@ -49,7 +49,7 @@ class Camera{
 
         //mouvements
         void moveFront(float delta);
-        void rotateLeft(float degrees);
+        void rotateLeft(float degrees, unsigned int dir);
         void rotateUp(float degrees);
         void changeDirection(float degrees);
         
@@ -70,6 +70,29 @@ class Camera{
         //setters
         inline glm::vec3 &position(){
             return _position;
+        }
+
+        inline void translate(const glm::vec3 &vec){
+            _position += vec;
+        }
+        inline void translateEyes(const glm::vec3 &size, unsigned int dir){
+            switch (dir){
+                case 0:
+                    translate(glm::vec3(0,0.25,0.25));
+                    break;
+                
+                case 1:
+                    translate(glm::vec3(-0.25,0.25,0));
+                    break;
+
+                case 2:
+                    translate(glm::vec3(0,0.25,-0.25));
+                    break;
+
+                case 3:
+                    translate(glm::vec3(0.25,0.25,0));
+                    break;
+            }
         }
         
 };

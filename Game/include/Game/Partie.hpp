@@ -1,8 +1,5 @@
 #pragma once
 
-//Json
-#include <json/json.h> 
-
 #include "Plateau.hpp"
 #include "Camera.hpp"
 #include "AssetsManager.hpp"
@@ -14,8 +11,8 @@ class Partie {
         Plateau _map;
         AssetsManager _assets; //tous les éléments du jeu, dont le personnage et la skybox
         Camera _camera; //reliée au personnage et à ses déplacements
-        Element* _explorateur;
-        Element* _skybox; //reliée à la caméra et à ses déplacements
+        Personnage* _explorateur;
+        Skybox* _skybox; //reliée à la caméra et à ses déplacements
 
         //config en fonction du niveau de difficulté
         std::map<std::string, float> _config;
@@ -60,9 +57,6 @@ class Partie {
         void draw(glm::mat4 ProjMatrix);
 
         void changeDirection(bool goud);
-        void avancer();
-
-        void loadConfig(const FilePath &configPath, const int niveau); //charger les données du fichier configurations.json
 
         void unloadPartie(){
             _assets.unloadAssets();

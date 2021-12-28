@@ -91,6 +91,11 @@ class Element{
             _position = position;
         }
 
+        inline void update2DPosition(glm::vec3 position){ //update pour la map
+            _position.x = position.x;
+            _position.z = position.z;
+        }
+
         //Affichage :
         friend std::ostream &operator<<(std::ostream &os, const Element &element){
             os << "     MVMatrix : " << element.MVMatrix() << "\n";

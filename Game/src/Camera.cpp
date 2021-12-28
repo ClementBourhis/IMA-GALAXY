@@ -1,7 +1,7 @@
 #include <Game/Camera.hpp>
 
 Camera::Camera()
-    : _distance(-5.0f), _angleX(180.f), _angleY(25.f), _position(0.f, 1.f, 0.f), _cameraType(false), _maxAngle(70.f), _phi(0), _theta(0), _blocked(false) {
+    : _distance(-5.0f), _angleX(180.f), _angleY(25.f), _position(0.f, 1.f, 0.f), _cameraType(false), _maxAngle(40.f), _phi(0), _theta(0), _blocked(false) {
     computeDirectionVectors();
 }
 
@@ -9,16 +9,16 @@ void Camera::initialization(const float &distance, const float &angleY, const fl
     _position = position;
     _distance = distance;
     rotateUp(angleY);
-    rotateLeft(angleX);
+    //rotateLeft(angleX);
     _maxAngle = maxAngle;
 } //on utilise pas cette fonction ?
 
-void Camera::controlManager(const SDL_Event &e){
+void Camera::controlManager(const SDL_Event &e, unsigned int dir){
     switch(e.type){
         case SDL_MOUSEMOTION:
             if (!_blocked && SDL_GetMouseState(nullptr, nullptr) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
                 if (e.motion.xrel != 0) {
-                    rotateLeft(e.motion.xrel / 1.5f);
+                    rotateLeft(e.motion.xrel / 1.5f, dir);
                 }
                 if (e.motion.yrel != 0) {
                     rotateUp(e.motion.yrel / 1.5f);
@@ -95,12 +95,30 @@ void Camera::moveFront(float delta) {
     }
 }
 
-void Camera::rotateLeft(float degrees){
+void Camera::rotateLeft(float degrees, unsigned int dir){
     if(_cameraType){
-        //if(_phi+(degrees*0.01) >= glm::radians(-_maxAngle) && _phi+(degrees*0.01) <= glm::radians(_maxAngle)){
+        float angleDir;
+        switch (dir){
+            case 0:
+                angleDir = 0;
+                break;
+            
+            case 1:
+                angleDir = -90;
+                break;
+
+            case 2:
+                angleDir = 180;
+                break;
+
+            case 3:
+                angleDir = 90;
+                break;
+        }
+        if(_phi+(degrees*0.01) >= glm::radians(angleDir-_maxAngle) && _phi+(degrees*0.01) <= glm::radians(angleDir+_maxAngle)){
             _phi+=degrees*0.01;
             computeDirectionVectors();
-        //}
+        }
         
     }
     else{

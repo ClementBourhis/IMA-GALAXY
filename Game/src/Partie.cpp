@@ -66,24 +66,28 @@ void Partie::draw(glm::mat4 ProjMatrix) {
     //se mettre au niveau des yeux de l'explorateur
     _camera.translateEyes(_explorateur->size(), _direction);
     
-
+    //----Skybox----
     _skybox->updatePosition(_camera.getPositionInScene());
     _skybox->draw(ProjMatrix, _camera.getViewMatrix(), false);
 
+    //----Sol----
     for(const auto &it : _map.getCells()){
             _assets.element("floor")->update2DPosition(it.getPosition());
-            _assets.element("floor")->draw(ProjMatrix, _camera.getViewMatrix());
+            _assets.element("floor")->draw(ProjMatrix, _camera.getViewMatrix(), true);
     }
 
+    //----Pièces----
     for(const auto &it : _map.getPieces()){
             _assets.element("piece")->update2DPosition(it.getPosition());
-            _assets.element("piece")->draw(ProjMatrix, _camera.getViewMatrix());
+            _assets.element("piece")->draw(ProjMatrix, _camera.getViewMatrix(), true);
     }
     //rotation des pièces
     _assets.element("piece")->rotate(glm::vec3(0,0,glm::radians(180 * (1000/static_cast<float>(_framerate))/1000)));
 
+
+    //----Explorateur----
     _explorateur->jump();
-    _explorateur->draw(ProjMatrix, _camera.getViewMatrix());
+    _explorateur->draw(ProjMatrix, _camera.getViewMatrix(), true);
     _explorateur->avancer(_direction);
 }
 

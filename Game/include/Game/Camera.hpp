@@ -76,21 +76,23 @@ class Camera{
             _position += vec;
         }
         inline void translateEyes(const glm::vec3 &size, unsigned int dir){
+            float haut = size.y/2;
+            float dvt = size.z/2;
             switch (dir){
                 case 0:
-                    translate(glm::vec3(0,0.25,0.25));
+                    translate(glm::vec3(0,haut,dvt));
                     break;
                 
                 case 1:
-                    translate(glm::vec3(-0.25,0.25,0));
+                    translate(glm::vec3(-dvt,haut,0));
                     break;
 
                 case 2:
-                    translate(glm::vec3(0,0.25,-0.25));
+                    translate(glm::vec3(0,haut,-dvt));
                     break;
 
                 case 3:
-                    translate(glm::vec3(0.25,0.25,0));
+                    translate(glm::vec3(dvt,haut,0));
                     break;
             }
         }

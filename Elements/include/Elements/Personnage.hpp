@@ -39,8 +39,6 @@ class Personnage : public Element {
             return _jumping;
         }
 
-        void controlManager(const SDL_Event &e);
-
         inline std::string type() const override {
             return "Personnage";
         }

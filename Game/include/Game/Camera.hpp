@@ -24,6 +24,8 @@ class Camera{
         glm::vec3 _leftVector;
         glm::vec3 _upVector;
 
+        float _angleDir; //angle de la direction de la caméra (utilisé pour l'angle maximum de la caméra freefly)
+
         float _maxAngle;    //angle max qui permet de tourner la tete de l'explorateur
         bool _cameraType; //choix de la camera Trackball(false) ou camera freefly(true)
         bool _blocked; //camera bloquée quand true
@@ -37,7 +39,7 @@ class Camera{
 
         //---méthodes
         void initialization(const float &distance = -5, const float &angleY = 20.f, const float &angleX = 180.f, const glm::vec3 &position = glm::vec3(), const float &maxAngle = 40.f); //initialisation des paramètre de la caméra
-        void controlManager(const SDL_Event &e, unsigned int dir);                                                                                                            //regroupement des contrôles pour la camera
+        void controlManager(const SDL_Event &e);                                                                                                            //regroupement des contrôles pour la camera
         void changeCameraType(bool type);                                                                                                                   //change le type de la camera
         void changeBlock();
 
@@ -49,7 +51,7 @@ class Camera{
 
         //mouvements
         void moveFront(float delta);
-        void rotateLeft(float degrees, unsigned int dir);
+        void rotateLeft(float degrees);
         void rotateUp(float degrees);
         void changeDirection(float degrees);
         

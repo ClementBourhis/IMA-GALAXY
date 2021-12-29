@@ -48,23 +48,3 @@ void Personnage::jump(){
         }
     }
 };
-
-void Personnage::controlManager(const SDL_Event &e){
-    switch(e.type){
-        case SDL_KEYDOWN:
-            switch (e.key.keysym.sym){
-
-                case SDLK_q:
-                    turnLeft();
-                    break;
-                
-                case SDLK_d:
-                    turnRight();
-                    break;
-               
-            }
-
-        default:
-            break;
-    }
-}

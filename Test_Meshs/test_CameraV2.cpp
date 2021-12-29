@@ -78,7 +78,7 @@ int main(int argc, char** argv) {
                 default:
                     break;
             }
-            camera.controlManager(e, 1);
+            camera.controlManager(e);
         }
 
 

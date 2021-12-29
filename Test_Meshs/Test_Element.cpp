@@ -62,7 +62,7 @@ int main(int argc, char** argv) {
             if(e.type == SDL_QUIT) {
                 done = true; // Leave the loop after this iteration
             }
-            camera.controlManager(e, 1);
+            camera.controlManager(e);
 
             if(windowManager.isKeyPressed(SDLK_m)){
                 std::cout << floor << std::endl;

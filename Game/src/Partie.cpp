@@ -24,10 +24,7 @@ void Partie::getInfosPlateau(){
 
 void Partie::eventManager(SDL_Event& e){
     //CAMERA
-    _camera.controlManager(e, _direction);
-
-    //PERSONNAGE
-    //_explorateur->controlManager(e);
+    _camera.controlManager(e);
     
     //Controles de Jeu
     switch(e.type){
@@ -35,14 +32,13 @@ void Partie::eventManager(SDL_Event& e){
             switch (e.key.keysym.sym){
 
                 case SDLK_q:
-                    //_explorateur->turnLeft();
-                    _explorateur->rotate(glm::vec3(0,glm::radians(90.f),0));
+                    _explorateur->turnLeft();
                     _camera.changeDirection(-90.f);
                     changeDirection(false);
                     break;
                 
                 case SDLK_d:
-                    _explorateur->rotate(glm::vec3(0,glm::radians(-90.f),0));
+                    _explorateur->turnRight();
                     _camera.changeDirection(90.f);
                     changeDirection(true);
                     break;

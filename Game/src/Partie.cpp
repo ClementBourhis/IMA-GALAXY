@@ -48,8 +48,8 @@ void Partie::eventManager(SDL_Event& e){
                     break;
 
                 case SDLK_z:
+                case SDLK_SPACE:
                     _explorateur->jumping() = true;
-                    //_explorateur->translate(glm::vec3(0,0.5,0));
                     break;
                 
             }

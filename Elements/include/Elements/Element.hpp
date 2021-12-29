@@ -76,11 +76,11 @@ class Element{
         }
 
         inline glm::vec3 &size(){
-            return _position;
+            return _size;
         }
 
         inline glm::vec3 &rotation(){
-            return _position;
+            return _rotation;
         }
 
         inline virtual std::string type() const {

@@ -6,18 +6,41 @@
 #include <Game/Partie.hpp>
 #include <Game/Plateau.hpp>
 
+Partie::Partie(const std::string appPath, const unsigned int framerate, const AssetsManager* assetsPtr)
+: _assets(assetsPtr), _framerate(framerate)
+{
+    load(appPath);
+    const int niv = _niveau;
+    _map = Plateau(appPath, niv);
+    _camera = Camera(_direction);
+    
+    initAssets();
+};
+
 Partie::Partie(const std::string appPath, const int niveau, const unsigned int framerate, const AssetsManager* assetsPtr)
 : _map(appPath, niveau), _assets(assetsPtr), _direction(0), _niveau(niveau), _framerate(framerate)
 {
+    initExploParam();
+    initAssets();
+};
+
+void Partie::initExploParam(){
+    _assets->element("explorateur")->rotation().y = glm::radians(180.f);
+    _assets->element("explorateur")->position() = glm::vec3(0.f,0.5f,0.f);
+}
+void Partie::initExploParam(unsigned int dir, float posX, float posZ){
+    _assets->element("explorateur")->rotation().y = glm::radians(180.f-(dir*90));
+    _assets->element("explorateur")->position() = glm::vec3(posX,0.5f,posZ);
+}
+
+void Partie::initAssets(){
     //explorateur
-    _assets->element("explorateur")->rotation().y = glm::radians(180.f); //initialisation de l'explorateur dans la bonne direction
-    _assets->element("explorateur")->position() = glm::vec3(0.f,0.5f,0.f); //initialisation de la position de l'explorateur en (0,0.5,0)
     _explorateur = dynamic_cast<Personnage*>(_assets->element("explorateur"));
     _explorateur->vitesse() = static_cast<float>(_niveau) * (1000/static_cast<float>(_framerate)) / 1000;
     _explorateur->hauteur() = _explorateur->position().y;
 
     //skybox
-    _skybox = dynamic_cast<Skybox*>(_assets->element("skybox"+std::to_string(niveau)));
+    _skybox = dynamic_cast<Skybox*>(_assets->element("skybox"+std::to_string(_niveau)));
 };
 
 void Partie::getInfosPlateau(){
@@ -105,4 +128,59 @@ void Partie::changeDirection(bool goud){ //gauche (0) ou droite (1)
             _direction--;
         }
     }
+}
+
+void Partie::save(const std::string appPath) const {
+    std::string filename = appPath + "/../Assets/Niveaux/" + "sauvegarde.txt";
+    std::ofstream file(filename);
+
+    if(!file.is_open()){
+        std::cerr << "error: can not create file: " << filename << std::endl;
+    }
+
+    //Niveau
+    file << _niveau << std::endl;
+
+    //Position
+	file << _explorateur->position().x << " ";
+    file << _explorateur->position().z << " ";
+    file << std::endl;
+
+    //Orientation de l'explorateur
+    file << _direction << std::endl;
+
+    //Score de la partie
+    //file << _score << std::endl;
+    
+    file.close();
+}
+
+void Partie::load(const std::string appPath) {
+    std::string filename = appPath + "/../Assets/Niveaux/" + "sauvegarde.txt";
+    std::ifstream file(filename);
+
+    if(!file.is_open()){
+        std::cerr << "error: cannot find file: " << filename << std::endl;
+        throw std::string("cannot find file load Partie");
+    }
+
+	// recup niveau
+    unsigned int niveau;
+	file >> niveau;
+    _niveau = niveau;
+
+    //recup position explorateur
+    float posX;
+    file >> posX;
+    float posZ;
+    file >> posZ;
+
+    //recup direction explorateur
+    unsigned int dir;
+    file >> dir;
+    _direction = dir;
+
+    initExploParam(_direction, posX, posZ);
+    
+    file.close();
 }

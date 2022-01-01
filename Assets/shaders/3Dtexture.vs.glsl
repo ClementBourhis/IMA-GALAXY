@@ -14,6 +14,7 @@ uniform mat4 uMVPMatrix;
 uniform mat4 uMVMatrix;
 uniform mat4 uNormalMatrix;
 
+
 void main() {
    //coordonées homogènes du vertex
     vec4 vertexPosition = vec4(aVertexPosition, 1);

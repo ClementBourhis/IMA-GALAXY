@@ -23,13 +23,18 @@ class Partie {
 	public:
 		//constructeurs-/-destructeur
 		Partie() = default;
+        Partie(const std::string appPath, const unsigned int framerate, const AssetsManager* assetsPtr);
         Partie(const std::string appPath, const int niveau, const unsigned int framerate, const AssetsManager* assetsPtr);
 		~Partie() = default;
 
 		//methodes
-        //void savePartie() const;
         void renderParcours();
         void getInfosPlateau();
+        void initExploParam();//initialisation de la position et de l'orientation de l'explorateur 
+        void initExploParam(unsigned int dir, float posX, float posZ);
+        void initAssets(); //initialise l'explorateur et la skybox
+        void save(const std::string appPath) const;
+        void load(const std::string appPath);
 
         inline Plateau getMap(){
             return _map;

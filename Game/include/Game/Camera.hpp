@@ -33,14 +33,14 @@ class Camera{
     public :
         //---constructeur
         Camera();
+        Camera(unsigned int dir); //direction du personnage
 
         //---destructeur
         ~Camera(){};
 
         //---méthodes
-        void initialization(const float &distance = -5, const float &angleY = 20.f, const float &angleX = 180.f, const glm::vec3 &position = glm::vec3(), const float &maxAngle = 40.f); //initialisation des paramètre de la caméra
-        void controlManager(const SDL_Event &e);                                                                                                            //regroupement des contrôles pour la camera
-        void changeCameraType(bool type);                                                                                                                   //change le type de la camera
+        void controlManager(const SDL_Event &e);      //regroupement des contrôles pour la camera
+        void changeCameraType(bool type);             //change le type de la camera
         void changeBlock();
 
         //méthode Trackball

@@ -4,14 +4,11 @@ Camera::Camera()
     : _distance(-5.0f), _angleX(180.f), _angleY(25.f), _position(0.f, 1.f, 0.f), _cameraType(false), _maxAngle(40.f), _phi(0), _theta(0), _blocked(false), _angleDir(0) {
     computeDirectionVectors();
 }
-
-void Camera::initialization(const float &distance, const float &angleY, const float &angleX, const glm::vec3 &position, const float &maxAngle){
-    _position = position;
-    _distance = distance;
-    rotateUp(angleY);
-    //rotateLeft(angleX);
-    _maxAngle = maxAngle;
-} //on utilise pas cette fonction ?
+Camera::Camera(unsigned int dir)
+    : _distance(-5.0f), _angleX(180.f), _angleY(25.f), _position(0.f, 1.f, 0.f), _cameraType(false), _maxAngle(40.f), _phi(0), _theta(0), _blocked(false), _angleDir(0) {
+    float degrees = dir*90;
+    changeDirection(degrees);
+}
 
 void Camera::controlManager(const SDL_Event &e){
     switch(e.type){

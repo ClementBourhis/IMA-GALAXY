@@ -21,6 +21,8 @@ class GameManager {
 		float _zNear = 0.1;
 		float _zFar = -100;
 
+		bool _menuVisibility; //visibilité du menu (montrer soit la partie soit le menu)
+
 	public:
 		//---constructeur
 		GameManager() = default;
@@ -63,9 +65,12 @@ class GameManager {
 		//---methodes
 		void makeFullscreen();
 		void createPartie(const int niveau);
+		void loadPartie(); //charger une partie depuis une sauvegarde
 		inline void supprPartie(){
 			delete _currentPartie;
 			_currentPartie = nullptr;
+
+			_menuVisibility = true;
 		};
 		inline void deleteGame(){
 			_assets->unloadAssets();
@@ -80,5 +85,5 @@ class GameManager {
 			_menu = nullptr;
 		};
 		void draw(glm::mat4 ProjMatrix);
-		void eventManager(SDL_Event& e);
+		bool eventManager(SDL_Event& e);
 };

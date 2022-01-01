@@ -15,8 +15,8 @@ using namespace glimac;
 
 int main(int argc, char** argv) {
     // Initialize SDL and open a window
-    unsigned int WINDOW_WIDTH = 800;
-    unsigned int WINDOW_HEIGHT = 600;
+    unsigned int WINDOW_WIDTH = 0;
+    unsigned int WINDOW_HEIGHT = 0;
     SDLWindowManager windowManager(WINDOW_WIDTH, WINDOW_HEIGHT, "IMA'GALAXY");
     
 
@@ -63,11 +63,13 @@ int main(int argc, char** argv) {
         // Event loop:
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
-            if(e.type == SDL_QUIT || windowManager.isKeyPressed(SDLK_ESCAPE)) {
+            bool isDone = game.eventManager(e);
+            if(isDone){
+                done = true;
+            }
+            if(e.type == SDL_QUIT){
                 done = true; // Leave the loop after this iteration
             }
-
-            game.eventManager(e);
         }
 
         /*********************************

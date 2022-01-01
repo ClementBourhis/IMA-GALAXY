@@ -20,7 +20,7 @@ class Plateau {
 	public:
 		//---constructeurs-/-destructeur
 		Plateau() = default; 
-		Plateau(const std::string appPath, const int niveau); 
+		Plateau(const std::string appPath, const int niveau);
 		~Plateau() = default;
 
 		//---methodes

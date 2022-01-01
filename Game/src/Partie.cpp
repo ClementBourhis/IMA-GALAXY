@@ -6,16 +6,18 @@
 #include <Game/Partie.hpp>
 #include <Game/Plateau.hpp>
 
-Partie::Partie(const std::string appPath, const int niveau)
-: _map(appPath, niveau), _assets(appPath), _direction(0), _niveau(niveau)
+Partie::Partie(const std::string appPath, const int niveau, const unsigned int framerate, const AssetsManager* assetsPtr)
+: _map(appPath, niveau), _assets(assetsPtr), _direction(0), _niveau(niveau), _framerate(framerate)
 {
     //explorateur
-    _explorateur = dynamic_cast<Personnage*>(_assets.element("explorateur"));
+    _assets->element("explorateur")->rotation().y = glm::radians(180.f); //initialisation de l'explorateur dans la bonne direction
+    _assets->element("explorateur")->position() = glm::vec3(0.f,0.5f,0.f); //initialisation de la position de l'explorateur en (0,0.5,0)
+    _explorateur = dynamic_cast<Personnage*>(_assets->element("explorateur"));
     _explorateur->vitesse() = static_cast<float>(_niveau) * (1000/static_cast<float>(_framerate)) / 1000;
     _explorateur->hauteur() = _explorateur->position().y;
 
     //skybox
-    _skybox = dynamic_cast<Skybox*>(_assets.element("skybox"+std::to_string(niveau)));
+    _skybox = dynamic_cast<Skybox*>(_assets->element("skybox"+std::to_string(niveau)));
 };
 
 void Partie::getInfosPlateau(){
@@ -68,18 +70,17 @@ void Partie::draw(glm::mat4 ProjMatrix) {
 
     //----Sol----
     for(const auto &it : _map.getCells()){
-            _assets.element("floor")->update2DPosition(it.getPosition());
-            _assets.element("floor")->draw(ProjMatrix, _camera.getViewMatrix(), true);
+            _assets->element("floor")->update2DPosition(it.getPosition());
+            _assets->element("floor")->draw(ProjMatrix, _camera.getViewMatrix(), true);
     }
 
     //----Pièces----
     for(const auto &it : _map.getPieces()){
-            _assets.element("piece")->update2DPosition(it.getPosition());
-            _assets.element("piece")->draw(ProjMatrix, _camera.getViewMatrix(), true);
+            _assets->element("piece")->update2DPosition(it.getPosition());
+            _assets->element("piece")->draw(ProjMatrix, _camera.getViewMatrix(), true);
     }
     //rotation des pièces
-    _assets.element("piece")->rotate(glm::vec3(0,0,glm::radians(180 * (1000/static_cast<float>(_framerate))/1000)));
-
+    _assets->element("piece")->rotate(glm::vec3(0,0,glm::radians(180 * (1000/static_cast<float>(_framerate))/1000)));
 
     //----Explorateur----
     _explorateur->jump();

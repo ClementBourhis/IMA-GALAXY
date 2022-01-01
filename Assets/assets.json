@@ -4,6 +4,11 @@
             "name": "3Dtexture",
             "vs" : "shaders/3Dtexture.vs.glsl",
             "fs" : "shaders/3Dtexture.fs.glsl"
+        },
+        {
+            "name": "2Dtexture",
+            "vs" : "shaders/2Dtexture.vs.glsl",
+            "fs" : "shaders/2Dtexture.fs.glsl"
         }
     ],
     "textures":[
@@ -30,6 +35,10 @@
         {
             "name": "asteroids",
             "image": "textures/obstacle/asteroids.png"
+        },
+        {
+            "name": "menu",
+            "image": "textures/menu/menu.png"
         }
     ],
     "meshs":[
@@ -91,7 +100,14 @@
             "position":[0,0.5,0],
             "size":[0.5,0.5,0.5],
             "rotation":[0,180,0]
-            
+        },
+        {
+            "name": "menu",
+            "mesh": "square",
+            "type": "Floor",
+            "shader": "2Dtexture",
+            "texture": "menu",
+            "size":[2,2,2]
         }
     ]
 }

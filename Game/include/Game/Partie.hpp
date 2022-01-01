@@ -9,14 +9,12 @@ class Partie {
 
 	private:
         Plateau _map;
-        AssetsManager _assets; //tous les éléments du jeu, dont le personnage et la skybox
+        const AssetsManager* _assets; //tous les éléments du jeu
         Camera _camera; //reliée au personnage et à ses déplacements
         Personnage* _explorateur;
         Skybox* _skybox; //reliée à la caméra et à ses déplacements
 
-        //config en fonction du niveau de difficulté
-        std::map<std::string, float> _config;
-        unsigned int _framerate = 24;
+        unsigned int _framerate;
         unsigned int _niveau;
 
         unsigned int _direction; //direction de déplacement (nord sud est ouest) entre 0 et 3, par défaut 0
@@ -25,7 +23,7 @@ class Partie {
 	public:
 		//constructeurs-/-destructeur
 		Partie() = default;
-        Partie(const std::string appPath, const int niveau);
+        Partie(const std::string appPath, const int niveau, const unsigned int framerate, const AssetsManager* assetsPtr);
 		~Partie() = default;
 
 		//methodes
@@ -41,7 +39,7 @@ class Partie {
         Camera getCamera(){
             return _camera;
         }
-        inline const AssetsManager &assets() const{
+        inline const AssetsManager *assets() const{
             return _assets;
         }
         inline const unsigned int  &framerate() const{
@@ -57,9 +55,5 @@ class Partie {
         void draw(glm::mat4 ProjMatrix);
 
         void changeDirection(bool goud);
-
-        void unloadPartie(){
-            _assets.unloadAssets();
-        }
 
 };

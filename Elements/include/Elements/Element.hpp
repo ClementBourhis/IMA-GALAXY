@@ -49,6 +49,20 @@ class Element{
         }
 
         //draw
+        inline void draw(){
+            //on bind les datas
+            _mesh->bind();
+            _shader->use();
+            _texture->bind();
+
+            _shader->sendUniformInt("uTexture", 0);
+
+            _mesh->draw();
+
+            //debind les datas
+            _texture->debind();
+            _mesh->debind();
+        };
         void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix, bool depthMask = true);
 
         //getters

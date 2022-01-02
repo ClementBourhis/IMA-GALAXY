@@ -1,7 +1,9 @@
-# Temple Run UI
-#J'ai écrit un truc
-#Coucou
-#hello test sur linux
+# IMA'GALAXY
+Projet de synthèse d'image, programmation, et architecture logicielle lors du semestre 3 à l'IMAC.
+<p align="center">
+  <img src="https://www.ingenieur-imac.fr/images/logoIMAC.png" />
+</p>
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.

@@ -21,6 +21,7 @@
 #include <Mesh/Mesh.hpp>
 #include <Mesh/Cube.hpp>
 #include <Mesh/Square.hpp>
+#include <Mesh/MenuMesh.hpp>
 
 //Elements
 #include <Elements/Element.hpp>

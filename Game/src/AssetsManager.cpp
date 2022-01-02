@@ -142,6 +142,10 @@ void AssetsManager::loadMesh(const Json::Value &data){
         }
     }
 
+    if(meshType == "MenuMesh"){
+        mesh = new MenuMesh();
+    }
+
     //on fillbuffer le mesh
     mesh->fillBuffers();
 

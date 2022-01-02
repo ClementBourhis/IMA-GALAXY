@@ -73,7 +73,6 @@ class GameManager {
 			_menuVisibility = true;
 		};
 		inline void deleteGame(){
-			_assets->unloadAssets();
 			delete _assets;
 			_assets = nullptr;
 

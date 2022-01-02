@@ -196,6 +196,11 @@ void Partie::load(const std::string appPath) {
     file >> dir;
     _direction = dir;
 
+    /*//recup du score
+    unsigned int score;
+    file >> score;
+    _score = score;*/
+
     initExploParam(_direction, posX, posZ);
     
     file.close();

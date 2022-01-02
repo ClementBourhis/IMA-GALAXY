@@ -4,31 +4,72 @@ Element::Element(Mesh *mesh, ShaderManager* shader, Texture* texture, glm::vec3 
     :_mesh(mesh), _shader(shader), _texture(texture), _position(position), _size(size), _rotation(glm::vec3(glm::radians(rotation.x),glm::radians(rotation.y),glm::radians(rotation.z))){
 }
 
+void Element::addListOfPosition(std::vector<glm::vec3> listOfPosition){
+    _listOfPosition = listOfPosition;
+}
+
 Element::~Element(){
     _mesh->free();
     _texture->free();
 }
 
-void Element::draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix, bool depthMask){
+void Element::draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix, bool depthMask, bool position2D){
     //on bind les datas
     _mesh->bind();
     _shader->use();
     _texture->bind();
 
-    _shader->sendUniformMatrix4("uMVPMatrix", ProjMatrix * ViewMatrix * MVMatrix());
-    _shader->sendUniformMatrix4("uMVMatrix", ViewMatrix * MVMatrix());
-    _shader->sendUniformMatrix4("uNormalMatrix", (glm::transpose(glm::inverse(MVMatrix()))));
-    _shader->sendUniformInt("uTexture", 0);
+    if(_listOfPosition.size() > 0){
+        for(const auto &position : _listOfPosition){
+            bool blacklisted = false;
+            for(const auto &it : _blackList){
+                if(position == it){
+                    blacklisted = true;
+                }
+            }
+            if(!blacklisted){
+                if(position2D){
+                    update2DPosition(position);
+                }
+                else{
+                    updatePosition(position);
+                }
 
-    //on désactive le gldepthmask (utile pour la skybox)
-    if(!depthMask){
-       glDepthMask(GL_FALSE); 
+                _shader->sendUniformMatrix4("uMVPMatrix", ProjMatrix * ViewMatrix * MVMatrix());
+                _shader->sendUniformMatrix4("uMVMatrix", ViewMatrix * MVMatrix());
+                _shader->sendUniformMatrix4("uNormalMatrix", (glm::transpose(glm::inverse(MVMatrix()))));
+                _shader->sendUniformInt("uTexture", 0);
+
+                //on désactive le gldepthmask (utile pour la skybox)
+                if(!depthMask){
+                    glDepthMask(GL_FALSE); 
+                }
+
+                _mesh->draw();
+
+                if(!depthMask){
+                    glDepthMask(GL_TRUE); 
+                }
+            }
+        }
     }
 
-    _mesh->draw();
+    else{
+        _shader->sendUniformMatrix4("uMVPMatrix", ProjMatrix * ViewMatrix * MVMatrix());
+        _shader->sendUniformMatrix4("uMVMatrix", ViewMatrix * MVMatrix());
+        _shader->sendUniformMatrix4("uNormalMatrix", (glm::transpose(glm::inverse(MVMatrix()))));
+        _shader->sendUniformInt("uTexture", 0);
 
-    if(!depthMask){
-       glDepthMask(GL_TRUE); 
+        //on désactive le gldepthmask (utile pour la skybox)
+        if(!depthMask){
+        glDepthMask(GL_FALSE); 
+        }
+
+        _mesh->draw();
+
+        if(!depthMask){
+        glDepthMask(GL_TRUE); 
+        }
     }
 
     //debind les datas

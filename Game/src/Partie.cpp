@@ -92,23 +92,39 @@ void Partie::draw(glm::mat4 ProjMatrix) {
     _skybox->draw(ProjMatrix, _camera.getViewMatrix(), false);
 
     //----Sol----
+    std::vector<glm::vec3> cellsPosition;
     for(const auto &it : _map.getCells()){
-            _assets->element("floor")->update2DPosition(it.getPosition());
-            _assets->element("floor")->draw(ProjMatrix, _camera.getViewMatrix(), true);
+        cellsPosition.push_back(it.getPosition());
     }
+    _assets->element("floor")->addListOfPosition(cellsPosition);
+    _assets->element("floor")->draw(ProjMatrix, _camera.getViewMatrix());
 
     //----Pièces----
+    std::vector<glm::vec3> piecesPosition;
     for(const auto &it : _map.getPieces()){
-            _assets->element("piece")->update2DPosition(it.getPosition());
-            _assets->element("piece")->draw(ProjMatrix, _camera.getViewMatrix(), true);
+        piecesPosition.push_back(it.getPosition());
     }
+    _assets->element("piece")->addListOfPosition(piecesPosition);
+    _assets->element("piece")->draw(ProjMatrix, _camera.getViewMatrix(), true, true);
+
     //rotation des pièces
     _assets->element("piece")->rotate(glm::vec3(0,0,glm::radians(180 * (1000/static_cast<float>(_framerate))/1000)));
 
     //----Explorateur----
     _explorateur->jump();
-    _explorateur->draw(ProjMatrix, _camera.getViewMatrix(), true);
+    _explorateur->draw(ProjMatrix, _camera.getViewMatrix());
     _explorateur->avancer(_direction);
+
+    //----TEST PHYSIC----
+    _assets->element("obstacle")->draw(ProjMatrix, _camera.getViewMatrix());
+    
+    if(_explorateur->inContactWith(*_assets->element("obstacle"))){
+        std::cout << "Obstacle touché !!!!!!!" << std::endl;
+    }
+
+    if(_explorateur->inContactWith(*_assets->element("piece"))){
+        std::cout << "bling !!!!!!!" << std::endl;
+    }
 }
 
 void Partie::changeDirection(bool goud){ //gauche (0) ou droite (1)

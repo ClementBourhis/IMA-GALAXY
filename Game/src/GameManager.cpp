@@ -13,6 +13,7 @@ void GameManager::makeFullscreen(){
 
     _windowWidth = videoInfo->current_w;
     _windowHeight = videoInfo->current_h;
+    _assets->element("menu")->size() = glm::vec3(_windowWidth, _windowHeight, 0);
 }
 
 void GameManager::createPartie(const int niveau){
@@ -57,6 +58,10 @@ bool GameManager::eventManager(SDL_Event& e){
                     case SDLK_SPACE:
                         std::cout << "PLAY ! " << std::endl;
                         createPartie(1);
+                        break;
+
+                    case SDLK_DELETE:
+                        done = true;
                         break;
 
                     default:

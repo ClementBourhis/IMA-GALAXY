@@ -80,7 +80,6 @@
         {
             "name": "piece",
             "mesh": "square",
-            "type": "Floor",
             "shader": "3Dtexture",
             "texture": "etoile",
             "size":[0.2,0.2,0.2],
@@ -90,7 +89,6 @@
         {
             "name": "obstacle",
             "mesh": "square",
-            "type": "Floor",
             "shader": "3Dtexture",
             "texture": "asteroids",
             "rotation":[90,0,0]            

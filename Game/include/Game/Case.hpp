@@ -15,7 +15,7 @@ class Case {
 	public:
 		//---constructeurs-/-destructeur
 		Case() = default; 
-		Case(int x, int y);	//constructeur à partir de la position de la case sur une grille 2D
+		Case(int x, int y, float hauteur);	//constructeur à partir de la position de la case sur une grille 2D
 		~Case() = default;
 
 		//---methodes

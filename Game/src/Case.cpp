@@ -1,7 +1,7 @@
 #include <Game/Case.hpp>
 
-Case::Case(int x, int y)
-: _position(glm::vec3(x,0,y)){
+Case::Case(int x, int y, float hauteur)
+: _position(glm::vec3(x,hauteur,y)){
 };
 
 //connaitre la position de la case

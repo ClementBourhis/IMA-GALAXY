@@ -39,13 +39,19 @@ void Plateau::loadParcours(const std::string &filename) {
         for (int j=0; j<widthGrid; j++) {
             std::getline(file, line);
             if(line!="0"){
-                Case cell(j,((heightGrid-1)-i)); //heightGrid-i pour avoir la case du bas comme la premiere en (0,0,0)
+                int posX = j;
+                int posY = ((heightGrid-1)-i); //heightGrid-i pour avoir la case du bas comme la premiere en (0,0,0)
+
+                Case cell(posX,posY, 0);
                 _cells.push_back(cell);
+
                 if(line=="200"){
-                    _pieces.push_back(cell);
+                    Case piece(posX,posY, 0.5);
+                    _pieces.push_back(piece);
                 }
                 if(line=="100"){
-                    _obstacles.push_back(cell);
+                    Case obs(posX,posY, 0);
+                    _obstacles.push_back(obs);
                 }
             }
         }

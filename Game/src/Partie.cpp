@@ -121,6 +121,9 @@ void Partie::draw(glm::mat4 ProjMatrix) {
     //obstacle en mouvement
     _assets->element("obstacle")->rotate(glm::vec3(glm::radians(50 * (1000/static_cast<float>(_framerate))/1000),0,glm::radians(50 * (1000/static_cast<float>(_framerate))/1000)));
 
+    //----Ligne d'arrivée----
+    _assets->element("goal")->updatePosition(cellsPosition[0] + glm::vec3(0, 0.5, 0));
+    _assets->element("goal")->draw(ProjMatrix, _camera.getViewMatrix());
 
     //----Explorateur----
     _explorateur->jump();
@@ -129,6 +132,7 @@ void Partie::draw(glm::mat4 ProjMatrix) {
 
     //----PHYSIC----    
     if(_explorateur->inContactWith(*_assets->element("obstacle"))){
+        std::cout << "Game Over : tu as percuté violament un astéroïd !\n Ton score est : " << _score << std::endl;
         _gameOver = true;
     }
 
@@ -139,6 +143,12 @@ void Partie::draw(glm::mat4 ProjMatrix) {
     }
 
     if(!_explorateur->inContactWith(*_assets->element("floor"), false)){
+        std::cout << "Game Over : tu est sortis de la route cosmique !\n Ton score est : " << _score << std::endl;
+        _gameOver = true;
+    }
+
+    if(_explorateur->inContactWith(*_assets->element("goal"), false)){
+        std::cout << "Victoire !! tu as rejoins la Galaxy IMAC !\n Ton score est : " << _score << std::endl;
         _gameOver = true;
     }
 }

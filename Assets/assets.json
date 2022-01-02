@@ -94,6 +94,13 @@
             "rotation":[90,0,0]            
         },
         {
+            "name": "goal",
+            "mesh": "square",
+            "shader": "3Dtexture",
+            "texture": "menu",
+            "rotation":[90, 180, 0]  
+        },
+        {
             "name": "explorateur",
             "type": "Personnage",
             "mesh": "cube",

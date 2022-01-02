@@ -4,7 +4,7 @@ Projet de synthèse d'image, programmation, et architecture logicielle lors du s
 ---
 
 <p align="center">
-  <img width="460" height="300" src="/Assets/images/imagalaxy-readme.png">
+  <img width="460" height="300" src="/images/imagalaxy-readme.png">
 </p>
 
 ## Getting started

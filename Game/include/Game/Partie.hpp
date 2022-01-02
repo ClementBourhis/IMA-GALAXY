@@ -18,7 +18,7 @@ class Partie {
         unsigned int _niveau;
 
         unsigned int _direction; //direction de déplacement (nord sud est ouest) entre 0 et 3, par défaut 0
-        //unsigned int _score; //score en fonction des pièces ramassées
+        unsigned int _score; //score en fonction des pièces ramassées
 
 	public:
 		//constructeurs-/-destructeur

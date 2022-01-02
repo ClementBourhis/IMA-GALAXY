@@ -18,7 +18,7 @@ Partie::Partie(const std::string appPath, const unsigned int framerate, const As
 };
 
 Partie::Partie(const std::string appPath, const int niveau, const unsigned int framerate, const AssetsManager* assetsPtr)
-: _map(appPath, niveau), _assets(assetsPtr), _direction(0), _niveau(niveau), _framerate(framerate)
+: _map(appPath, niveau), _assets(assetsPtr), _direction(0), _niveau(niveau), _framerate(framerate), _score(0)
 {
     initExploParam();
     initAssets();
@@ -127,13 +127,14 @@ void Partie::draw(glm::mat4 ProjMatrix) {
 
 
     _assets->element("obstacle")->draw(ProjMatrix, _camera.getViewMatrix());
-    
+
     if(_explorateur->inContactWith(*_assets->element("obstacle"))){
         _assets->element("obstacle")->blackListAllHit();
     }
 
     if(_explorateur->inContactWith(*_assets->element("piece"))){
         std::cout << "bling !!!!!!!" << std::endl;
+        _score++;
         _assets->element("piece")->blackListAllHit();
     }
 }
@@ -177,7 +178,7 @@ void Partie::save(const std::string appPath) const {
     file << _direction << std::endl;
 
     //Score de la partie
-    //file << _score << std::endl;
+    file << _score << std::endl;
     
     file.close();
 }
@@ -207,10 +208,10 @@ void Partie::load(const std::string appPath) {
     file >> dir;
     _direction = dir;
 
-    /*//recup du score
+    //recup du score
     unsigned int score;
     file >> score;
-    _score = score;*/
+    _score = score;
 
     initExploParam(_direction, posX, posZ);
     

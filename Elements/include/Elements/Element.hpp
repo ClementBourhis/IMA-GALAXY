@@ -166,7 +166,7 @@ class Element{
             updatePhysicBox();
         }
 
-        inline bool inContactWith(Element &element){    //interaction entre 2 elements retourne true s'il se touchent
+        inline bool inContactWith(Element &element, bool Yaxe = true){    //interaction entre 2 elements retourne true s'il se touchent
             bool contact = false;
             bool contactX = false;
             bool contactY = false;
@@ -188,6 +188,11 @@ class Element{
 
                     if(_physicBoxO.z < VirtualPhysicBoxO.z + element.size().z && _physicBoxO.z + _size.z > VirtualPhysicBoxO.z){
                         contactZ = true;
+                    }
+
+                    //si on ne prend pas en compte l'axe Y
+                    if(!Yaxe){
+                        contactY = true;
                     }
 
                     if(contactX && contactY && contactZ){

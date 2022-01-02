@@ -138,7 +138,7 @@ void Partie::draw(glm::mat4 ProjMatrix) {
         _assets->element("piece")->blackListAllHit();
     }
 
-    if(!_explorateur->inContactWith(*_assets->element("floor"))){
+    if(!_explorateur->inContactWith(*_assets->element("floor"), false)){
         _gameOver = true;
     }
 }

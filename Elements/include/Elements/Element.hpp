@@ -204,7 +204,7 @@ class Element{
                             if(element.targetHit().size() > 0){
                                 for(const auto &it : element.targetHit()){
                                     if(it == position){
-                                        contact = false;
+                                        isTargetHit = true;
                                     }
                                 }
                             }

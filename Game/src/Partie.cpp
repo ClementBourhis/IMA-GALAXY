@@ -133,9 +133,13 @@ void Partie::draw(glm::mat4 ProjMatrix) {
     }
 
     if(_explorateur->inContactWith(*_assets->element("piece"))){
-        std::cout << "bling !!!!!!!" << std::endl;
+        //std::cout << "bling !!!!!!!" << std::endl;
         _score++;
         _assets->element("piece")->blackListAllHit();
+    }
+
+    if(!_explorateur->inContactWith(*_assets->element("floor"))){
+        _gameOver = true;
     }
 }
 

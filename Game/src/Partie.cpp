@@ -105,7 +105,7 @@ void Partie::draw(glm::mat4 ProjMatrix) {
         piecesPosition.push_back(it.getPosition());
     }
     _assets->element("piece")->addListOfPosition(piecesPosition);
-    _assets->element("piece")->draw(ProjMatrix, _camera.getViewMatrix(), true, true);
+    _assets->element("piece")->draw(ProjMatrix, _camera.getViewMatrix(), true);
 
     //rotation des pièces
     _assets->element("piece")->rotate(glm::vec3(0,0,glm::radians(180 * (1000/static_cast<float>(_framerate))/1000)));
@@ -116,14 +116,25 @@ void Partie::draw(glm::mat4 ProjMatrix) {
     _explorateur->avancer(_direction);
 
     //----TEST PHYSIC----
+
+    std::vector<glm::vec3> testpositions;
+    testpositions.push_back(glm::vec3(0, 0, 1));
+    testpositions.push_back(glm::vec3(1, 0, 1));
+    testpositions.push_back(glm::vec3(3, 0, 1));
+    testpositions.push_back(glm::vec3(0, 0, 5));
+    
+    _assets->element("obstacle")->addListOfPosition(testpositions);
+
+
     _assets->element("obstacle")->draw(ProjMatrix, _camera.getViewMatrix());
     
     if(_explorateur->inContactWith(*_assets->element("obstacle"))){
-        std::cout << "Obstacle touché !!!!!!!" << std::endl;
+        _assets->element("obstacle")->blackListAllHit();
     }
 
     if(_explorateur->inContactWith(*_assets->element("piece"))){
         std::cout << "bling !!!!!!!" << std::endl;
+        _assets->element("piece")->blackListAllHit();
     }
 }
 

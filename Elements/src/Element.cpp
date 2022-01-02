@@ -13,7 +13,7 @@ Element::~Element(){
     _texture->free();
 }
 
-void Element::draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix, bool depthMask, bool position2D){
+void Element::draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix, bool depthMask){
     //on bind les datas
     _mesh->bind();
     _shader->use();
@@ -28,12 +28,7 @@ void Element::draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix, boo
                 }
             }
             if(!blacklisted){
-                if(position2D){
-                    update2DPosition(position);
-                }
-                else{
-                    updatePosition(position);
-                }
+                updatePosition(position);
 
                 _shader->sendUniformMatrix4("uMVPMatrix", ProjMatrix * ViewMatrix * MVMatrix());
                 _shader->sendUniformMatrix4("uMVMatrix", ViewMatrix * MVMatrix());

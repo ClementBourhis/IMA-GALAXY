@@ -29,6 +29,7 @@ class Element{
         //si l'élément est draw en plusieurs position, on stock les coordonées pour les physicaliser
         std::vector<glm::vec3> _listOfPosition;
         std::vector<glm::vec3> _blackList;
+        std::vector<glm::vec3> _targetHit;
 
         //---méthode
         //on met à jour la physiqueBox qui se déplace avec l'objet
@@ -78,10 +79,28 @@ class Element{
             _mesh->debind();
         };
 
-        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix, bool depthMask = true, bool position2D = false);
+        void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix, bool depthMask = true);
 
         void toBlackList(glm::vec3 position){
             _blackList.push_back(position);
+        }
+
+        void toTargetHit(glm::vec3 position){
+            _targetHit.push_back(position);
+        }
+
+        void blackListAllHit(){
+            for(const auto &it : _targetHit){
+                bool isBlackListed = false;
+                for(const auto &blacklisted : _blackList){
+                    if(it == blacklisted){
+                        isBlackListed = true;
+                    }
+                }
+                if(!isBlackListed){
+                    toBlackList(it);
+                }
+            }
         }
 
         //getters
@@ -109,6 +128,14 @@ class Element{
 
         inline const std::vector<glm::vec3> &listOfPosition() const{
             return _listOfPosition;
+        }
+
+        inline const std::vector<glm::vec3> &blackList() const{
+            return _blackList;
+        }
+
+        inline const std::vector<glm::vec3> &targetHit() const{
+            return _targetHit;
         }
 
         //setters
@@ -139,13 +166,13 @@ class Element{
             updatePhysicBox();
         }
 
-        inline bool inContactWith(const Element &element) const{    //interaction entre 2 elements retourne true s'il se touchent
+        inline bool inContactWith(Element &element){    //interaction entre 2 elements retourne true s'il se touchent
             bool contact = false;
             bool contactX = false;
             bool contactY = false;
             bool contactZ = false;
             if(element.listOfPosition().size() > 0){
-                for(const auto &position : element.listOfPosition()){
+                for(auto &position : element.listOfPosition()){
                     contactX = false;
                     contactY = false;
                     contactZ = false;
@@ -156,7 +183,6 @@ class Element{
                     }
 
                     if(_physicBoxO.y < VirtualPhysicBoxO.y + element.size().y && _physicBoxO.y + _size.y > VirtualPhysicBoxO.y){
-                        std::cout << " Y " << std::endl;
                         contactY = true;
                     }
 
@@ -166,6 +192,26 @@ class Element{
 
                     if(contactX && contactY && contactZ){
                         contact = true;
+                        if(element.blackList().size() > 0){
+                            for(const auto &it : element.blackList()){
+                                if(it == position){
+                                    contact = false;
+                                }
+                            }
+                        }
+                        if(contact){
+                            bool isTargetHit = false;
+                            if(element.targetHit().size() > 0){
+                                for(const auto &it : element.targetHit()){
+                                    if(it == position){
+                                        contact = false;
+                                    }
+                                }
+                            }
+                            if(!isTargetHit){
+                                element.toTargetHit(position);
+                            }
+                        }
                     }
                 }
             }

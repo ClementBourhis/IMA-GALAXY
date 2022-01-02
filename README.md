@@ -1,11 +1,11 @@
 # IMA'GALAXY
+
+<img align="right" src="/images/imagalaxy-readme.png">
 Projet de synthèse d'image, programmation, et architecture logicielle lors du semestre 3 à l'IMAC.
 
 ---
 
-<p align="center">
-  <img width="460" height="300" src="/images/imagalaxy-readme.png">
-</p>
+
 
 ## Getting started
 

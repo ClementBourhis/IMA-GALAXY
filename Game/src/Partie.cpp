@@ -7,7 +7,7 @@
 #include <Game/Plateau.hpp>
 
 Partie::Partie(const std::string appPath, const unsigned int framerate, const AssetsManager* assetsPtr)
-: _assets(assetsPtr), _framerate(framerate)
+: _assets(assetsPtr), _framerate(framerate), _gameOver(false)
 {
     load(appPath);
     const int niv = _niveau;
@@ -18,7 +18,7 @@ Partie::Partie(const std::string appPath, const unsigned int framerate, const As
 };
 
 Partie::Partie(const std::string appPath, const int niveau, const unsigned int framerate, const AssetsManager* assetsPtr)
-: _map(appPath, niveau), _assets(assetsPtr), _direction(0), _niveau(niveau), _framerate(framerate), _score(0)
+: _map(appPath, niveau), _assets(assetsPtr), _direction(0), _niveau(niveau), _framerate(framerate), _score(0), _gameOver(false)
 {
     initExploParam();
     initAssets();
@@ -110,26 +110,26 @@ void Partie::draw(glm::mat4 ProjMatrix) {
     //rotation des pièces
     _assets->element("piece")->rotate(glm::vec3(0,0,glm::radians(180 * (1000/static_cast<float>(_framerate))/1000)));
 
+    //---Obstacle---
+    std::vector<glm::vec3> obstaclesPosition;
+    for(const auto &it : _map.getObstacles()){
+        obstaclesPosition.push_back(it.getPosition());
+    }
+    _assets->element("obstacle")->addListOfPosition(obstaclesPosition);
+    _assets->element("obstacle")->draw(ProjMatrix, _camera.getViewMatrix(), true);
+
+    //obstacle en mouvement
+    _assets->element("obstacle")->rotate(glm::vec3(glm::radians(50 * (1000/static_cast<float>(_framerate))/1000),0,glm::radians(50 * (1000/static_cast<float>(_framerate))/1000)));
+
+
     //----Explorateur----
     _explorateur->jump();
     _explorateur->draw(ProjMatrix, _camera.getViewMatrix());
     _explorateur->avancer(_direction);
 
-    //----TEST PHYSIC----
-
-    std::vector<glm::vec3> testpositions;
-    testpositions.push_back(glm::vec3(0, 0, 1));
-    testpositions.push_back(glm::vec3(1, 0, 1));
-    testpositions.push_back(glm::vec3(3, 0, 1));
-    testpositions.push_back(glm::vec3(0, 0, 5));
-    
-    _assets->element("obstacle")->addListOfPosition(testpositions);
-
-
-    _assets->element("obstacle")->draw(ProjMatrix, _camera.getViewMatrix());
-
+    //----PHYSIC----    
     if(_explorateur->inContactWith(*_assets->element("obstacle"))){
-        _assets->element("obstacle")->blackListAllHit();
+        _gameOver = true;
     }
 
     if(_explorateur->inContactWith(*_assets->element("piece"))){

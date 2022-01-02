@@ -50,7 +50,7 @@ void Plateau::loadParcours(const std::string &filename) {
                     _pieces.push_back(piece);
                 }
                 if(line=="100"){
-                    Case obs(posX,posY, 0);
+                    Case obs(posX,posY, 0.25);
                     _obstacles.push_back(obs);
                 }
             }

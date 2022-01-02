@@ -40,8 +40,13 @@ void GameManager::draw(glm::mat4 ProjMatrix){
     else{
         if(_currentPartie){ //si il y a bien une partie en cours
             glEnable(GL_BLEND); //activation de la transparence
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
-            _currentPartie->draw(ProjMatrix);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            if(_currentPartie->gameOver()){
+                supprPartie();
+            }
+            else{
+                _currentPartie->draw(ProjMatrix);
+            }
         }
     }
 }

@@ -20,6 +20,8 @@ class Partie {
         unsigned int _direction; //direction de déplacement (nord sud est ouest) entre 0 et 3, par défaut 0
         unsigned int _score; //score en fonction des pièces ramassées
 
+        bool _gameOver;
+
 	public:
 		//constructeurs-/-destructeur
 		Partie() = default;
@@ -50,6 +52,11 @@ class Partie {
         inline const unsigned int  &framerate() const{
             return _framerate;
         }
+
+        inline const bool &gameOver() const{
+            return _gameOver;
+        }
+
         //setters
         void setCameraPos(const glm::vec3 pos){
             _camera.position() = pos;

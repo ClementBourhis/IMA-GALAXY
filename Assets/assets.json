@@ -83,14 +83,14 @@
             "shader": "3Dtexture",
             "texture": "etoile",
             "size":[0.2,0.2,0.2],
-            "rotation":[-90,0,0],
-            "position":[0,0.5,0]
+            "rotation":[-90,0,0]
         },
         {
             "name": "obstacle",
-            "mesh": "square",
+            "mesh": "cube",
             "shader": "3Dtexture",
             "texture": "asteroids",
+            "size":[0.15, 0.25, 0.20],
             "rotation":[90,0,0]            
         },
         {

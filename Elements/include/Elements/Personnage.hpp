@@ -7,7 +7,7 @@ class Personnage : public Element {
     public:
         bool _jumping = false;
         bool _jumpSens = true; //true montée, false descente
-        float _maxJump = 0.6;
+        float _maxJump = 0.8;
         float _vitesse; //avancement en bloc par seconde
         float _hauteur; //hauteur d'origine
 

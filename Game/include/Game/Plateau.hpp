@@ -22,9 +22,9 @@
 class Plateau {
 	private:
 		//---attributs
-		std::vector<Case> _cells; 		//tableau de cases
-		std::vector<Case> _pieces; 		//tableau de pieces
-		std::vector<Case> _obstacles; 	//tableau d'obstacles
+		std::vector<Case> _cells; 		/*!< tableau de cases */
+		std::vector<Case> _pieces; 		/*!< tableau de pieces */
+		std::vector<Case> _obstacles; 	/*!< tableau d'obstacles */
 
 	public:
 		//---constructeurs-/-destructeur
@@ -33,8 +33,10 @@ class Plateau {
 		~Plateau() = default;
 
 		//---methodes
-		void loadParcours(const std::string &filename); //charge le chemin à partir du fichier txt
-		void infosPlateau();	//affiche en cout les éléments du plateaux
+		/// \brief charge le chemin à partir du fichier txt
+		void loadParcours(const std::string &filename);
+		/// \brief affiche en cout les éléments du plateaux
+		void infosPlateau();
 
 		//getters
 		inline std::vector<Case> getCells() const{

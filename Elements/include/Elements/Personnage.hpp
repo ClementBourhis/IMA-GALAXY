@@ -26,10 +26,13 @@ class Personnage : public Element {
         }
 
         //---méthodes
-        //Controle du personnage
+        /// \brief Controle du personnage, avancer
         void avancer(unsigned int dir);
+        /// \brief Controle du personnage, tourner à gauche
         void turnLeft();
+        /// \brief Controle du personnage, tourner à droite
         void turnRight();
+        /// \brief Controle du personnage, sauter
         void jump();
 
         //getters

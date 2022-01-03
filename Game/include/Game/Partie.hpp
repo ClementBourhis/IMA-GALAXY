@@ -17,16 +17,16 @@ class Partie {
 	private:
         //---attributs
         Plateau _map;
-        const AssetsManager* _assets;   //tous les éléments du jeu
-        Camera _camera;                 //reliée au personnage et à ses déplacements
-        Personnage* _explorateur;       //Personnage que l'on va contrôler
-        Skybox* _skybox;                //reliée à la caméra et à ses déplacements
+        const AssetsManager* _assets;   /*!< tous les éléments du jeu  */
+        Camera _camera;                 /*!< reliée au personnage et à ses déplacements */
+        Personnage* _explorateur;       /*!< Personnage que l'on va contrôler */
+        Skybox* _skybox;                /*!< reliée à la caméra et à ses déplacements */
 
-        unsigned int _framerate;        //vitesse d'affichage
-        unsigned int _niveau;           //numéro associé au niveau sélectioné
+        unsigned int _framerate;        /*!< vitesse d'affichage */
+        unsigned int _niveau;           /*!< numéro associé au niveau sélectioné */
 
-        unsigned int _direction;        //direction de déplacement (nord sud est ouest) entre 0 et 3, par défaut 0
-        unsigned int _score;            //score en fonction des pièces ramassées
+        unsigned int _direction;        /*!< direction de déplacement (nord sud est ouest) entre 0 et 3, par défaut 0 */
+        unsigned int _score;            /*!< score en fonction des pièces ramassées */
 
         bool _gameOver;
 
@@ -40,15 +40,17 @@ class Partie {
 		//---methodes
         void getInfosPlateau(); //retourne les infos du plateau utilisé dans la partie
 
-        //initialisation de la position et de l'orientation de l'explorateur 
+        /// \brief initialisation de la position et de l'orientation de l'explorateur, avec al direction et la position à 0 par défaut (la première fois qu'on lance une partie par exemple)
         void initExploParam();
+        /// \brief surcharge de l'initialisation de la position et de l'orientation de l'explorateur, lorsque la partie créée est construite à partir d'une partie sauvegardée
         void initExploParam(unsigned int dir, float posX, float posZ);
 
-        //initialise l'explorateur et la skybox
+        /// \brief initialise l'explorateur et la skybox
         void initAssets();
 
-        //gestion de niveau
+        /// \brief sauvegarde de niveau
         void save(const std::string appPath) const;
+        /// \brief chargement d'un niveau sauvergardé
         void load(const std::string appPath);
         void reset();
 
@@ -76,6 +78,7 @@ class Partie {
             _camera.position() = pos;
         }
 
+        /// \brief controle des événements de la partie
         void eventManager(SDL_Event& e);
 
         void draw(glm::mat4 ProjMatrix);

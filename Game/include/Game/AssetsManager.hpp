@@ -41,21 +41,23 @@ class AssetsManager{
     private :
         //---attributs
         //Stockage de chaque pointeur vers les objets qui vont nous servir
-        FilePath _assetsPath;
-        std::map<std::string, ShaderManager*> _shaders;
-        std::map<std::string, Texture*> _textures;
-        std::map<std::string, Mesh*> _meshs;
-        std::map<std::string, Element*> _elements;
+        FilePath _assetsPath;                               /*!< chemin de l'application */
+        std::map<std::string, ShaderManager*> _shaders;     /*!< pointeur ver les shaders qui vont nous servir */
+        std::map<std::string, Texture*> _textures;          /*!< pointeur ver les textures qui vont nous servir */
+        std::map<std::string, Mesh*> _meshs;                /*!< pointeur ver les meshs qui vont nous servir */
+        std::map<std::string, Element*> _elements;          /*!< pointeur ver les éléments qui vont nous servir */
 
     public :
         //---constructeur
-        AssetsManager(const FilePath &assetsPath);  //récupère tous les éléments depuis un fichier Json
+        /// \brief constructeur qui récupère tous les éléments depuis un fichier Json
+        AssetsManager(const FilePath &assetsPath);
 
         //---destructeur
-        ~AssetsManager();                           //libère la mémoire
+        /// \brief libère la mémoire
+        ~AssetsManager();
 
         //---méthodes
-        //Initialisation
+        /// \brief Initialisation
         void loadAssets(const FilePath &assetsPath);
         void unloadAssets();
 
@@ -81,17 +83,20 @@ class AssetsManager{
         void unloadElements();
 
         //Getters
-        //on récupère un asset de la liste via son "name"
+        /// \brief getter, on récupère un asset de la liste via son "name"
         ShaderManager *shader(const std::string &name) const;
+        /// \brief getter, on récupère un asset de la liste via son "name"
         Texture *texture(const std::string &name) const;
+        /// \brief getter, on récupère un asset de la liste via son "name"
         Mesh *mesh(const std::string &name) const;
+        /// \brief getter, on récupère un asset de la liste via son "name"
         Element *element(const std::string &name) const;
 
-        //pour reset les éléments dans Partie, on récupère la liste entière
+        /// \brief pour reset les éléments dans Partie, on récupère la liste entière
         std::map<std::string, Element*> elements() const;
 
 
-        //Affichage
+        /// \brief Affichage
         friend std::ostream &operator<<(std::ostream &os, const AssetsManager &assets){
             os << "-Shaders :\n";
             if(assets._shaders.size() > 0){

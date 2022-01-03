@@ -26,18 +26,18 @@
 class Element{
     protected :
         //---attributs
-        Mesh* _mesh;            //permet que l'élément ai une représentation physique basé sur un mesh
-        glm::vec3 _position;    //position de l'element dans la scène
-        glm::vec3 _size;        //défini la taille de l'élément
-        glm::vec3 _rotation;    //défini la rotation de l'élément
-        ShaderManager *_shader; //Associe un shader pour cet element
-        Texture *_texture;      //Associe une texture pour cet element
-        glm::vec3 _physicBoxO;  //on détermine la zone physique d'un élement par 1 point d'origine O et sa taille
+        Mesh* _mesh;            /*!< permet que l'élément ai une représentation physique basé sur un mesh */
+        glm::vec3 _position;    /*!< position de l'element dans la scène */
+        glm::vec3 _size;        /*!< défini la taille de l'élément */
+        glm::vec3 _rotation;    /*!< défini la rotation de l'élément */
+        ShaderManager *_shader; /*!< Associe un shader pour cet element */
+        Texture *_texture;      /*!< Associe une texture pour cet element */
+        glm::vec3 _physicBoxO;  /*!< on détermine la zone physique d'un élement par 1 point d'origine O et sa taille */
 
         //si l'élément est draw en plusieurs position, on stock les coordonées pour les physicaliser
-        std::vector<glm::vec3> _listOfPosition; //liste des positions où l'objet s'affiche
-        std::vector<glm::vec3> _blackList;      //liste des positions où l'objet ne dois plus s'afficher (ex : pour les pièces)
-        std::vector<glm::vec3> _targetHit;      //liste des positions où l'objet à été touché
+        std::vector<glm::vec3> _listOfPosition; /*!< liste des positions où l'objet s'affiche */
+        std::vector<glm::vec3> _blackList;      /*!< liste des positions où l'objet ne dois plus s'afficher (ex : pour les pièces) */
+        std::vector<glm::vec3> _targetHit;      /*!< liste des positions où l'objet à été touché */
 
         //---méthode
         //on met à jour la physiqueBox qui change de taille où se déplace avec l'objet
@@ -54,22 +54,22 @@ class Element{
         ~Element();
 
         //---méthodes
-        //transformations
+        /// \brief transformation de la position d el'élément
         inline void translate(const glm::vec3 &vec){
             _position += vec;
             updatePhysicBox();
         }
 
+        /// \brief transformation de la taille de l'élément
         inline void scale(const glm::vec3 &vec){
             _size += vec;
             updatePhysicBox();
         }
-
+        /// \brief rotation de l'élément
         inline void rotate(const glm::vec3 &vec){
             _rotation += vec;
         }
 
-        //draw
         inline void draw(){
             //on bind les datas
             _mesh->bind();
@@ -88,18 +88,18 @@ class Element{
         void draw(const glm::mat4 &ProjMatrix, const glm::mat4 &ViewMatrix, bool depthMask = true);
 
 
-        //méthodes pour un éléments multi-affiché
-        void addListOfPosition(std::vector<glm::vec3> listOfPosition);  //on indique à l'élément toutes les positions où il devra s'afficher
-
-        void toBlackList(glm::vec3 position){                           //on indique à quel position on souhaite que l'élément ne s'affiche plus
+        /// \brief méthodes pour un éléments multi-affiché, on indique à l'élément toutes les positions où il devra s'afficher
+        void addListOfPosition(std::vector<glm::vec3> listOfPosition); 
+        /// \brief méthodes pour un éléments multi-affiché, on indique à quel position on souhaite que l'élément ne s'affiche plus
+        void toBlackList(glm::vec3 position){
             _blackList.push_back(position);
         }
-
-        void toTargetHit(glm::vec3 position){                           //on indique quel position l'objet à été touché
+        /// \brief méthodes pour un éléments multi-affiché, on indique quel position l'objet à été touché
+        void toTargetHit(glm::vec3 position){
             _targetHit.push_back(position);
         }
-
-        void blackListAllHit(){                                         //on blacklist tout les objets qui ont été touché
+        /// \brief méthodes pour un éléments multi-affiché, on blacklist tout les objets qui ont été touché
+        void blackListAllHit(){
             for(const auto &it : _targetHit){
                 bool isBlackListed = false;
                 for(const auto &blacklisted : _blackList){
@@ -114,7 +114,8 @@ class Element{
         }
 
         //getters
-        glm::mat4 MVMatrix() const; //on récupère ma ViewMatrice de l'élément
+        /// \brief on récupère ma ViewMatrice de l'élément
+        glm::mat4 MVMatrix() const;
 
         inline Mesh *mesh() const{
             return _mesh;
@@ -148,7 +149,7 @@ class Element{
             return _targetHit;
         }
 
-        //retourne en string de quel type est l'élément (à spécifier dans les classes fille de élément)
+        /// \brief retourne en string de quel type est l'élément (à spécifier dans les classes fille de élément)
         inline virtual std::string type() const {
             return "Element";
         }
@@ -171,7 +172,7 @@ class Element{
             updatePhysicBox();
         }
 
-        //Quans la partie se termine on reset les listes de contact des éléments pour recommencer à zero
+        /// \brief Quand la partie se termine on reset les listes de contact des éléments pour recommencer à zero
         inline void resetElement(){
             for(int i = 0; i<_targetHit.size(); i++){
                 _targetHit.pop_back();
@@ -181,15 +182,14 @@ class Element{
             }
         }
 
-        //interaction entre 2 elements retourne true s'ils se touchent
+        /// \brief interaction entre 2 elements retourne true s'ils se touchent
         inline bool inContactWith(Element &element, bool Yaxe = true){
             bool contact = false;   //les éléments sont en contact s'ils se rencontre sur les 3 axes
             bool contactX = false;
             bool contactY = false;
             bool contactZ = false;
 
-            //Dans le cas où l'élément est multi-affiché, il faut vérifier le contact avec toutes ces positions d'affichage 
-            //car en réalité une fois sa boucle draw terminé, l'élément ne se trouve qu'a 1 seul endroit dans la scène
+            //Dans le cas où l'élément est multi-affiché, il faut vérifier le contact avec toutes ces positions d'affichage car en réalité une fois sa boucle draw terminé, l'élément ne se trouve qu'a 1 seul endroit dans la scène
             if(element.listOfPosition().size() > 0){
                 for(auto &position : element.listOfPosition()){
                     //reset pour la nouvelle position
@@ -270,7 +270,7 @@ class Element{
                 
         }
 
-        //Affichage :
+        /// \brief Affichage
         friend std::ostream &operator<<(std::ostream &os, const Element &element){
             os << "     MVMatrix : " << element.MVMatrix() << "\n";
             os << "     Position : " << element._position << "\n";

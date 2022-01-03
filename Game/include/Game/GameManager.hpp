@@ -45,14 +45,14 @@ class GameManager {
 		Partie* _currentPartie = nullptr;
 
 		//Configurations
-		std::string _appPath;				//chemin absolue de l'application
-		unsigned int _framerate = 24;		//vitesse d'affichage
-		unsigned int _windowWidth = 800;	//résolution par défaut : longeur
-		unsigned int _windowHeight = 600;	//résolution par défaut : hauteur
-		float _zNear = 0.1;					//distance d'affichage  : proche 
-		float _zFar = -100;					//distance d'affichage	: loin
+		std::string _appPath;				/*!< chemin absolue de l'application */
+		unsigned int _framerate = 24;		/*!< vitesse d'affichage */
+		unsigned int _windowWidth = 800;	/*!< résolution par défaut : longeur */
+		unsigned int _windowHeight = 600;	/*!< résolution par défaut : hauteur */
+		float _zNear = 0.1;					/*!< distance d'affichage  : proche */
+		float _zFar = -100;					/*!< distance d'affichage	: loin */
 
-		bool _menuVisibility; //visibilité du menu (montrer soit la partie soit le menu)
+		bool _menuVisibility; /*!< visibilité du menu (montrer soit la partie soit le menu) */
 
 	public:
 		//---constructeur

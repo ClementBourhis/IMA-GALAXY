@@ -15,7 +15,8 @@
 class Menu {
 	private:
         //---attribut
-        const AssetsManager* _assets; //tous les éléments du jeu
+        /// \brief tous les éléments du jeu
+        const AssetsManager* _assets;
 
 	public:
 		//---constructeurs-/-destructeur

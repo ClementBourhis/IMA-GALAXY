@@ -23,13 +23,14 @@ class Case {
 	public:
 		//---constructeurs-/-destructeur
 		Case() = default; 
-		Case(int x, int y, float hauteur);	//constructeur à partir de la position de la case sur une grille 2D
+		/// \brief constructeur à partir de la position de la case sur une grille 2D
+		Case(int x, int y, float hauteur);
 		~Case() = default;
 
 		//---methodes
-		//getter
+		/// \brief getter de la position
 		glm::vec3 getPosition() const;
 
-		//setter
+		/// \brief setter de la position
 		void setPosition(int x,int y,int z);
 };

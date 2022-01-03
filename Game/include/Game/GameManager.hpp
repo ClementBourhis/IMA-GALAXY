@@ -56,11 +56,11 @@ class GameManager {
 
 	public:
 		//---constructeur
+		GameManager() = default;
 		/**
 		 * \brief constructeur
 		 * \param appPath : le chemin du répertoire où se situe le main de l'application
 		 */
-		GameManager() = default;
 		GameManager(const std::string appPath);
 
 
@@ -107,11 +107,14 @@ class GameManager {
         }
 
 		//---methodes
-		void makeFullscreen();	//adapte la taille de la fenètre à l'écran 
-		void createPartie(const int niveau);	//créer une partie
-		void loadPartie(); //charger une partie depuis une sauvegarde
+		/// \brief adapte la taille de la fenètre à l'écran
+		void makeFullscreen();
+		/// \brief créer une partie
+		void createPartie(const int niveau);
+		/// \brief charger une partie depuis une sauvegarde
+		void loadPartie();
 
-		//suppression d'une partie
+		/// \brief suppression d'une partie
 		inline void supprPartie(){
 			delete _currentPartie;
 			_currentPartie->reset();
@@ -120,7 +123,7 @@ class GameManager {
 			_menuVisibility = true;
 		};
 
-		//quitte le jeu en libérant la mémoire
+		/// \brief quitte le jeu en libérant la mémoire
 		inline void deleteGame(){
 			delete _assets;
 			_assets = nullptr;
@@ -133,9 +136,9 @@ class GameManager {
 			_menu = nullptr;
 		};
 
-		//affichage du jeu dans la fenètre
+		/// \brief affichage du jeu dans la fenètre
 		void draw(glm::mat4 ProjMatrix);
 
-		//gestion des controles et des evènement sur la fenètre
+		/// \brief gestion des controles et des evènement sur la fenètre
 		bool eventManager(SDL_Event& e);
 };

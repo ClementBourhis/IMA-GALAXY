@@ -1,0 +1,6 @@
+<map id="Graphe hiérarchique des classes" name="Graphe hiérarchique des classes">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,92,57"/>
+<area shape="rect" id="node2" href="$classJson_1_1Exception.html" title=" " alt="" coords="140,31,261,57"/>
+<area shape="rect" id="node3" href="$classJson_1_1LogicError.html" title=" " alt="" coords="319,5,442,32"/>
+<area shape="rect" id="node4" href="$classJson_1_1RuntimeError.html" title=" " alt="" coords="309,56,452,83"/>
+</map>

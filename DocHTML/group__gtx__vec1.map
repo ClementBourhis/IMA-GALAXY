@@ -1,0 +1,4 @@
+<map id="GLM_GTX_vec1" name="GLM_GTX_vec1">
+<area shape="rect" id="node1" href="$group__gtx.html" title="Functions and types that the GLSL specification doesn&#39;t define, but useful to have for a C++ program." alt="" coords="5,5,231,31"/>
+<area shape="rect" id="node2" title="Add vec1, ivec1, uvec1 and bvec1 types. &lt;glm/gtx/vec1.hpp&gt; need to be included to use these functiona..." alt="" coords="279,5,401,31"/>
+</map>

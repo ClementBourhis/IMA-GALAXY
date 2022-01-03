@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['readme_2emd_4',['README.md',['../README_8md.html',1,'']]]
+  ['associated_5fmin_5fmax_2ehpp_1898',['associated_min_max.hpp',['../associated__min__max_8hpp.html',1,'']]]
 ];

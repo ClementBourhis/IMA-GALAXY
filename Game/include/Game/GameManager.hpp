@@ -6,9 +6,15 @@
 #include "Menu.hpp" 
 #include "AssetsManager.hpp"
 
-/// \class GameManager
-/// \file GameManager.hpp
-/// \brief class defining a vector for linear algebra operations. TEST
+/**
+ * \file GameManager.hpp
+ * \brief Déclaration de la classe GameManager
+ */
+
+/**
+ * \class GameManager
+ * \brief moteur de Jeu, qui gère les assets, le menu et la partie
+ */
 
 class GameManager {
 	private:
@@ -29,6 +35,10 @@ class GameManager {
 
 	public:
 		//---constructeur
+		/**
+		 * \brief constructeur
+		 * \param appPath : le chemin du répertoire où se situe le main de l'application
+		 */
 		GameManager() = default;
 		GameManager(const std::string appPath);
         //---destructeur

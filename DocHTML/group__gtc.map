@@ -1,0 +1,19 @@
+<map id="GTC Extensions (Stable)" name="GTC Extensions (Stable)">
+<area shape="rect" id="node1" href="$group__gtc__noise.html" title=" " alt="" coords="291,5,418,31"/>
+<area shape="rect" id="node2" title="Functions and types that the GLSL specification doesn&#39;t define, but useful to have for a C++ program." alt="" coords="5,376,184,401"/>
+<area shape="rect" id="node3" href="$group__gtc__reciprocal.html" title="Define secant, cosecant and cotangent functions." alt="" coords="277,55,432,80"/>
+<area shape="rect" id="node4" href="$group__gtc__epsilon.html" title="Comparison functions for a user defined epsilon values." alt="" coords="285,104,424,129"/>
+<area shape="rect" id="node5" href="$group__gtc__random.html" title="Generate random number from various distribution methods." alt="" coords="284,153,425,179"/>
+<area shape="rect" id="node6" href="$group__gtc__matrix__inverse.html" title=" " alt="" coords="260,203,449,228"/>
+<area shape="rect" id="node7" href="$group__gtc__dual__quaternion.html" title="Defines a templated dual&#45;quaternion type and several dual&#45;quaternion operations." alt="" coords="256,252,453,277"/>
+<area shape="rect" id="node8" href="$group__gtc__ulp.html" title="Allow the measurement of the accuracy of a function against a reference implementation...." alt="" coords="299,301,410,327"/>
+<area shape="rect" id="node9" href="$group__gtc__matrix__integer.html" title=" " alt="" coords="261,351,448,376"/>
+<area shape="rect" id="node10" href="$group__gtc__constants.html" title="Provide a list of constants and precomputed useful values." alt="" coords="277,400,432,425"/>
+<area shape="rect" id="node11" href="$group__gtc__type__ptr.html" title="Handles the interaction between pointers and vector, matrix types." alt="" coords="282,449,427,475"/>
+<area shape="rect" id="node12" href="$group__gtx__rotate__normalized__axis.html" title="Quaternions and matrices rotations around normalized axis." alt="" coords="232,499,477,524"/>
+<area shape="rect" id="node13" href="$group__gtc__packing.html" title="This extension provides a set of function to convert vertors to packed formats." alt="" coords="283,548,426,573"/>
+<area shape="rect" id="node14" href="$group__gtc__matrix__transform.html" title="Defines functions that generate common transformation matrices." alt="" coords="252,597,457,623"/>
+<area shape="rect" id="node15" href="$group__gtc__matrix__access.html" title=" " alt="" coords="262,647,447,672"/>
+<area shape="rect" id="node16" href="$group__gtc__quaternion.html" title="Defines a templated quaternion type and several quaternion operations." alt="" coords="274,696,435,721"/>
+<area shape="rect" id="node17" href="$group__gtc__type__precision.html" title="Defines specific C++&#45;based precision types." alt="" coords="261,745,448,771"/>
+</map>

@@ -10,5 +10,3 @@ foreach(SRC_FILE ${SRC_FILES})
     add_executable(${OUTPUT} ${SRC_FILE} ${HEADER_FILES} ${SHADER_FILES})   #ajout d'un executable
     target_link_libraries(${OUTPUT} ${ALL_LIBRARIES})                       #relie toute les lib
 endforeach()
-
-file(COPY shaders DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

@@ -19,7 +19,7 @@ cd build
 
 Build le projet depuis le dossier build, penser à mettre le chemin relatif vers le dossier du projet
 ```
-cmake [chemin-relatif-vers-la-racine-du-dossier-du-projet]
+cmake [chemin vers la racine du dossier du projet]
 ```
 
 Compiler le projet depuis le dossier build
@@ -29,7 +29,7 @@ make
 
 Exécuter le jeu
 ```
-./Test_Meshs/Test_Meshs_Test_GameManager
+./Jeu/Jeu_Temple_Run
 ```
 
 ## Commandes

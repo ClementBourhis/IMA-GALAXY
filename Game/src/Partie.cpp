@@ -91,6 +91,11 @@ void Partie::draw(glm::mat4 ProjMatrix) {
     _skybox->updatePosition(_camera.getPositionInScene());
     _skybox->draw(ProjMatrix, _camera.getViewMatrix(), false);
 
+    //----Explorateur----
+    _explorateur->jump();
+    _explorateur->draw(ProjMatrix, _camera.getViewMatrix());
+    _explorateur->avancer(_direction);
+
     //----Sol----
     std::vector<glm::vec3> cellsPosition;
     for(const auto &it : _map.getCells()){
@@ -125,11 +130,6 @@ void Partie::draw(glm::mat4 ProjMatrix) {
     _assets->element("goal")->updatePosition(cellsPosition[0] + glm::vec3(0, 0.5, 0));
     _assets->element("goal")->draw(ProjMatrix, _camera.getViewMatrix());
 
-    //----Explorateur----
-    _explorateur->jump();
-    _explorateur->draw(ProjMatrix, _camera.getViewMatrix());
-    _explorateur->avancer(_direction);
-
     //----PHYSIC----    
     if(_explorateur->inContactWith(*_assets->element("obstacle"))){
         std::cout << "Game Over : tu as percuté violament un astéroïd !\n Ton score est : " << _score << std::endl;
@@ -137,7 +137,6 @@ void Partie::draw(glm::mat4 ProjMatrix) {
     }
 
     if(_explorateur->inContactWith(*_assets->element("piece"))){
-        //std::cout << "bling !!!!!!!" << std::endl;
         _score++;
         _assets->element("piece")->blackListAllHit();
     }
@@ -147,8 +146,8 @@ void Partie::draw(glm::mat4 ProjMatrix) {
         _gameOver = true;
     }
 
-    if(_explorateur->inContactWith(*_assets->element("goal"), false)){
-        std::cout << "Victoire !! tu as rejoins la Galaxy IMAC !\n Ton score est : " << _score << std::endl;
+    if(_explorateur->inContactWith(*_assets->element("goal"))){
+        std::cout << "Victoire !! tu as atteint la planète !\n Ton score est : " << _score << std::endl;
         _gameOver = true;
     }
 }
@@ -230,4 +229,10 @@ void Partie::load(const std::string appPath) {
     initExploParam(_direction, posX, posZ);
     
     file.close();
+}
+
+void Partie::reset(){
+    for(auto &it : _assets->elements()){
+        it.second->resetElement();
+    }
 }

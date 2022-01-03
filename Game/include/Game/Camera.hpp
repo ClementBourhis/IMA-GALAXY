@@ -24,11 +24,11 @@ class Camera{
         glm::vec3 _leftVector;
         glm::vec3 _upVector;
 
-        float _angleDir; //angle de la direction de la caméra (utilisé pour l'angle maximum de la caméra freefly)
+        float _angleDir;    //angle de la direction de la caméra (utilisé pour l'angle maximum de la caméra freefly)
 
         float _maxAngle;    //angle max qui permet de tourner la tete de l'explorateur
-        bool _cameraType; //choix de la camera Trackball(false) ou camera freefly(true)
-        bool _blocked; //camera bloquée quand true
+        bool _cameraType;   //choix de la camera Trackball(false) ou camera freefly(true)
+        bool _blocked;      //camera bloquée quand true
 
     public :
         //---constructeur

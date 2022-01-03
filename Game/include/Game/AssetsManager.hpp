@@ -51,6 +51,7 @@ class AssetsManager{
         void loadAssets(const FilePath &assetsPath);
         void unloadAssets();
 
+        //-Pour tout les assets on va avoir une méthode load pour le charger, et une méthode unload pour libérer la mémoire
         //Shaders
         void loadShaders(const Json::Value &data);
         void loadShader(const Json::Value &data);
@@ -72,10 +73,15 @@ class AssetsManager{
         void unloadElements();
 
         //Getters
+        //on récupère un asset de la liste via son "name"
         ShaderManager *shader(const std::string &name) const;
         Texture *texture(const std::string &name) const;
         Mesh *mesh(const std::string &name) const;
         Element *element(const std::string &name) const;
+
+        //pour reset les éléments dans Partie, on récupère la liste entière
+        std::map<std::string, Element*> elements() const;
+
 
         //Affichage
         friend std::ostream &operator<<(std::ostream &os, const AssetsManager &assets){

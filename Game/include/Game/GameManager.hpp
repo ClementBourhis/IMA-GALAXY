@@ -82,6 +82,7 @@ class GameManager {
 		void loadPartie(); //charger une partie depuis une sauvegarde
 		inline void supprPartie(){
 			delete _currentPartie;
+			_currentPartie->reset();
 			_currentPartie = nullptr;
 
 			_menuVisibility = true;

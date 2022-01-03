@@ -235,3 +235,7 @@ Mesh* AssetsManager::mesh(const std::string &name) const{
 Element* AssetsManager::element(const std::string &name) const{
     return _elements.at(name);
 }
+
+std::map<std::string, Element*> AssetsManager::elements() const{
+    return _elements;
+}

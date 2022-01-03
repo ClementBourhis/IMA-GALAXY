@@ -37,6 +37,7 @@ class Partie {
         void initAssets(); //initialise l'explorateur et la skybox
         void save(const std::string appPath) const;
         void load(const std::string appPath);
+        void reset();
 
         inline Plateau getMap(){
             return _map;

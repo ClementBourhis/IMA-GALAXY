@@ -220,21 +220,20 @@ class Element{
                                 }
                             }
                         }
-                    }
-
-                    //s'il y a contact, on indique à l'élément touché qu'elle position à été en contact
-                    //s'il a été déjà touché à cette position on ne le rajoute pas dans les éléments déjà touché 
-                    if(contact){
-                        bool isTargetHit = false;
-                        if(element.targetHit().size() > 0){
-                            for(const auto &it : element.targetHit()){
-                                if(it == position){
-                                    isTargetHit = true;
+                        //s'il y a contact, on indique à l'élément touché qu'elle position à été en contact
+                        //s'il a été déjà touché à cette position on ne le rajoute pas dans les éléments déjà touché 
+                        if(contact){
+                            bool isTargetHit = false;
+                            if(element.targetHit().size() > 0){
+                                for(const auto &it : element.targetHit()){
+                                    if(it == position){
+                                        isTargetHit = true;
+                                    }
                                 }
                             }
-                        }
-                        if(!isTargetHit){
-                            element.toTargetHit(position);
+                            if(!isTargetHit){
+                                element.toTargetHit(position);
+                            }
                         }
                     }
                 }

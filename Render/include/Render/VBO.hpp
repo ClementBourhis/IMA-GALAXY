@@ -19,10 +19,13 @@ class VBO : public Render {
         ~VBO();
 
         //---méthodes
-        void bind() const;  //bind le VBO
-        void debind() const;//debind le VBO
+        /// \brief bind le VBO
+        void bind() const;
 
-        //Remplissage du VBO
+        /// \brief debind le VBO
+        void debind() const;
+
+        /// \brief Remplissage du VBO
         template <typename type>
         void fillBuffer(const std::vector<type> &vec){
             bind();

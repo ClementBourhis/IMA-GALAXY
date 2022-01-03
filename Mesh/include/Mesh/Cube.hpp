@@ -25,8 +25,10 @@ class Cube : public Mesh{
         ~Cube() = default;
 
         //méthodes
-        void build(GLfloat size); //remplit les vecteurs _vertices et _indices
+        /// \brief remplit les vecteurs _vertices et _indices
+        void build(GLfloat size);
 
+        /// \brief retourne un string qui indique le type du mesh
         inline std::string type() const override{
             return "Cube";
         }

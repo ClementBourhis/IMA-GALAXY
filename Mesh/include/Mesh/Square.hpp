@@ -16,7 +16,8 @@ class Square : public Mesh{
     //récupère les attributs de Mesh
     private :
         //---méthodes
-        void build(float size); //construit les vertex et les envoies dans le conteneur _vertices du Mesh
+        /// \brief construit les vertex et les envoies dans le conteneur _vertices du Mesh
+        void build(float size);
 
     public:
         //---constructeurs

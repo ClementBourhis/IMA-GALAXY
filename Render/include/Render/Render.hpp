@@ -29,13 +29,20 @@ class Render {
         ~Render() = default;
 
         //---méthodes
-        const GLuint& getId() const;                //retourne l'adresse de l'objet (getter)
-        GLuint& getId();                            //retourne l'adresse de l'objet et peut modifier sa valeur (setter)
+        /// \brief retourne l'adresse de l'objet (getter)
+        const GLuint& getId() const;                
+
+        /// \brief retourne l'adresse de l'objet et peut modifier sa valeur (setter)
+        GLuint& getId();                            
                                 
                         
-        void bind();                                //bind l'objet
-        void debind();                              //debind l'objet
+        /// \brief bind l'objet
+        void bind();                                
+
+        /// \brief debind l'objet
+        void debind();                              
         
+        /// \brief remplit les datas de l'objet
         template <typename type>
-        void fillBuffer(std::vector<type> &vec){};  //remplit les datas de l'objet
+        void fillBuffer(std::vector<type> &vec){}; 
 };

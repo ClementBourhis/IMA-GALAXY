@@ -21,10 +21,13 @@ class VAO : public Render {
         ~VAO();
 
         //---méthodes
-        void bind() const;  //bind le VAO
-        void debind() const;//debind le VAO
+        /// \brief bind le VAO
+        void bind() const;  
 
-        //Remplissage du VAO
+        /// \brief debind le VAO
+        void debind() const;
+
+        /// \brief Remplissage du VAO
         template <typename type>
         void fillBuffer(const std::vector<type> &vec,  const VBO* vbo, const IBO* ibo = nullptr){
             //on bind tout

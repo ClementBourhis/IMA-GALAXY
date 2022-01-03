@@ -24,15 +24,15 @@
 class Mesh{
     protected :
         //---attributs
-        std::vector<ShapeVertex> _vertices; //conteneur des nos vertex. (à envoyer au VBO)
-        std::vector<u_int32_t> _indices;    //conteneur des indices (à envoyer à l'IBO)
+        std::vector<ShapeVertex> _vertices; /*!< conteneur des nos vertex. (à envoyer au VBO) */
+        std::vector<u_int32_t> _indices;    /*!< conteneur des indices (à envoyer à l'IBO) */
 
-        VBO *_vbo = new VBO();              //objet VBO
-        IBO *_ibo = new IBO();              //objet IBO
-        VAO *_vao = new VAO();              //objet VAO
+        VBO *_vbo = new VBO();              /*!< objet VBO */
+        IBO *_ibo = new IBO();              /*!< objet IBO */
+        VAO *_vao = new VAO();              /*!< objet VAO */
 
-        bool _isFill;                        //on vérifie si le mesh à envoyer ses données
-        bool _isBind;                        //on vérifie si le mesh est déjà bind
+        bool _isFill;                       /*!< on vérifie si le mesh à envoyer ses données */
+        bool _isBind;                       /*!< on vérifie si le mesh est déjà bind */
 
     public :
         //---constructeurs
@@ -42,17 +42,25 @@ class Mesh{
 
         //---destructeurs
         ~Mesh(){};
-        void free();            //libère la mémoire en supprimant tout les objets VBO, VAO, Texture
+        /// \brief libère la mémoire en supprimant tout les objets VBO, VAO, Texture
+        void free();
 
         //---methodes
-        void bind();            //bind les éléments permetant de dessiner le mesh (VAO + Texture) et d'activer le program avec les shaders
-        void debind();          //debind le vao et la texture
-        void fillBuffers();     //on met un fillBuffer pour envoyer les datas aux cibles souhaité
+        /// \brief bind les éléments permetant de dessiner le mesh (VAO + Texture) et d'activer le program avec les shaders
+        void bind();
 
-        void draw();            //dessine le mesh
+        /// \brief debind le vao et la texture
+        void debind();
+
+        /// \brief on met un fillBuffer pour envoyer les datas aux cibles souhaité
+        void fillBuffers(); 
+        
+        /// \brief dessine le mesh
+        void draw();
 
         //getters
-        inline GLsizei nbVertex() const{  //on récupère le nb de vertex utilisé pour le mesh
+        /// \brief on récupère le nb de vertex utilisé pour le mesh
+        inline GLsizei nbVertex() const{
             return _vertices.size();
         }
 
@@ -76,7 +84,8 @@ class Mesh{
             return _vao;
         }
 
-        inline bool haveIBO() const{   //on créer une méthode pour vérifier qu'il existe ou non un IBO
+        /// \brief on créer une méthode pour vérifier qu'il existe ou non un IBO
+        inline bool haveIBO() const{
             return _indices.size() > 0 ? true : false;
         }
 

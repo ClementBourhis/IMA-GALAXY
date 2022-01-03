@@ -7,7 +7,8 @@
 //STL
 #include <cmath>                        //cos, sin
 
-//La classe camera créer un objet camera qui prend en compte une version trackball (à amélioré pour faire une version freefly) 
+//La classe camera créer un objet camera qui prend en compte une version trackball et une version freefly
+//Elle embarque tous ses controles dans le controleManager
 class Camera{
     private :
         //---attributs
@@ -41,7 +42,7 @@ class Camera{
         //---méthodes
         void controlManager(const SDL_Event &e);      //regroupement des contrôles pour la camera
         void changeCameraType(bool type);             //change le type de la camera
-        void changeBlock();
+        void changeBlock();                           //bloque ou débloque l'angle de vu de la caméra
 
         //méthode Trackball
         void setPosition(const glm::vec3 &position); //changement du centre de la trackball
@@ -67,8 +68,6 @@ class Camera{
             _upVector = glm::cross(_frontVector, _leftVector);
         }
 
-        void update();
-
         //setters
         inline glm::vec3 &position(){
             return _position;
@@ -77,6 +76,7 @@ class Camera{
         inline void translate(const glm::vec3 &vec){
             _position += vec;
         }
+
         inline void translateEyes(const glm::vec3 &size, unsigned int dir){
             float haut = size.y/2;
             float dvt = size.z/2;

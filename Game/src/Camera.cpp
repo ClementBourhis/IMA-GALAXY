@@ -142,8 +142,3 @@ glm::mat4 Camera::getViewMatrix(){
         return VM;
     }
 }
-
-
-void Camera::update(){
-    //update la position en fonction de l'explorateur
-}

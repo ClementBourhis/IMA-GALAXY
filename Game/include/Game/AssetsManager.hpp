@@ -29,6 +29,7 @@
 #include <Elements/Skybox.hpp>
 #include <Elements/Personnage.hpp>
 
+//L'assets Manager s'occupe de charger/créer tous les assets (Shader, Texture, Mesh, Element) pour ensuite nous les utilisions
 class AssetsManager{
     private :
         //---attributs

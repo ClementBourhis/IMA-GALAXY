@@ -29,7 +29,7 @@ void AssetsManager::loadAssets(const FilePath &assetsPath){
 }
 
 void AssetsManager::unloadAssets(){
-    //unloadShaders(); --> error double free
+    //unloadShaders(); --> double free, pas nécessaire
     unloadTextures();
     unloadMeshs();
     unloadElements();
@@ -142,10 +142,6 @@ void AssetsManager::loadMesh(const Json::Value &data){
         }
     }
 
-    if(meshType == "MenuMesh"){
-        mesh = new MenuMesh();
-    }
-
     //on fillbuffer le mesh
     mesh->fillBuffers();
 
@@ -178,20 +174,25 @@ void AssetsManager::loadElement(const Json::Value &data){
     Mesh *mesh = _meshs.at(data["mesh"].asString());
     ShaderManager *shader = _shaders.at(data["shader"].asString());
     Texture *texture = _textures.at(data["texture"].asString());
+
     glm::vec3 position = glm::vec3(0.f,0.f,0.f);
     glm::vec3 size = glm::vec3(1.f,1.f,1.f);
     glm::vec3 rotation = glm::vec3(0.f,0.f,0.f);
+
+    //si il existe des conditions spécifique de création d'élément
     if(data["position"]){
         position = glm::vec3(data["position"][0].asFloat(), data["position"][1].asFloat(), data["position"][2].asFloat());
     }
+
     if(data["size"]){
         size = glm::vec3(data["size"][0].asFloat(), data["size"][1].asFloat(), data["size"][2].asFloat());
     }
+
     if(data["rotation"]){
         rotation = glm::vec3(data["rotation"][0].asFloat(), data["rotation"][1].asFloat(), data["rotation"][2].asFloat());
     }
 
-    //on créer l'élément
+    //on créer l'élément en fonction de son type
     Element *element;
     if(data["type"]){
         std::string type = data["type"].asString();

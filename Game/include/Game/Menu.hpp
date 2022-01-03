@@ -2,7 +2,7 @@
 
 #include "AssetsManager.hpp"
 
-
+//La classe Menu prend en charge l'affichage du menu
 class Menu {
 	private:
         //---attribut

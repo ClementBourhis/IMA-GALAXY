@@ -18,8 +18,6 @@ void Plateau::loadParcours(const std::string &filename) {
         throw std::ios_base::failure("Plateau::loadParcours() : error : can't load file: " + filename);
     }
 
-    std::cout << "Niveau chargé : " << filename << std::endl;
-
     //on récupère notre fichier ligne par ligne
     std::string line;
     //on passe les deux premières lignes qui contiennent P2 et created by gimp

@@ -3,7 +3,7 @@
 //---Mesh
 #include <Mesh/Mesh.hpp>
 
-//Classe cube qui hérite de la classe Mesh parce que c'est un mesh plus complexe
+//Classe cube hérite de la classe Mesh, elle construit les vertices nécessaire pour la création d'un cube
 class Cube : public Mesh{
     protected :
         //on reprend les attributs qui sont déjà dans Mesh

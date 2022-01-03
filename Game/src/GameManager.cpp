@@ -77,7 +77,6 @@ bool GameManager::eventManager(SDL_Event& e){
             //Clic souris
             case SDL_MOUSEBUTTONDOWN:
                 if (e.button.button == SDL_BUTTON_LEFT){
-                    std::cout << "(" << e.button.x << "," << e.button.y << ")" << std::endl;
                     if (e.button.x > 0.2*_windowWidth && e.button.x < 0.39*_windowWidth && e.button.y > 0.7*_windowHeight && e.button.y < 0.83*_windowHeight){
                         //QUIT
                         done = true;
@@ -111,7 +110,7 @@ bool GameManager::eventManager(SDL_Event& e){
         switch(e.type){
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym){                  
-                    //TEST QUAND ON PERD
+                    //Si on veux s'auto game over
                     case SDLK_p:
                         supprPartie();
                         break;

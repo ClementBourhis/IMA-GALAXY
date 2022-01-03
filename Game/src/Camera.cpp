@@ -4,6 +4,7 @@ Camera::Camera()
     : _distance(-5.0f), _angleX(180.f), _angleY(25.f), _position(0.f, 1.f, 0.f), _cameraType(false), _maxAngle(40.f), _phi(0), _theta(0), _blocked(false), _angleDir(0) {
     computeDirectionVectors();
 }
+
 Camera::Camera(unsigned int dir)
     : _distance(-5.0f), _angleX(180.f), _angleY(25.f), _position(0.f, 1.f, 0.f), _cameraType(false), _maxAngle(40.f), _phi(0), _theta(0), _blocked(false), _angleDir(0) {
     float degrees = dir*90;
@@ -81,7 +82,6 @@ void Camera::changeBlock(){
         _blocked = true;
 }
 
-//---TrackBall
 void Camera::setPosition(const glm::vec3 &position){
     _position = position;
 }

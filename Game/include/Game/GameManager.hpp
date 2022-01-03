@@ -16,6 +16,7 @@
  * \brief moteur de Jeu, qui gère les assets, le menu et la partie
  */
 
+//Le GameManager est le noeud du jeu, il créer des parties et rassemble tous les éléments du jeu
 class GameManager {
 	private:
 		//---attributs

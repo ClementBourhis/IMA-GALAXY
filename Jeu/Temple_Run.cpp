@@ -38,10 +38,9 @@ int main(int argc, char** argv) {
     game.makeFullscreen();
     WINDOW_WIDTH = game.windowWidth();
     WINDOW_HEIGHT = game.windowHeight();
-    std::cout << game.windowWidth() << std::endl;
-    std::cout << game.windowHeight() << std::endl;
+    std::cout << "Résolution : " << game.windowWidth() << " x " << game.windowHeight() << std::endl;
 
-    std::cout << "ASSETS GAME" << *game.assets() << std::endl;
+    std::cout << "ASSETS GAME\n" << *game.assets() << std::endl;
 
     /* Nombre minimal de millisecondes separant le rendu de deux images, 24 images par secondes */
     static const Uint32 FRAMERATE_MILLISECONDS = 1000 / game.framerate();

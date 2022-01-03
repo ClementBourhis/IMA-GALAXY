@@ -28,6 +28,7 @@ void Partie::initExploParam(){
     _assets->element("explorateur")->rotation().y = glm::radians(180.f);
     _assets->element("explorateur")->position() = glm::vec3(0.f,0.5f,0.f);
 }
+
 void Partie::initExploParam(unsigned int dir, float posX, float posZ){
     _assets->element("explorateur")->rotation().y = glm::radians(180.f-(dir*90));
     _assets->element("explorateur")->position() = glm::vec3(posX,0.5f,posZ);
@@ -81,9 +82,11 @@ void Partie::eventManager(SDL_Event& e){
 }
 
 //dessine tous les elements de la scene
+//C'est ici qu'est géré l'organisation de l'affichage des éléments
 void Partie::draw(glm::mat4 ProjMatrix) {
     //update position camera en fonction de la position de l'explorateur
     _camera.position() = _explorateur->position();
+
     //se mettre au niveau des yeux de l'explorateur
     _camera.translateEyes(_explorateur->size(), _direction);
     
@@ -130,22 +133,26 @@ void Partie::draw(glm::mat4 ProjMatrix) {
     _assets->element("goal")->updatePosition(cellsPosition[0] + glm::vec3(0, 0.5, 0));
     _assets->element("goal")->draw(ProjMatrix, _camera.getViewMatrix());
 
-    //----PHYSIC----    
+    //----PHYSIC----  
+    //si on rencontre un astéroid  
     if(_explorateur->inContactWith(*_assets->element("obstacle"))){
-        std::cout << "Game Over : tu as percuté violament un astéroïd !\n Ton score est : " << _score << std::endl;
+        std::cout << "Game Over : tu as percuté violemment un astéroïd !\n Ton score est : " << _score << std::endl;
         _gameOver = true;
     }
 
+    //si on rencontre une pièce
     if(_explorateur->inContactWith(*_assets->element("piece"))){
         _score++;
         _assets->element("piece")->blackListAllHit();
     }
 
+    //si on sort du chemin
     if(!_explorateur->inContactWith(*_assets->element("floor"), false)){
-        std::cout << "Game Over : tu est sortis de la route cosmique !\n Ton score est : " << _score << std::endl;
+        std::cout << "Game Over : tu es sorti de la route cosmique !\n Ton score est : " << _score << std::endl;
         _gameOver = true;
     }
 
+    //si on atteint la ligne d'arrivée 
     if(_explorateur->inContactWith(*_assets->element("goal"))){
         std::cout << "Victoire !! tu as atteint la planète !\n Ton score est : " << _score << std::endl;
         _gameOver = true;

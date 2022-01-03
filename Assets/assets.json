@@ -55,8 +55,9 @@
             "type": "Square"
         },
         {
-            "name": "menu",
-            "type": "MenuMesh"
+            "name": "square2",
+            "type": "Square",
+            "size": 2
         }
     ],
     "elements":[
@@ -116,8 +117,7 @@
         },
         {
             "name": "menu",
-            "mesh": "menu",
-            "type": "Floor",
+            "mesh": "square2",
             "shader": "2Dtexture",
             "texture": "menu"
         }

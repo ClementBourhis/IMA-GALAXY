@@ -39,7 +39,11 @@
         {
             "name": "menu",
             "image": "textures/menu/menu.png"
-        }
+        },
+        {
+            "name": "goal",
+            "image": "textures/goal/terre.png"
+        }        
     ],
     "meshs":[
         {
@@ -95,10 +99,10 @@
         },
         {
             "name": "goal",
-            "mesh": "square",
+            "mesh": "cube",
             "shader": "3Dtexture",
-            "texture": "menu",
-            "rotation":[90, 180, 0]  
+            "texture": "goal",
+            "rotation":[0,90,0]
         },
         {
             "name": "explorateur",

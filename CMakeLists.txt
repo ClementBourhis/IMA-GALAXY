@@ -33,3 +33,6 @@ add_subdirectory(Adds/jsoncpp)
 
 #on copie le répertoire assets à la source du build (pour avoir des chemins relatifs qui fonctionnent depuis n'importe quel emplacement du build)
 file(COPY Assets DESTINATION .)
+
+#copie de la documentation doxygen
+file(COPY DocHTML DESTINATION .)

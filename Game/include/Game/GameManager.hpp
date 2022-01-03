@@ -6,6 +6,10 @@
 #include "Menu.hpp" 
 #include "AssetsManager.hpp"
 
+/// \class GameManager
+/// \file GameManager.hpp
+/// \brief class defining a vector for linear algebra operations. TEST
+
 class GameManager {
 	private:
 		//---attributs

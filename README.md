@@ -53,7 +53,4 @@ Exécuter le jeu
 
 
 ## Documentation Doxygen
-Pour plus d'informations, ouvrir la documentation Doxygen dans un navigateur
-```
-.
-```
+Pour plus d'informations, ouvrir la documentation Doxygen dans un navigateur : `DocHTML/index.html`

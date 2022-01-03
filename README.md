@@ -8,7 +8,7 @@ Projet de synthèse d'image, programmation, et architecture logicielle lors du s
 ### **Par Clément Bourhis, Sirine Bradai, Sacha Chouvin, et Estelle Thouvenin**
 
 ## Librairies
-Pour pouvoir compiler correctement le projet, les librairies SDL, OpenGL, et GLEW sont nécessaires.
+Pour pouvoir compiler correctement le projet, les librairies SDL, OpenGL, et GLEW sont nécessaires. Doxygen est optionnel pour la documentation.
 
 ## Compiler le projet
 Créer un dossier build à l'emplacement désiré
@@ -31,6 +31,12 @@ Exécuter le jeu
 ```
 ./Jeu/Jeu_Temple_Run
 ```
+
+Optionnel : générer la documentation Doxygen
+```
+doxygen
+```
+(exécuter la commande doxygen depuis le dossier du projet)
 
 ## Commandes
 ### ***Déplacements***

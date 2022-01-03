@@ -10,7 +10,15 @@
 //Game
 #include "Case.hpp"
 
-//La classe plateau récupère la position des éléments d'une map pgm
+/**
+ * \file Plateau.hpp
+ * \brief Déclaration de la classe Plateau
+ */
+/**
+ * \class Plateau
+ * \brief Récupère la position des éléments d'une map pgm
+ */
+
 class Plateau {
 	private:
 		//---attributs

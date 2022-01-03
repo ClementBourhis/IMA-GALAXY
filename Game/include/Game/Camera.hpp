@@ -7,8 +7,15 @@
 //STL
 #include <cmath>                        //cos, sin
 
-//La classe camera créer un objet camera qui prend en compte une version trackball et une version freefly
-//Elle embarque tous ses controles dans le controleManager
+
+/**
+ * \file Camera.hpp
+ * \brief Déclaration de la classe Camera
+ */
+/**
+ * \class Camera
+ * \brief Permet de créer un objet camera qui prend en compte une version trackball et une version freefly. Elle embarque tous ses controles dans le controleManager.
+ */
 class Camera{
     private :
         //---attributs

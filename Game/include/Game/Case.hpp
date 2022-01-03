@@ -6,7 +6,15 @@
 //glimac
 #include <glimac/glm.hpp> 	//glm::vec3, glm::vec2
 
-//La classe Case permet de prendre en charge les plateformes sur lequel le personnage va évoluer
+/**
+ * \file Case.hpp
+ * \brief Déclaration de la classe Case
+ */
+/**
+ * \class Case
+ * \brief Permet de prendre en charge les plateformes sur lequel le personnage va évoluer
+ */
+
 class Case {
 	private:
 		//---attributs

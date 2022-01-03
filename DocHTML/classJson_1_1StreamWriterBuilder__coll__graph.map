@@ -1,5 +1,0 @@
-<map id="Json::StreamWriterBuilder" name="Json::StreamWriterBuilder">
-<area shape="rect" id="node1" title="Build a StreamWriter implementation." alt="" coords="29,109,219,136"/>
-<area shape="rect" id="node2" href="$classJson_1_1StreamWriter_1_1Factory.html" title="A simple abstract factory." alt="" coords="5,5,149,47"/>
-<area shape="rect" id="node3" href="$classJson_1_1Value.html" title="Represents a JSON value." alt="" coords="173,13,267,39"/>
-</map>

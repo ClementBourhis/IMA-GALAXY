@@ -14,7 +14,15 @@
 //Mesh
 #include <Mesh/Mesh.hpp>
 
-//La classe Elements rassemble tous les elements constituant le jeux (sol, personnage, pièce...)
+/**
+ * \file Element.hpp
+ * \brief Déclaration de la classe Element
+ */
+/**
+ * \class Element
+ * \brief rassemble tous les elements constituant le jeu (sol, personnage, pièce...)
+ */
+
 class Element{
     protected :
         //---attributs

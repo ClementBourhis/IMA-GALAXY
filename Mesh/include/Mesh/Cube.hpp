@@ -3,7 +3,15 @@
 //---Mesh
 #include <Mesh/Mesh.hpp>
 
-//Classe cube hérite de la classe Mesh, elle construit les vertices nécessaire pour la création d'un cube
+/**
+ * \file Cube.hpp
+ * \brief Déclaration de la classe Cube
+ */
+/**
+ * \class Cube
+ * \brief hérite de la classe Mesh, elle construit les vertices nécessaire pour la création d'un cube
+ */
+
 class Cube : public Mesh{
     protected :
         //on reprend les attributs qui sont déjà dans Mesh

@@ -6,17 +6,37 @@
 #include "Menu.hpp" 
 #include "AssetsManager.hpp"
 
+// ========== DOXYGEN MENU ========== //
+/// \mainpage
+/// \tableofcontents
+/// \section introduction_sec Introduction
+/// Projet de synthèse d'image, programmation, et architecture logicielle lors du semestre 3 à l'IMAC, inspiré du jeu Temple Run.
+/// Par Clément Bourhis, Sirine Bradai, Sacha Chouvin, et Estelle Thouvenin.
+/// \section install_bigsec Installer le jeu
+/// \subsection dependencies_sec Librairies nécessaires
+/// \li SDL
+/// \li OpenGL
+/// \li GLEW
+/// \li Doxygen pour la documentation (optionnel)
+/// \subsection install_sec Compiler le projet avec cmake (Linux / Mac)
+/// \li mkdir build
+/// \li cd build
+/// \li cmake [chemin vers la racine du dossier du projet]
+/// \li make
+/// \li ./Jeu/Jeu_Temple_Run
+/// \li documentation optionnelle : commande 'doxygen' depuis la racine du dossier du projet
+// ================================= //
+
+
 /**
  * \file GameManager.hpp
  * \brief Déclaration de la classe GameManager
  */
-
 /**
  * \class GameManager
- * \brief moteur de Jeu, qui gère les assets, le menu et la partie
+ * \brief Le GameManager est le noeud du jeu, il crée des parties et rassemble tous les éléments du jeu
  */
 
-//Le GameManager est le noeud du jeu, il créer des parties et rassemble tous les éléments du jeu
 class GameManager {
 	private:
 		//---attributs

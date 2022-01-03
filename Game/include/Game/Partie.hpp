@@ -4,7 +4,15 @@
 #include "Camera.hpp"
 #include "AssetsManager.hpp"
 
-//La classe Partie génère un niveau de jeu qui selon la map pgm sélectionnée réorganise les éléments
+/**
+ * \file Partie.hpp
+ * \brief Déclaration de la classe Partie
+ */
+/**
+ * \class Partie
+ * \brief Génère un niveau de jeu qui selon la map pgm sélectionnée réorganise les éléments
+ */
+
 class Partie {
 	private:
         //---attributs

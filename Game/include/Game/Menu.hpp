@@ -2,7 +2,16 @@
 
 #include "AssetsManager.hpp"
 
-//La classe Menu prend en charge l'affichage du menu
+
+/**
+ * \file Menu.hpp
+ * \brief Déclaration de la classe Menu
+ */
+/**
+ * \class Menu
+ * \brief Prend en charge l'affichage du menu
+ */
+
 class Menu {
 	private:
         //---attribut

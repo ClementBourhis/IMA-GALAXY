@@ -1,6 +1,0 @@
-<map id="Graphe hiérarchique des classes" name="Graphe hiérarchique des classes">
-<area shape="rect" id="node1" href="$classMesh.html" title=" " alt="" coords="5,56,63,83"/>
-<area shape="rect" id="node2" href="$classCube.html" title=" " alt="" coords="130,5,185,32"/>
-<area shape="rect" id="node3" href="$classMenuMesh.html" title=" " alt="" coords="111,56,204,83"/>
-<area shape="rect" id="node4" href="$classSquare.html" title=" " alt="" coords="124,107,191,133"/>
-</map>

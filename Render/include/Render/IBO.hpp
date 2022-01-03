@@ -2,8 +2,15 @@
 
 #include "Render.hpp"
 
-//La classe IBO est sensiblement la même que la classe VBO
-//Elle permet de créer des objets IBO et de les manipuler plus simplement
+/**
+ * \file IBO.hpp
+ * \brief Déclaration de la classe IBO
+ */
+/**
+ * \class IBO
+ * \brief La classe IBO est sensiblement la même que la classe VBO. Elle permet de créer des objets IBO et de les manipuler plus simplement
+ */
+
 class IBO : public Render { 
     //---attribut de Render
     public :

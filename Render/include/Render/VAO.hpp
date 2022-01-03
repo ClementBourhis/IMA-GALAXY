@@ -4,8 +4,15 @@
 #include "VBO.hpp"
 #include "IBO.hpp"
 
-//La classe VAO permet de créer des objets VAO et de les manipuler plus simplement
-//elle utilise les classe VBO et IBO pour envoyer les informations au shader
+/**
+ * \file VAO.hpp
+ * \brief Déclaration de la classe VAO
+ */
+/**
+ * \class VAO
+ * \brief permet de créer des objets VAO et de les manipuler plus simplement. Elle utilise les classe VBO et IBO pour envoyer les informations au shader
+ */
+
 class VAO : public Render {
     //---attribut de Render
     public :

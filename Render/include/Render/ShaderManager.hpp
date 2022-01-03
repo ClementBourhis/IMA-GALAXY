@@ -9,7 +9,16 @@
 #include <glimac/FilePath.hpp>  //FilePath
 #include <glimac/glm.hpp>       //glm::mat4, glm::vec3
 
-//Le ShaderManager permet de simplifier l'utilisation des shaders qui peuvent etre différents par meshs
+
+/**
+ * \file ShaderManager.hpp
+ * \brief Déclaration de la classe ShaderManager
+ */
+/**
+ * \class ShaderManager
+ * \brief permet de simplifier l'utilisation des shaders qui peuvent etre différents par meshs
+ */
+
 class ShaderManager {
     private :
         //---attributs

@@ -6,8 +6,15 @@
 //GL
 #include <GL/glew.h>    //GLuint
 
-//La classe render regroupe les classes VBO/VAO/IBO
-//elle permet la création de ces objets et de les manipuler plus aisement  
+/**
+ * \file Render.hpp
+ * \brief Déclaration de la classe Render
+ */
+/**
+ * \class Render
+ * \brief regroupe les classes VBO VAO IBO. Permet la création de ces objets et de les manipuler plus aisement
+ */
+
 class Render {
 
     protected :

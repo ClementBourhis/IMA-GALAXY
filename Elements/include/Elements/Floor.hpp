@@ -2,7 +2,16 @@
 
 #include "Element.hpp"
 
-//la classe Floor permet de spécifier à l'élément qu'il s'agit d'un floor, et au besoin de lui donner des méthodes spécifiques
+
+/**
+ * \file Floor.hpp
+ * \brief Déclaration de la classe Floor
+ */
+/**
+ * \class Floor
+ * \brief permet de spécifier à l'élément qu'il s'agit d'un floor, et au besoin de lui donner des méthodes spécifiques
+ */
+
 class Floor : public Element {
     //---attributs de Element
     public:

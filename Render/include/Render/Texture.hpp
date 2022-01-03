@@ -15,7 +15,16 @@
 
 using namespace glimac; //utilisation de la lib glimac
 
-//La classe texture permet de créer des objets textures plus simplement
+
+/**
+ * \file Texture.hpp
+ * \brief Déclaration de la classe Texture
+ */
+/**
+ * \class Texture
+ * \brief Permet de créer des objets textures plus simplement
+ */
+
 class Texture {
     private :
         //---attributs

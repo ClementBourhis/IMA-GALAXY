@@ -11,8 +11,16 @@
 #include <Render/ShaderManager.hpp>
 #include <Render/Texture.hpp>
 
-//La classe Mesh permet de créer des éléments et de les dessiner avec des shaders et texture
-//Elle regroupe également les classes de mesh plus complexe comme la classe Cube.hpp
+
+/**
+ * \file Mesh.hpp
+ * \brief Déclaration de la classe Mesh
+ */
+/**
+ * \class Mesh
+ * \brief permet de créer des éléments et de les dessiner avec des shaders et texture. Elle regroupe également les classes de mesh plus complexe comme la classe Cube.hpp
+ */
+
 class Mesh{
     protected :
         //---attributs

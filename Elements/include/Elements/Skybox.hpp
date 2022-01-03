@@ -2,6 +2,15 @@
 
 #include "Element.hpp"
 
+/**
+ * \file Skybox.hpp
+ * \brief Déclaration de la classe Skybox
+ */
+/**
+ * \class Skybox
+ * \brief Permet de spécifier à l'élément qu'il s'agit d'une skybox
+ */
+
 class Skybox : public Element {
     //---attributs de Element
     public:

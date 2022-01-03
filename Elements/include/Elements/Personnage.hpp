@@ -2,8 +2,16 @@
 
 #include "Element.hpp"
 
-//la classe Personnage permet de spécifier à l'élément qu'il s'agit d'un personnage, 
-//on lui attribut un état particulier et des commandes pour le contrôler
+
+/**
+ * \file Personnage.hpp
+ * \brief Déclaration de la classe Personnage
+ */
+/**
+ * \class Personnage
+ * \brief Permet de spécifier à l'élément qu'il s'agit d'un personnage, on lui attribut un état particulier et des commandes pour le contrôler
+ */
+
 class Personnage : public Element {
     //---attributs de Element
     public:
